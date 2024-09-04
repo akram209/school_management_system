@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('subject_id')->references('id')->on('subjects');
             $table->string('phone')->unique();
             $table->string('address');
+            $table->string('gender');
             $table->string('salary');
             $table->tinyInteger('experience_years');
             $table->text('qualification');
