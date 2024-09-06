@@ -16,4 +16,13 @@ class TimetableModel extends Model
     , 'day_name'
     ,'start_time'
     , 'end_time'];
+    public function subject(){
+        return $this->belongsTo(Subject::class);
+    }
+    public function class(){
+        return $this->belongsTo(\App\Models\Class::class);
+    }
+    public function teacher(){
+        return $this->belongsTo(Teacher::class);
+    }
 }

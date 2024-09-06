@@ -11,6 +11,6 @@ class FeeModel extends Model
     protected $fillable = ['student_id', 'status'];
 
     public function student(){
-        return $this->belongsTo(student::class);
+        return $this->belongsTo(Student::class);
 }
 }
