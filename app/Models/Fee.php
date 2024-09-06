@@ -9,4 +9,8 @@ class FeeModel extends Model
 {
     use HasFactory;
     protected $fillable = ['student_id', 'status'];
+
+    public function student(){
+        return $this->belongsTo(student::class);
+}
 }
