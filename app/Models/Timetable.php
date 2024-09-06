@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Class as ClassModel;
 
 class TimetableModel extends Model
 {
@@ -20,7 +21,7 @@ class TimetableModel extends Model
         return $this->belongsTo(Subject::class);
     }
     public function class(){
-        return $this->belongsTo(\App\Models\Class::class);
+        return $this->belongsTo(ClassModel::class);
     }
     public function teacher(){
         return $this->belongsTo(Teacher::class);
