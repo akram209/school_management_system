@@ -14,23 +14,27 @@ class Student extends Model
         'user_id',
         'class_id',
         'parent_id',
-        'gender',
         'image',
-        ];
+    ];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
-    public function class(){
+    public function class()
+    {
         return $this->belongsTo(ClassModel::class);
     }
-    public function attendence(){
+    public function attendence()
+    {
         return $this->hasMany(Attendence::class);
     }
-    public function fee(){
+    public function fee()
+    {
         return $this->hasOne(Fee::class);
     }
-    public function parent(){
+    public function parent()
+    {
         return $this->belongsToMany(Parent::class);
     }
 }
