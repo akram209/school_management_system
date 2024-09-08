@@ -32,20 +32,21 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $permission = Permission::where('code', $request->code)->where('email', $request->email)->first();
-        if (!$permission) {
-            return back()->withErrors(['code' => 'The code is not valid.']);
-        }
+
 
         $request->validate([
-            'firstname' => ['required', 'string', 'max:30'],
-            'lastname' => ['required', 'string', 'max:30'],
+            'firstname' => ['required', 'string', 'max:30', 'min:3'],
+            'lastname' => ['required', 'string', 'max:30', 'min:3'],
             'gender' => ['required'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'code' => ['required'],
             'image' => ['required', 'image', 'mimes:jpeg,png,jpg'],
         ]);
+        $permission = Permission::where('code', $request->code)->where('email', $request->email)->first();
+        if (!$permission) {
+            return back()->withErrors(['code' => 'The code is not valid.']);
+        }
         if (request()->hasFile('image')) {
             $file = request()->file('image');
             $path = Storage::disk('images')->put('students', $file);

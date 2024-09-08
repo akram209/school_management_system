@@ -100,9 +100,7 @@
                                                 class="form-control form-control-lg" name="password" />
                                             <label class="form-label" for="form3Example9">Password</label>
                                         </div>
-                                        @error('confirm')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
+
                                         <div data-mdb-input-init class="form-outline mb-3">
 
                                             <input type="password" id="form3Example90"
