@@ -1,39 +1,57 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('password.store') }}">
-        @csrf
+<!DOCTYPE html>
+<html lang="en">
 
-        <!-- Password Reset Token -->
-        <input type="hidden" name="token" value="{{ $request->route('token') }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+</head>
+<link rel="stylesheet" href="{{ asset('build/assets/css/login.css') }}">
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+<!-- MDB -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.min.css" rel="stylesheet" />
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+<body>
+    <div class="container">
+        <h6 class="alert alert-primary" role="alert">This is a secure area of the application. Please confirm your
+            password before continuing.</h6> <x-auth-session-status class="mb-4" :status="session('status')" />
+        <form method="POST" action="{{ route('password.store') }}">
+            @csrf
+            <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+            <div style="margin-top:10px" data-mdb-input-init class="form-outline mb-4  ">
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+                <input type="email" id="email" class="form-control" value="" name="email" />
+                <label class="form-label" for="email">Email address</label>
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
+            </div>
+            <x-input-error :messages="$errors->get('password')" class="alert alert-danger" role="alert" />
 
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
+            <div data-mdb-input-init class="form-outline mb-4">
+                <input type="password" id="password" class="form-control" name="password"
+                    autocomplete="current-password" />
+                <label class="form-label" for="password">Password</label>
+            </div>
+            <div data-mdb-input-init class="form-outline mb-4">
+                <input type="password" id="password_confirmatio" class="form-control" name="password_confirmation"
+                    equired autocomplete="new-password" />
+                <label class="form-label" for="password">Password</label>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+            </div>
+            <x-input-error :messages="$errors->get('password_confirmation')" class="alert alert-danger" role="alert" />
+
+
+
+            <button type="submit" class="btn btn-primary btn-block mb-4">Reset Password</button>
+
+
+        </form>
+    </div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"></script>
+</body>
+
+</html>
