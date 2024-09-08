@@ -127,7 +127,7 @@
 
 
                                         <div class="d-flex justify-content-end pt-3">
-                                            <button type="button" class="btn btn-light btn-lg">Reset all</button>
+                                            <button type="reset" class="btn btn-light btn-lg">Reset all</button>
                                             <input type="submit" class="btn btn-primary btn-lg ms-2"
                                                 value="Register" />
                                         </div>
