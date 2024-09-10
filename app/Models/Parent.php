@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Parent extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'phone', 'address',  'image'];
+    protected $fillable = ['user_id', 'phone', 'address', 'image'];
     public function user()
     {
         return $this->belongsTo(User::class);
