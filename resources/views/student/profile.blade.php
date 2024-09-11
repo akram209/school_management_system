@@ -37,7 +37,6 @@
                                 <i class="fa-solid fa-people-roof"></i> <span class="nav-text">Your Class</span>
                             </a>
                             <ul>
-                                <li>
                                 <li><a href="add-professor.html"><i class="fa-solid fa-users"></i><span>class
                                             teamates</span></a></li>
                                 <li><a href="edit-professor.html"> <i class="fa-solid fa-people-group"></i> <span>class
