@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('address');
             $table->string('phone')->unique();
-            $table->string('image')->nullable();
 
             $table->timestamps();
         });

@@ -17,7 +17,6 @@ class Teacher extends Model
         'salary',
         'experience_years',
         'qualification',
-        'image',
         'status'
     ];
 

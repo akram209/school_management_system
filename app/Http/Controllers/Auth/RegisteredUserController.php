@@ -58,12 +58,12 @@ class RegisteredUserController extends Controller
             'gender' => $request->gender,
             'role' => 'student',
             'email' => $request->email,
+            'image' => $path,
             'password' => Hash::make($request->password),
         ]);
 
         $student = Student::create([
             'user_id' => $user->id,
-            'image' => $path,
 
         ]);
         Auth::login($user);

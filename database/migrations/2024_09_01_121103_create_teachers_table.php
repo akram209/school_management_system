@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('salary');
             $table->tinyInteger('experience_years');
             $table->text('qualification');
-            $table->string('image')->nullable();
             $table->enum('status', ['paid', 'unpaid'])->default('unpaid');
             $table->timestamps();
         });
