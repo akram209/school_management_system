@@ -98,6 +98,15 @@
                                             password</span> </a></li>
                             </ul>
                         </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                <span class="nav-text">Logout</span>
+                            </a>
+                            <ul>
+
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
