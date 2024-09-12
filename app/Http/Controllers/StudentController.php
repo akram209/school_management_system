@@ -43,7 +43,6 @@ class StudentController extends Controller
             'password' => ['required'],
             // 'code' => ['required'],
             'image' => ['required', 'image', 'mimes:jpeg,png,jpg'],
-            'parent_id' => ['required', 'exists:users,id'],
             'class_id' => ['required', 'exists:classes,id'],
         ]);
         // $permission = Permission::where('code', $request->code)->where('email', $request->email)->first();
@@ -67,7 +66,6 @@ class StudentController extends Controller
 
         $student = Student::create([
             'user_id' => $user->id,
-            'parent_id' => $request->parent_id,
             'class_id' => $request->class_id,
 
         ]);
@@ -106,12 +104,10 @@ class StudentController extends Controller
             'password' => ['required'],
             'code' => ['required'],
             'image' => [ 'image', 'mimes:jpeg,png,jpg'],
-            'parent_id' => ['required', 'exists:users,id'],
             'class_id' => ['required', 'exists:classes,id'],
         ]);
         $student->update([
             'user_id' => $student->user_id,
-            'parent_id' => request()->parent_id,
             'class_id' => request()->class_id,
         ]);
 
