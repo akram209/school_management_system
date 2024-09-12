@@ -14,7 +14,7 @@ class SendPermission extends Command
      *
      * @var string
      */
-    protected $signature = 'send:permission {email} {--type=student }{--update}';
+    protected $signature = 'send:permission {email} {--update}';
 
     /**
      * The console command description.
@@ -32,50 +32,32 @@ class SendPermission extends Command
         $code = $this->generateRandomCode();
         $email = $this->argument('email');
         $permission = Permission::where('email', $email)->first();
-        if (!in_array($this->option('type'), ['admin', 'parent', 'teacher', 'student'])) {
-            $this->error('Invalid type');
-            return;
-        }
+
 
         if (!$this->option('update')) {
             if ($permission) {
-                $this->info('Permission already exists');
+                $this->error('Permission already exists');
                 return;
             } else {
                 Permission::create([
                     'email' => $email,
                     'code' => $code,
-                    'type' => $this->option('type'),
+                    'type' => 'student',
                 ]);
                 $this->info('Permission sent successfully');
             }
         } else {
             $permission->update([
-                'type' => $this->option('type'),
+                'type' => 'student',
                 'code' => $code
             ]);
             $this->info('Permission updated successfully');
         }
-        if ($this->option('type') === 'student') {
-            $this->url = 'https://example.com/permissions/' . $code;
-        }
 
-        if ($this->option('type') === 'parent') {
-            $this->url = 'https://example.com/permissions/' . $code;
-        }
-
-        if ($this->option('type') === 'admin') {
-            $this->url = 'https://example.com/permissions/' . $code;
-        }
-
-        if ($this->option('type') === 'teacher') {
-            $this->url = 'https://example.com/permissions/' . $code;
-        }
         $details = [
             'title' => 'Permission',
             'body' => 'You have been granted permission to enroll',
             'code' => $code,
-            'url' => $this->url
         ];
 
         Mail::to($email)->send(new MailSendPermission($details));
