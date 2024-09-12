@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Student Profile')
+@section('title', 'Teacher Profile')
 @section('title of sidebar', 'Settings')
 @section('list')
     <ul>
@@ -14,122 +14,44 @@
                             Teachers</span></a></li>
             </ul>
         </li>
-
-        <li>
-            <a href="#">
-                <i class="fa-solid fa-person-breastfeeding"></i>
-                <span class="nav-text">Your Parents</span>
-            </a>
-            <ul>
-
-            </ul>
-        </li>
-
-        <li>
-            <a href="#">
-                <i class="fa-solid fa-book"></i>
-                <span class="nav-text">Subjects</span>
-            </a>
-            <ul>
-
-            </ul>
-        </li>
-
-        <li>
-            <a href="#">
-                <i class="fa-solid fa-clipboard-user"></i>
-                <span class="nav-text">Attendance</span>
-            </a>
-            <ul>
-
-            </ul>
-
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa-solid fa-comment-dollar"></i>
-                <span class="nav-text">Your Fee</span>
-            </a>
-            <ul>
-                <li>
-                    <a> <i class="fa-solid fa-credit-card"></i><span>paid / unpaid</span></a>
-                </li>
-            </ul>
-
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa-solid fa-gears"></i>
-                <span class="nav-text">privacy settings</span>
-            </a>
-            <ul>
-                <li><a href="add-professor.html"> <i class="fa-regular fa-file-lines"></i><span>change
-                            your info</span></a></li>
-                <li><a href="all-professors.html"><i class="fa-solid fa-key"></i><span>change
-                            password</span> </a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                <span class="nav-text">Logout</span>
-            </a>
-            <ul>
-
-            </ul>
-        </li>
     </ul>
 @endsection
+
 @section('card-body')
     <div class="profile-card-body">
-        <p>Student ID</p>
         <p>Full Name</p>
-        <p>Email</p>
         <p>Gender</p>
-        <p>Class</p>
+        <p>Qualification</p>
+        <p>Excperience</p>
         <p>Join Date</p>
-
-
-
     </div>
     </div>
 @endsection
-@section('content')
-    <div class="totel-attendence">
-        <p id="attendence">Attendance</p>
-        <div class="progress-circle">
-            <svg class="progress-ring" width="120" height="120">
-                <circle class="progress-attendence-ring__circle" stroke="blue" stroke-width="10" fill="transparent" r="50"
-                    cx="60" cy="60" />
-            </svg>
-            <div class="progress-value">
-                <span id="percentage-attendence"></span>
-            </div>
-        </div>
-    </div>
 
-    <div class="totel-absence">
-        <p id="absence">Absence</p>
-        <div class="progress-circle">
-            <svg class="progress-ring" width="120" height="120">
-                <circle class="progress-absence-ring__circle" stroke="blue" stroke-width="10" fill="transparent" r="50"
-                    cx="60" cy="60" />
-            </svg>
-            <div class="progress-value">
-                <span id="percentage-absence"></span>
-            </div>
+@section('content')
+
+    <div class="teacher-info">
+        <div class="teacher-info-header">
+            <h3>Contact me</h3>
         </div>
+
+        <div class="teacher-info-body">
+            <p>address :</p>
+            <hr>
+            <p> phone : </p>
+            <hr>
+            <p>Email : </p>
+        </div>
+
     </div>
-    <div class="totel-assignment">
-        <p id="assignment">Assignment</p>
-        <div class="progress-circle">
-            <svg class="progress-ring" width="120" height="120">
-                <circle class="progress-assignment-ring__circle" stroke="blue" stroke-width="10" fill="transparent" r="50"
-                    cx="60" cy="60" />
-            </svg>
-            <div class="progress-value">
-                <span id="percentage-assignment"></span>
-            </div>
+    <div class="teacher-subject">
+        <div class="teacher-subject-header">
+            <h3>Subject</h3>
+
+        </div>
+
+        <div class="teacher-subject-body">
+            <img id="img-subject" src="{{ asset('build/assets/images/subject.png') }}" alt="">
         </div>
 
     </div>
