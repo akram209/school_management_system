@@ -7,7 +7,7 @@
     </h3>
 
 
-    <x-mail::button :url="$details['url']">
+    <x-mail::button :url="route('register')">
         Register
     </x-mail::button>
 

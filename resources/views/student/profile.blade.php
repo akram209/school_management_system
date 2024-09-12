@@ -34,7 +34,15 @@
 
             </ul>
         </li>
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span class="nav-text">Timetable</span>
+            </a>
+            <ul>
 
+            </ul>
+        </li>
         <li>
             <a href="#">
                 <i class="fa-solid fa-clipboard-user"></i>

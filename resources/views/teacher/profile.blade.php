@@ -5,13 +5,80 @@
     <ul>
         <li>
             <a href="#">
-                <i class="fa-solid fa-people-roof"></i> <span class="nav-text">Your Class</span>
+                <i class="fa-solid fa-people-roof"></i> <span class="nav-text">Your Classes</span>
             </a>
             <ul>
-                <li><a href="add-professor.html"><i class="fa-solid fa-users"></i><span>class
-                            teamates</span></a></li>
-                <li><a href="edit-professor.html"> <i class="fa-solid fa-people-group"></i> <span>class
-                            Teachers</span></a></li>
+                <li><a href="add-professor.html"><i class="fa-solid fa-users-between-lines"></i><span>class 1
+                        </span></a></li>
+                <li><a href="edit-professor.html"><i class="fa-solid fa-users-between-lines"></i> <span>class 2
+                        </span></a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-clipboard-user"></i><span class="nav-text">Attendance</span>
+            </a>
+            <ul>
+                <li><a href="add-professor.html"><i class="fa-solid fa-newspaper"></i></i><span> class 1
+                        </span></a>
+                </li>
+                <li><a href="add-professor.html"><i class="fa-solid fa-newspaper"></i></i><span> class 2
+                        </span></a>
+                </li>
+                <li><a href="add-professor.html"><i class="fa-solid fa-newspaper"></i></i><span> class 3
+                        </span></a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span class="nav-text">Timetable</span>
+            </a>
+            <ul>
+
+            </ul>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-file-import"></i> <span class="nav-text">Assignments</span>
+            </a>
+            <ul>
+                <li><a href="add-professor.html"><i class="fa-regular fa-file-lines"></i><span> add Assignment
+                        </span></a></li>
+                <li><a href="edit-professor.html"><i class="fa-solid fa-file-signature"></i> <span>all assignment
+                        </span></a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-clipboard-list"></i> <span class="nav-text">Exams</span>
+            </a>
+            <ul>
+                <li><a href="add-professor.html"><i class="fa-regular fa-file-lines"></i><span> add Exam
+                        </span></a></li>
+                <li><a href="edit-professor.html"><i class="fa-solid fa-check-double"></i> <span>all Exams
+                        </span></a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-list-check"></i><span class="nav-text">Grades</span>
+            </a>
+            <ul>
+                <li><a href="add-professor.html"><i class="fa-regular fa-file-lines"></i><span> Exam 1
+                        </span></a></li>
+                <li><a href="edit-professor.html"><i class="fa-regular fa-file-lines"></i> <span> Exam 2
+                        </span></a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <span class="nav-text">Logout</span>
+            </a>
+            <ul>
+
             </ul>
         </li>
     </ul>
