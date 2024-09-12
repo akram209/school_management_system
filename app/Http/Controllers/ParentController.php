@@ -48,23 +48,25 @@ class ParentController extends Controller
         // }
       
 
-        $user = User::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'gender' => $request->gender,
-            'role' => 'parent',
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+      
 
         if (request()->hasFile('image')) {
             $file = request()->file('image');
             $path = Storage::disk('images')->put('parents', $file);
+            $user = User::create([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'gender' => $request->gender,
+                'role' => 'parent',
+                'email' => $request->email,
+                'image' => $path,
+                'password' => Hash::make($request->password),
+            ]);
             $parent = ParentModel::create([
                 'user_id' => $user->id,
                 'phone' => $request->phone,
                 'address' => $request->address,
-                 'image' => $path,
+                
             ]);
         }
        
@@ -122,7 +124,7 @@ class ParentController extends Controller
             $file = request()->file('image');
             Storage::disk('images')->delete($parent->image);
             $path = Storage::disk('images')->put('parents', $file);
-            $parent->update([
+            $parent->user->update([
                 'image' => $path,
             ]);
         }
@@ -144,7 +146,7 @@ class ParentController extends Controller
     public function destroy(string $id)
     {
         $parent = ParentModel::find($id);
-        Storage::disk('images')->delete($parent->image);
+        Storage::disk('images')->delete($parent->user->image);
         $parent->user->delete();
         $parent->delete();
        

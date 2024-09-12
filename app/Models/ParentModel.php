@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ParentModel extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'phone', 'address','image'];
+    protected $fillable = ['user_id', 'phone', 'address'];
     protected $table ='parents';
     public function user()
     {
