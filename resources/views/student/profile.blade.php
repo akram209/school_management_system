@@ -1,141 +1,104 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
+@section('title', 'Student Profile')
+@section('title of sidebar', 'Settings')
+@section('list')
+    <ul>
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-people-roof"></i> <span class="nav-text">Your Class</span>
+            </a>
+            <ul>
+                <li><a href="add-professor.html"><i class="fa-solid fa-users"></i><span>class
+                            teamates</span></a></li>
+                <li><a href="edit-professor.html"> <i class="fa-solid fa-people-group"></i> <span>class
+                            Teachers</span></a></li>
+            </ul>
+        </li>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Profile</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="{{ asset('build/assets/css/studentProfile.css') }}">
-    <link rel="stylesheet" href="{{ asset('build/assets/css/all.css') }}">
-    <link rel="stylesheet" href="{{ asset('build/assets/css/all.min.css') }}">
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-person-breastfeeding"></i>
+                <span class="nav-text">Your Parents</span>
+            </a>
+            <ul>
 
-<body>
-    <nav class="navbar navbar-dark bg-primary">
+            </ul>
+        </li>
 
-        <i class="bi bi-list" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
-            aria-controls="offcanvasWithBothOptions"></i>
-        <img src="{{ asset('build/assets/images/Screenshot 2024-09-11 174254.png') }}" class="rounded-circle"
-            height="22" alt="Avatar" loading="lazy" />
-    </nav>
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-book"></i>
+                <span class="nav-text">Subjects</span>
+            </a>
+            <ul>
 
-    <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
-        aria-labelledby="offcanvasWithBothOptionsLabel">
-        <div class="offcanvas-header">
-            <h5>Settings</h5>
+            </ul>
+        </li>
 
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div>
-                <div>
-                    <ul>
-                        <li>
-                            <a href="#">
-                                <i class="fa-solid fa-people-roof"></i> <span class="nav-text">Your Class</span>
-                            </a>
-                            <ul>
-                                <li><a href="add-professor.html"><i class="fa-solid fa-users"></i><span>class
-                                            teamates</span></a></li>
-                                <li><a href="edit-professor.html"> <i class="fa-solid fa-people-group"></i> <span>class
-                                            Teachers</span></a></li>
-                            </ul>
-                        </li>
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-clipboard-user"></i>
+                <span class="nav-text">Attendance</span>
+            </a>
+            <ul>
 
-                        <li>
-                            <a href="#">
-                                <i class="fa-solid fa-person-breastfeeding"></i>
-                                <span class="nav-text">Your Parents</span>
-                            </a>
-                            <ul>
+            </ul>
 
-                            </ul>
-                        </li>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-comment-dollar"></i>
+                <span class="nav-text">Your Fee</span>
+            </a>
+            <ul>
+                <li>
+                    <a> <i class="fa-solid fa-credit-card"></i><span>paid / unpaid</span></a>
+                </li>
+            </ul>
 
-                        <li>
-                            <a href="#">
-                                <i class="fa-solid fa-book"></i>
-                                <span class="nav-text">Subjects</span>
-                            </a>
-                            <ul>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-gears"></i>
+                <span class="nav-text">privacy settings</span>
+            </a>
+            <ul>
+                <li><a href="add-professor.html"> <i class="fa-regular fa-file-lines"></i><span>change
+                            your info</span></a></li>
+                <li><a href="all-professors.html"><i class="fa-solid fa-key"></i><span>change
+                            password</span> </a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <span class="nav-text">Logout</span>
+            </a>
+            <ul>
 
-                            </ul>
-                        </li>
+            </ul>
+        </li>
+    </ul>
+@endsection
+@section('card-body')
+    <div class="profile-card-body">
+        <p>Student ID</p>
+        <p>Full Name</p>
+        <p>Email</p>
+        <p>Gender</p>
+        <p>Class</p>
 
-                        <li>
-                            <a href="#">
-                                <i class="fa-solid fa-clipboard-user"></i>
-                                <span class="nav-text">Attendance</span>
-                            </a>
-                            <ul>
 
-                            </ul>
-
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa-solid fa-comment-dollar"></i>
-                                <span class="nav-text">Your Fee</span>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a> <i class="fa-solid fa-credit-card"></i><span>paid / unpaid</span></a>
-                                </li>
-                            </ul>
-
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa-solid fa-gears"></i>
-                                <span class="nav-text">privacy settings</span>
-                            </a>
-                            <ul>
-                                <li><a href="add-professor.html"> <i class="fa-regular fa-file-lines"></i><span>change
-                                            your info</span></a></li>
-                                <li><a href="all-professors.html"><i class="fa-solid fa-key"></i><span>change
-                                            password</span> </a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                <span class="nav-text">Logout</span>
-                            </a>
-                            <ul>
-
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
     </div>
-    <div class="profile-card">
-        <div class="profile-card-header">
-
-            <img src="{{ asset('build/assets/images/Screenshot 2024-09-11 174254.png') }}" alt="profile"
-                class="profile-card-header-profile-img">
-        </div>
-        <hr>
-
-        <div class="profile-card-body">
-            <p>Student ID</p>
-            <p>Full Name</p>
-            <p>Email</p>
-            <p>Gender</p>
-            <p>Class</p>
-
-
-        </div>
     </div>
+@endsection
+@section('content')
     <div class="totel-attendence">
         <p id="attendence">Attendance</p>
         <div class="progress-circle">
             <svg class="progress-ring" width="120" height="120">
-                <circle class="progress-attendence-ring__circle" stroke="blue" stroke-width="10" fill="transparent"
-                    r="50" cx="60" cy="60" />
+                <circle class="progress-attendence-ring__circle" stroke="blue" stroke-width="10" fill="transparent" r="50"
+                    cx="60" cy="60" />
             </svg>
             <div class="progress-value">
                 <span id="percentage-attendence"></span>
@@ -159,8 +122,8 @@
         <p id="assignment">Assignment</p>
         <div class="progress-circle">
             <svg class="progress-ring" width="120" height="120">
-                <circle class="progress-assignment-ring__circle" stroke="blue" stroke-width="10" fill="transparent"
-                    r="50" cx="60" cy="60" />
+                <circle class="progress-assignment-ring__circle" stroke="blue" stroke-width="10" fill="transparent" r="50"
+                    cx="60" cy="60" />
             </svg>
             <div class="progress-value">
                 <span id="percentage-assignment"></span>
@@ -301,13 +264,4 @@
             </table>
         </div>
     </div>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
-    <script src="{{ asset('build/assets/js/studentProfile.js') }}"></script>
-
-</body>
-
-</html>
+@endsection
