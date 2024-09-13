@@ -1,102 +1,127 @@
 @extends('layouts.app')
-@section('title', 'Teacher Profile')
+@section('title', 'Parent Profile')
 @section('title of sidebar', 'Settings')
+
 @section('list')
     <ul>
         <li>
-            <a href="#">
-                <i class="fa-solid fa-people-roof"></i> <span class="nav-text">Your Classes</span>
+            <a href="#"> <i class="fa-solid fa-people-roof"></i> <span class="nav-text">Your Child Class</span>
             </a>
+
             <ul>
-                <li><a href=""><i class="fa-solid fa-users-between-lines"></i><span>class 1
-                        </span></a></li>
-                <li><a href="edit-professor.html"><i class="fa-solid fa-users-between-lines"></i> <span>class 2
-                        </span></a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa-solid fa-clipboard-user"></i><span class="nav-text">Attendance</span>
-            </a>
-            <ul>
-                <li><a href=""><i class="fa-solid fa-newspaper"></i></i><span> class 1
+                <li><a href=""><i class="fa-solid fa-newspaper"></i></i><span> Akram
                         </span></a>
                 </li>
-                <li><a href=""><i class="fa-solid fa-newspaper"></i></i><span> class 2
+                <li><a href=""><i class="fa-solid fa-newspaper"></i></i><span> Ahmed
                         </span></a>
                 </li>
-                <li><a href=""><i class="fa-solid fa-newspaper"></i></i><span> class 3
+                <li><a href=""><i class="fa-solid fa-newspaper"></i></i><span> Ayman
                         </span></a>
                 </li>
             </ul>
         </li>
         <li>
             <a href="#">
-                <i class="fa-solid fa-calendar-days"></i>
-                <span class="nav-text">Timetable</span>
+                <i class="fa-solid fa-person-breastfeeding"></i>
+                <span class="nav-text">Your Children</span>
             </a>
             <ul>
+                <li><a href=""><i class="fa-solid fa-child"></i></i></i><span> Akram
+                        </span></a>
+                </li>
+                <li><a href=""><i class="fa-solid fa-child"></i></i></i><span> Ahmed
+                        </span></a>
+                </li>
+                <li><a href=""><i class="fa-solid fa-child"></i></i></i><span> Ayman
+                        </span></a>
+                </li>
 
             </ul>
         </li>
         <li>
             <a href="#">
-                <i class="fa-solid fa-file-import"></i> <span class="nav-text">Assignments</span>
+                <i class="fa-solid fa-comment-dollar"></i>
+                <span class="nav-text">Your Fee</span>
             </a>
             <ul>
-                <li><a href=""><i class="fa-regular fa-file-lines"></i><span> add Assignment
-                        </span></a></li>
-                <li><a href="edit-professor.html"><i class="fa-solid fa-file-signature"></i> <span>all assignment
-                        </span></a></li>
-            </ul>
+                <li>
+                <li><a href="" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+                            class="fa-solid fa-child"></i></i></i><span> Akram
+                        </span></a>
+                </li>
+                <li><a href="" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+                            class="fa-solid fa-child"></i></i></i><span> Ahmed
+                        </span></a>
+                </li>
+                <li><a href="" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+                            class="fa-solid fa-child"></i></i></i><span> Ayman
+                        </span></a>
+                </li>
         </li>
-        <li>
-            <a href="#">
-                <i class="fa-solid fa-clipboard-list"></i> <span class="nav-text">Exams</span>
-            </a>
-            <ul>
-                <li><a href=""><i class="fa-regular fa-file-lines"></i><span> add Exam
-                        </span></a></li>
-                <li><a href="edit-professor.html"><i class="fa-solid fa-check-double"></i> <span>all Exams
-                        </span></a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa-solid fa-list-check"></i><span class="nav-text">Grades</span>
-            </a>
-            <ul>
-                <li><a href=""><i class="fa-regular fa-file-lines"></i><span> Exam 1
-                        </span></a></li>
-                <li><a href="edit-professor.html"><i class="fa-regular fa-file-lines"></i> <span> Exam 2
-                        </span></a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                <span class="nav-text">Logout</span>
-            </a>
-            <ul>
+    </ul>
 
-            </ul>
-        </li>
+    </li>
+    <li>
+        <a href="#">
+            <i class="fa-solid fa-clipboard-user"></i>
+            <span class="nav-text">Attendance</span>
+        </a>
+        <ul>
+
+
+            <li><a href=""><i class="fa-solid fa-child"></i></i></i><span> Akram
+                    </span></a>
+            </li>
+            <li><a href=""><i class="fa-solid fa-child"></i></i></i><span> Ahmed
+                    </span></a>
+            </li>
+            <li><a href=""><i class="fa-solid fa-child"></i></i></i><span> Ayman
+                    </span></a>
+            </li>
+
+        </ul>
+
+    </li>
+    <li>
+        <a href="#">
+            <i class="fa-solid fa-file-import"></i> <span class="nav-text">Assignments</span>
+        </a>
+        <ul>
+            <li><a href=""><i class="fa-solid fa-child"></i></i></i><span> Akram
+                    </span></a>
+            </li>
+            <li><a href=""><i class="fa-solid fa-child"></i></i></i><span> Ahmed
+                    </span></a>
+            </li>
+            <li><a href=""><i class="fa-solid fa-child"></i></i></i><span> Ayman
+                    </span></a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="#">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span class="nav-text">Logout</span>
+        </a>
+        <ul>
+
+        </ul>
+    </li>
     </ul>
 @endsection
 
 @section('card-body')
+
     <div class="profile-card-body">
+        <p>Parent ID</p>
         <p>Full Name</p>
         <p>Gender</p>
-        <p>Qualification</p>
-        <p>Excperience</p>
         <p>Join Date</p>
+
     </div>
     </div>
 @endsection
-
 @section('content')
-
     <div class="teacher-info">
         <div class="teacher-info-header">
             <h3>Contact me</h3>
@@ -113,12 +138,19 @@
     </div>
     <div class="teacher-subject">
         <div class="teacher-subject-header">
-            <h3>Subject</h3>
+            <h3>Your Children</h3>
 
+        </div>
+        <div class="teacher-info-body">
+            <p style="text-align: center">Akram Hesham</p>
+            <hr>
+            <p style="text-align: center">Ahmed Hesham </p>
+            <hr>
+            <p style="text-align: center">Ayman Hesham</p>
         </div>
 
         <div class="teacher-subject-body">
-            <img id="img-subject" src="{{ asset('build/assets/images/subject.png') }}" alt="">
+
         </div>
 
     </div>
@@ -253,6 +285,25 @@
 
                 </tbody>
             </table>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div style="transition: ease in out .5s; " class="modal fade" id="exampleModal" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

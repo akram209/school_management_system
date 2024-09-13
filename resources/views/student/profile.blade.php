@@ -8,7 +8,7 @@
                 <i class="fa-solid fa-people-roof"></i> <span class="nav-text">Your Class</span>
             </a>
             <ul>
-                <li><a href="add-professor.html"><i class="fa-solid fa-users"></i><span>class
+                <li><a href=""><i class="fa-solid fa-users"></i><span>class
                             teamates</span></a></li>
                 <li><a href="edit-professor.html"> <i class="fa-solid fa-people-group"></i> <span>class
                             Teachers</span></a></li>
@@ -71,7 +71,7 @@
                 <span class="nav-text">privacy settings</span>
             </a>
             <ul>
-                <li><a href="add-professor.html"> <i class="fa-regular fa-file-lines"></i><span>change
+                <li><a href=""> <i class="fa-regular fa-file-lines"></i><span>change
                             your info</span></a></li>
                 <li><a href="all-professors.html"><i class="fa-solid fa-key"></i><span>change
                             password</span> </a></li>
