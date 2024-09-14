@@ -104,9 +104,15 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">
-                                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                    <span class="nav-text">Logout</span>
+                                <form action="{{ route('logout') }}" method="POST" id="logout-form">
+                                    @csrf
+                                    <a href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                </form>
+
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                <span class="nav-text">Logout</span>
                                 </a>
                                 <ul>
 
@@ -184,14 +190,21 @@
                                 <ul>
                                     <li><a href=""><i class="fa-regular fa-file-lines"></i><span> Exam 1
                                             </span></a></li>
-                                    <li><a href="edit-professor.html"><i class="fa-regular fa-file-lines"></i> <span> Exam 2
+                                    <li><a href="edit-professor.html"><i class="fa-regular fa-file-lines"></i> <span> Exam
+                                                2
                                             </span></a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">
-                                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                    <span class="nav-text">Logout</span>
+                                <form action="{{ route('logout') }}" method="POST" id="logout-form">
+                                    @csrf
+                                    <a href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                </form>
+
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                <span class="nav-text">Logout</span>
                                 </a>
                                 <ul>
 
@@ -297,9 +310,15 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                <span class="nav-text">Logout</span>
+                            <form action="{{ route('logout') }}" method="POST" id="logout-form">
+                                @csrf
+                                <a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                            </form>
+
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            <span class="nav-text">Logout</span>
                             </a>
                             <ul>
 

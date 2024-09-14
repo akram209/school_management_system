@@ -188,4 +188,21 @@
             </table>
         </div>
     </div>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h4 style="color: rgb(34, 34, 199)">Welcome to your school website</h4>
+            <form id="classForm" action="" method="post">
+                <label for="class"> please select your class carefully:</label>
+                <select name="class" id="class">
+                    <option value="1">Class 1</option>
+                    <option value="2">Class 2</option>
+                    <option value="3">Class 3</option>
+                </select>
+                <br><br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+
 @endsection

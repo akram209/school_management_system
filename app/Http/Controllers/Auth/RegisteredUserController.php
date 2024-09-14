@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Fee;
 use App\Models\Permission;
 use App\Models\Student;
 use App\Models\User;
@@ -59,15 +60,21 @@ class RegisteredUserController extends Controller
             'role' => 'student',
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'image' => $path,
         ]);
 
         $student = Student::create([
             'user_id' => $user->id,
-            'image' => $path,
 
+
+        ]);
+        session()->put('class_id', $student->class_id);
+        Fee::Create([
+            'student_id' => $student->id,
+            'status' => 'unpaid'
         ]);
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect(route('student.profile'));
     }
 }
