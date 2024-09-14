@@ -21,7 +21,7 @@ class Student extends Model
     }
     public function class()
     {
-        return $this->belongsTo(ClassModel::class);
+        return $this->belongsTo(ClassModel::class, 'class_id');
     }
     public function attendence()
     {
@@ -33,6 +33,6 @@ class Student extends Model
     }
     public function parent()
     {
-        return $this->belongsToMany(Parent::class);
+        return $this->belongsToMany(ParentModel::class, 'parent_student', 'student_id', 'parent_id');
     }
 }
