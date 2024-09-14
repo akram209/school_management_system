@@ -129,13 +129,7 @@ class StudentController extends Controller
         ]);
 
         return $student;
-
-
-
  
-
-
-     
     }
 
     /**
@@ -148,4 +142,20 @@ class StudentController extends Controller
         $student->user->delete();
         $student->delete();
     }
+    public function profile($id)
+    {
+        $student_profile = Student::with(['fee', 'class', 'attendence', 'class.timeTable'])->find($id);
+        
+        if (!$student_profile) {
+            return response()->json(['message' => 'Student not found'], 404);
+        }
+    
+        return $student_profile;
+    }
+    public function getSudentsByClassId($id){
+
+        $students_by_classId= Student::with(['class', 'fee', 'user', 'attendence', 'class.timeTable'])->where('class_id', $id)->get();
+        return $students_by_classId;
+    }
+    
 }

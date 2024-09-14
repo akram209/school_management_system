@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClassModel;
 use App\Models\Teacher;
 use App\Models\User;
 
@@ -172,4 +173,13 @@ class TeacherController extends Controller
         
         
     }
+    public function getTeachersByClassId($id)
+    {
+        $class = ClassModel::with('teachers')->find($id);
+        if (!$class) {
+            return response()->json(['message' => 'Class not found'], 404);
+        }
+        return $class->teachers;
+    }
+    
 }

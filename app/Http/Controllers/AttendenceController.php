@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Attendence;
+use App\Models\Student;
 
 class AttendenceController extends Controller
 {
@@ -81,5 +82,14 @@ class AttendenceController extends Controller
     public function destroy(Attendence $attendence)
     {
         $attendence->delete();
+    }
+    public function getAttendecesByStudentId($id){
+        $students = Student::with('attendence')->find($id);
+        if (!$students) {
+            return response()->json(['message' => 'Class not found'], 404);
+        }
+
+        return $students->attendence;
+        
     }
 }

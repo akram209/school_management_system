@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\ParentModel;
 use Illuminate\Http\Request;
 use App\Models\Permission;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -150,5 +151,14 @@ class ParentController extends Controller
         $parent->user->delete();
         $parent->delete();
        
+    }
+    public function getParentsByStudentId($id){
+
+      $students = Student::with('parent')->find($id);
+      if (!$students) {
+        return response()->json(['message' => 'Class not found'], 404);
+    }
+      return $students->parent;
+      
     }
 }
