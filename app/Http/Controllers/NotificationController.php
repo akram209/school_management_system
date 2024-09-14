@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
 class NotificationController extends Controller
@@ -11,7 +12,7 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        $index=Notification::all();
+        $index = Notification::all();
         return $index;
     }
 
@@ -48,7 +49,7 @@ class NotificationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Notitification $notification)
+    public function show(Notification $notification)
     {
         return $notification;
     }
@@ -56,7 +57,7 @@ class NotificationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Notitification $notification)
+    public function edit(Notification $notification)
     {
         return $notification;
     }
@@ -64,29 +65,29 @@ class NotificationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Notitification $notification)
+    public function update(Request $request, Notification $notification)
     {
-       $request->validate([
-           'title' => ['required', 'string', 'max:30', 'min:3'],
-           'body' => ['required', 'string', 'max:30', 'min:3'],
-           'message' => ['required', 'string', 'max:50', 'min:3'],
-           'user_id' => ['required', 'exists:users,id'],
-           'type' => ['required', 'in:admin,student'],
-       ]);
-       Notification::update([
-           'title' => $request->title,
-           'body' => $request->body,
-           'message' => $request->message,
-           'user_id' => $request->user_id,
-           'type' => $request->type,
-       ]);
-       $notification->update($request->all());
+        $request->validate([
+            'title' => ['required', 'string', 'max:30', 'min:3'],
+            'body' => ['required', 'string', 'max:30', 'min:3'],
+            'message' => ['required', 'string', 'max:50', 'min:3'],
+            'user_id' => ['required', 'exists:users,id'],
+            'type' => ['required', 'in:admin,student'],
+        ]);
+        $notification->update([
+            'title' => $request->title,
+            'body' => $request->body,
+            'message' => $request->message,
+            'user_id' => $request->user_id,
+            'type' => $request->type,
+        ]);
+        $notification->update($request->all());
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Notitification $notification)
+    public function destroy(Notification $notification)
     {
         return $notification->delete();
     }

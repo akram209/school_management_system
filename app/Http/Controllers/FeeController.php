@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fee;
 use Illuminate\Http\Request;
 
 class FeeController extends Controller
@@ -11,7 +12,7 @@ class FeeController extends Controller
      */
     public function index()
     {
-        $index=Fee::all();
+        $index = Fee::all();
         return $index;
     }
 
@@ -43,7 +44,7 @@ class FeeController extends Controller
      */
     public function show(Fee $fee)
     {
-       return $fee;
+        return $fee;
     }
 
     /**
@@ -63,7 +64,7 @@ class FeeController extends Controller
             'student_id' => ['required', 'exists:students,id'],
             'status' => ['required', 'in:paid,unpaid'],
         ]);
-        Fee::update([
+        $fee->update([
             'student_id' => $request->student_id,
             'status' => $request->status,
         ]);
@@ -75,6 +76,6 @@ class FeeController extends Controller
      */
     public function destroy(Fee $fee)
     {
-        $fee ->delete();
+        $fee->delete();
     }
 }

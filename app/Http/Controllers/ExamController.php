@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Exam;
 use Illuminate\Http\Request;
 
 class ExamController extends Controller
@@ -11,7 +12,7 @@ class ExamController extends Controller
      */
     public function index()
     {
-        $index=Exam::all();
+        $index = Exam::all();
         return $index;
     }
 
@@ -59,7 +60,7 @@ class ExamController extends Controller
             'subject_id' => ['required', 'exists:subjects,id'],
             'class_id' => ['required', 'exists:classes,id'],
         ]);
-        Exam::update([
+        $exam->update([
             'subject_id' => $request->subject_id,
             'class_id' => $request->class_id,
         ]);
@@ -71,6 +72,6 @@ class ExamController extends Controller
      */
     public function destroy(Exam $exam)
     {
-         $exam->delete();
+        $exam->delete();
     }
 }

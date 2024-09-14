@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\Attendence;
 
@@ -11,8 +12,8 @@ class AttendenceController extends Controller
      */
     public function index()
     {
-       $index =Attendence::all();
-       return $index;
+        $index = Attendence::all();
+        return $index;
     }
 
     /**
@@ -38,7 +39,6 @@ class AttendenceController extends Controller
             'date' => $request->date,
             'status' => $request->status,
         ]);
-         
     }
 
     /**
@@ -60,18 +60,18 @@ class AttendenceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,Attedence $attendence)
-    { 
+    public function update(Request $request, Attendence $attendence)
+    {
         $request->validate([
-        'student_id' => ['required', 'exists:students,id'],
-        'date' => ['required'],
-        'status' => ['required', 'in:present,absent'],
-    ]);
-        Attendence::update([
-        'student_id' => $request->student_id,
-        'date' => $request->date,
-        'status' => $request->status,
-    ]);
+            'student_id' => ['required', 'exists:students,id'],
+            'date' => ['required'],
+            'status' => ['required', 'in:present,absent'],
+        ]);
+        $attendence->update([
+            'student_id' => $request->student_id,
+            'date' => $request->date,
+            'status' => $request->status,
+        ]);
         $attendence->update($request->all());
     }
 
@@ -82,5 +82,4 @@ class AttendenceController extends Controller
     {
         $attendence->delete();
     }
-    
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClassModel;
 use Illuminate\Http\Request;
 
 class ClassController extends Controller
@@ -11,7 +12,7 @@ class ClassController extends Controller
      */
     public function index()
     {
-        $index=ClassModel::all();
+        $index = ClassModel::all();
         return $index;
     }
 
@@ -72,6 +73,6 @@ class ClassController extends Controller
      */
     public function destroy(classmodel $classModel)
     {
-       $classModel->delete();
+        $classModel->delete();
     }
 }
