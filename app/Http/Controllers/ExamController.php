@@ -74,4 +74,7 @@ class ExamController extends Controller
     {
         $exam->delete();
     }
+    public function getExamsBySubjectId($subject_id){
+        return Exam::where('subject_id', $subject_id)->get();
+    }
 }

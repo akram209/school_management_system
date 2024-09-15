@@ -75,4 +75,8 @@ class ClassController extends Controller
     {
         $classModel->delete();
     }
+    public function getClassByTeacherId($teacher_id){
+        $class=ClassModel::with('teachers')->find($teacher_id);
+        return $class;
+    }
 }

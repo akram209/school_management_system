@@ -78,4 +78,9 @@ class FeeController extends Controller
     {
         $fee->delete();
     }
+    public function getFeeByStudentId($studentId)
+    {
+        $fee = Fee::where('student_id', $studentId)->get();
+        return $fee;
+    }
 }
