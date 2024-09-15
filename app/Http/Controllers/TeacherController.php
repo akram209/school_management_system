@@ -182,11 +182,11 @@ class TeacherController extends Controller
         return $class->teachers;
     }
     public function profile ($teacher_id){
-        $teacher = Teacher::with(['user', 'subject'])->find($id);
+        $teacher = Teacher::with(['user', 'subject'])->find($teacher_id);
         if (!$teacher) {
             return response()->json(['message' => 'Teacher not found'], 404);
         }
         return $teacher;
     }
-    
+
 }
