@@ -154,7 +154,7 @@ class StudentController extends Controller
     }
     public function getSudentsByClassId($id){
 
-        $students_by_classId= Student::with(['class', 'fee', 'user', 'attendence', 'class.timeTable'])->where('class_id', $id)->get();
+        $students_by_classId= Student::where('class_id', $id)->get();
         return $students_by_classId;
     }
     

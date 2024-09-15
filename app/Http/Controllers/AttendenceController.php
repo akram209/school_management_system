@@ -84,12 +84,12 @@ class AttendenceController extends Controller
         $attendence->delete();
     }
     public function getAttendecesByStudentId($id){
-        $students = Student::with('attendence')->find($id);
-        if (!$students) {
+        $attendence = Attendence::where('student_id' ,$id)->get();
+        if (!$attendence){
             return response()->json(['message' => 'Class not found'], 404);
         }
 
-        return $students->attendence;
-        
+        return $attendence;
+
     }
 }
