@@ -43,17 +43,10 @@
             </div>
         </div>
     </div>
-    <div class="profile-card">
-        <div class="profile-card-header">
 
-            <img src="{{ asset('build/assets/images/Screenshot 2024-09-11 174254.png') }}" alt="profile"
-                class="profile-card-header-profile-img">
-        </div>
-        <hr>
-        @yield('card-body')
-        @yield('content')
+    @yield('content')
 
-        @include('../includes.scripts')
+    @include('../includes.scripts')
 </body>
 
 </html>

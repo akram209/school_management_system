@@ -3,7 +3,13 @@
 @section('title of sidebar', 'Settings')
 
 
-@section('card-body')
+<div class="profile-card">
+    <div class="profile-card-header">
+
+        <img src="{{ asset('build/assets/images/Screenshot 2024-09-11 174254.png') }}" alt="profile"
+            class="profile-card-header-profile-img">
+    </div>
+    <hr>
     <div class="profile-card-body">
         <p>Full Name</p>
         <p>Gender</p>
@@ -11,8 +17,8 @@
         <p>Excperience</p>
         <p>Join Date</p>
     </div>
-    </div>
-@endsection
+</div>
+
 
 @section('content')
 

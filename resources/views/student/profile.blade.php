@@ -1,8 +1,13 @@
 @extends('layouts.app')
 @section('title', 'Student Profile')
 @section('title of sidebar', 'Settings')
+<div class="profile-card">
+    <div class="profile-card-header">
 
-@section('card-body')
+        <img src="{{ asset('build/assets/images/Screenshot 2024-09-11 174254.png') }}" alt="profile"
+            class="profile-card-header-profile-img">
+    </div>
+    <hr>
     <div class="profile-card-body">
         <p>Student ID</p>
         <p>Full Name</p>
@@ -14,8 +19,8 @@
 
 
     </div>
-    </div>
-@endsection
+</div>
+
 @section('content')
     <div class="totel-attendence">
         <p id="attendence">Attendance</p>
