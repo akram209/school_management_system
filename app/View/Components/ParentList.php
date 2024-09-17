@@ -2,17 +2,16 @@
 
 namespace App\View\Components;
 
-use App\Models\Teacher;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class TeacherList extends Component
+class ParentList extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct(public $userId)
+    public function __construct()
     {
         //
     }
@@ -22,7 +21,6 @@ class TeacherList extends Component
      */
     public function render(): View|Closure|string
     {
-        $teacher = Teacher::with(['user', 'subject', 'class'])->where('user_id', $this->userId)->first();
-        return view('components.teacher-list', compact('teacher'));
+        return view('components.parent-list');
     }
 }
