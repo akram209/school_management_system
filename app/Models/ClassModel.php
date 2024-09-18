@@ -36,4 +36,7 @@ class ClassModel extends Model
     {
         return $this->hasMany(Grade::class, 'class_id');
     }
+    public function subjects(){
+        return $this->belongsToMany(Subject::class, 'class_subject', 'class_id','subject_id');
+    }
 }
