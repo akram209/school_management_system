@@ -17,6 +17,16 @@
     </div>
 @endsection --}}
 @section('content')
+    <style>
+        .table {
+            width: 80% !important;
+            left: 21% !important;
+        }
+
+        td:nth-child(6) {
+            width: 120px !important;
+        }
+    </style>
     <table class="table align-middle mb-4 bg-white">
         <thead class="bg-light">
             <tr>

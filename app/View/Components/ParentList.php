@@ -11,7 +11,7 @@ class ParentList extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct(public $userId)
     {
         //
     }
@@ -21,6 +21,7 @@ class ParentList extends Component
      */
     public function render(): View|Closure|string
     {
+        // $parent = ParentModel::with(['user', 'student.class'])->where('id', $this->userId)->first();
         return view('components.parent-list');
     }
 }

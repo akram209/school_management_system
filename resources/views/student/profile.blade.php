@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Student Profile')
 @section('title of sidebar', 'Settings')
+
 <div class="profile-card">
     <div class="profile-card-header">
 

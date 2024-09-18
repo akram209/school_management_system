@@ -63,6 +63,7 @@
 </li>
 <li>
     <a href="#">
+        {{-- attendance by with students ids --}}
         <i class="fa-solid fa-clipboard-user"></i>
         <span class="nav-text">Attendance</span>
     </a>
@@ -84,7 +85,25 @@
 </li>
 <li>
     <a href="#">
+        {{-- assignment students by students ids   --}}
         <i class="fa-solid fa-file-import"></i> <span class="nav-text">Assignments</span>
+    </a>
+    <ul>
+        <li><a href=""><i class="fa-solid fa-child"></i></i></i><span> Akram
+                </span></a>
+        </li>
+        <li><a href=""><i class="fa-solid fa-child"></i></i></i><span> Ahmed
+                </span></a>
+        </li>
+        <li><a href=""><i class="fa-solid fa-child"></i></i></i><span> Ayman
+                </span></a>
+        </li>
+    </ul>
+</li>
+<li>
+    <a href="#">
+        {{-- exams students by students ids   --}}
+        <i class="fa-solid fa-file-import"></i> <span class="nav-text">Exams</span>
     </a>
     <ul>
         <li><a href=""><i class="fa-solid fa-child"></i></i></i><span> Akram
