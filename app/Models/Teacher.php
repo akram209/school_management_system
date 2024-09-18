@@ -17,7 +17,6 @@ class Teacher extends Model
         'salary',
         'experience_years',
         'qualification',
-        'image',
         'status'
     ];
 
@@ -33,7 +32,7 @@ class Teacher extends Model
 
     public function class()
     {
-        return $this->belongsToMany(ClassModel::class);
+        return $this->belongsToMany(ClassModel::class, 'class_teacher', 'teacher_id', 'class_id');
     }
 
     public function timeTable()

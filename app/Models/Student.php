@@ -13,8 +13,6 @@ class Student extends Model
     protected $fillable = [
         'user_id',
         'class_id',
-        'parent_id',
-        'image',
     ];
 
     public function user()
@@ -23,7 +21,7 @@ class Student extends Model
     }
     public function class()
     {
-        return $this->belongsTo(ClassModel::class);
+        return $this->belongsTo(ClassModel::class, 'class_id');
     }
     public function attendence()
     {
@@ -35,6 +33,13 @@ class Student extends Model
     }
     public function parent()
     {
-        return $this->belongsToMany(Parent::class);
+
+        return $this->belongsToMany(ParentModel::class, 'parent_student', 'student_id', 'parent_id');
+    }
+    public function assignments(){
+        return $this->belongsToMany(Assignment::class,'assignment_student','student_id','assignment_id');
+    }
+    public function exams(){
+        return $this->belongsToMany(Exam::class,'exam_student','student_id','exam_id');
     }
 }

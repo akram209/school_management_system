@@ -11,19 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('teachers', function (Blueprint $table) {
+        Schema::create('assignments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('subject_id');
             $table->foreign('subject_id')->references('id')->on('subjects');
-            $table->string('phone')->unique();
-            $table->string('address');
-            $table->string('salary');
-            $table->tinyInteger('experience_years');
-            $table->text('qualification');
-            $table->enum('status', ['paid', 'unpaid'])->default('unpaid');
+            $table->unsignedBigInteger('class_id');
+            $table->foreign('class_id')->references('id')->on('classes');
+            $table->string('title',20);
+            $table->text('description');
+            $table->enum('type',['online','offlie']);
+            $table->integer('mark');
+            $table->time('deadline');
             $table->timestamps();
+
         });
     }
 
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('teachers');
+        Schema::dropIfExists('assignments');
     }
 };

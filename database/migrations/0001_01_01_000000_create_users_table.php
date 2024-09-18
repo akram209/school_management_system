@@ -19,6 +19,8 @@ return new class extends Migration
             $table->enum('role', ['admin', 'student', 'teacher', 'parent']);
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('image')->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });
