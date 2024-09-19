@@ -5,48 +5,6 @@
 
 @section('content')
     <style>
-        #search-teacher {
-            position: absolute !important;
-            width: 70% !important;
-            height: 40px !important;
-            left: 10% !important;
-            top: 8% !important;
-            word-wrap: none !important;
-        }
-
-        #teacher-list {
-            position: absolute !important;
-            height: 40px !important;
-            left: 80% !important;
-            top: 8% !important;
-            word-wrap: none !important;
-            background-color: #007bff;
-            color: #ffffff;
-            border-radius: 5px;
-
-        }
-
-        #search-student {
-            position: absolute !important;
-            width: 70% !important;
-            height: 40px !important;
-            left: 10% !important;
-            top: 47% !important;
-            word-wrap: none !important;
-        }
-
-        #student-list {
-            position: absolute !important;
-            height: 40px !important;
-            left: 80% !important;
-            top: 47% !important;
-            word-wrap: none !important;
-            background-color: #007bff;
-            color: #ffffff;
-            border-radius: 5px;
-
-        }
-
         #footer {
             position: absolute !important;
             width: 80% !important;
