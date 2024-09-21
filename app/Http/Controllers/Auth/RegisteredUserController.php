@@ -69,13 +69,12 @@ class RegisteredUserController extends Controller
 
 
         ]);
-        session()->put('class_id', $student->class_id);
         Fee::Create([
             'student_id' => $student->id,
             'status' => 'unpaid'
         ]);
         Auth::login($user);
 
-        return redirect(route('student.profile'));
+        return redirect(route('student.profile'), $user->id);
     }
 }

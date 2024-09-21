@@ -18,7 +18,6 @@ class StudentController extends Controller
     {
         $students = Student::all();
         return $students;
-        
     }
 
     /**
@@ -34,7 +33,7 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-       
+
         $request->validate([
             'firstname' => ['required', 'string', 'max:30', 'min:3'],
             'lastname' => ['required', 'string', 'max:30', 'min:3'],
@@ -69,9 +68,6 @@ class StudentController extends Controller
             'class_id' => $request->class_id,
 
         ]);
-       
-
-        
     }
 
     /**
@@ -80,16 +76,12 @@ class StudentController extends Controller
     public function show(Student $student)
     {
         return $student;
-        
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        
-    }
+    public function edit(string $id) {}
 
     /**
      * Update the specified resource in storage.
@@ -103,7 +95,7 @@ class StudentController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required'],
             'code' => ['required'],
-            'image' => [ 'image', 'mimes:jpeg,png,jpg'],
+            'image' => ['image', 'mimes:jpeg,png,jpg'],
             'class_id' => ['required', 'exists:classes,id'],
         ]);
         $student->update([
@@ -129,7 +121,6 @@ class StudentController extends Controller
         ]);
 
         return $student;
- 
     }
 
     /**
@@ -137,25 +128,39 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-   
+
         Storage::disk('images')->delete($student->user->image);
         $student->user->delete();
         $student->delete();
     }
     public function profile($id)
     {
-        $student_profile = Student::with(['fee', 'class', 'attendence', 'class.timeTable'])->find($id);
-        
-        if (!$student_profile) {
-            return response()->json(['message' => 'Student not found'], 404);
-        }
-    
-        return $student_profile;
+        $student = Student::with(['user',  'class.timeTable.teacher',  'class.timeTable.subject'])->where('user_id', $id)->first();
+        return view('student.profile', ['student' => $student]);
     }
-    public function getSudentsByClassId($id){
+    public function getSudentsByClassId($id)
+    {
 
-        $students_by_classId= Student::where('class_id', $id)->get();
+        $students_by_classId = Student::where('class_id', $id)->get();
         return $students_by_classId;
     }
-    
+    public function setClass($id, Request $request)
+    {
+        $student = Student::where('user_id', $id);
+        $student->update([
+            'class_id' => request()->class_id,
+        ]);
+        return redirect()->route('student.profile', $id);
+    }
+    public function getStudentresults($id)
+    {
+
+        $student = Student::with('attendence', 'assignments')->where('user_id', $id)->first();
+
+        if (!$student) {
+            return response()->json(['message' => 'Student not found'], 404);
+        }
+
+        return response()->json($student);
+    }
 }

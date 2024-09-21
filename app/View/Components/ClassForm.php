@@ -2,13 +2,12 @@
 
 namespace App\View\Components;
 
-use App\Models\Student;
-use App\Models\User;
+use App\Models\ClassModel;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class StudentList extends Component
+class ClassForm extends Component
 {
     /**
      * Create a new component instance.
@@ -23,7 +22,7 @@ class StudentList extends Component
      */
     public function render(): View|Closure|string
     {
-        // $student = Student::with(['user', 'class', 'fee'])->where('user_id', $this->userId)->first();
-        return view('components.student-list');
+        $classes = ClassModel::all();
+        return view('components.class-form', ['classes' => $classes], ['userId' => $this->userId]);
     }
 }

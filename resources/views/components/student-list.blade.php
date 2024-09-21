@@ -2,7 +2,7 @@
     <li>
         <a href="#">
             {{-- class name by class id in student  --}}
-            <i class="fa-solid fa-people-roof"></i> <span class="nav-text"></span>
+            <i class="fa-solid fa-people-roof"></i> <span class="nav-text"></span> Your Classes
         </a>
         <ul>
             {{-- student by class id in student --}}
