@@ -51,7 +51,7 @@
 <div class="profile-card">
     <div class="profile-card-header">
 
-        <img src="{{ asset('build/assets/images/Screenshot 2024-09-11 174254.png') }}" alt="profile"
+        <img src="{{ asset('storage/images/' . $student->user->image) }}" alt="profile"
             class="profile-card-header-profile-img">
     </div>
     <hr>

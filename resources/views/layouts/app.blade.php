@@ -13,8 +13,8 @@
 
         <i class="bi bi-list" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
             aria-controls="offcanvasWithBothOptions"></i>
-        <img src="{{ asset('build/assets/images/Screenshot 2024-09-11 174254.png') }}" class="rounded-circle"
-            height="22" alt="Avatar" loading="lazy" />
+        <img src="{{ asset('storage/images/' . Auth::user()->image) }}" class="rounded-circle" height="22"
+            alt="Avatar" loading="lazy" />
     </nav>
 
     <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
