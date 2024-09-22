@@ -1,16 +1,15 @@
 <ul>
     <li>
-        <a href="#">
+        <a href="{{ route('class.show', $student->class_id) }}">
             {{-- class name by class id in student  --}}
-            <i class="fa-solid fa-people-roof"></i> <span class="nav-text"></span> Your Classes
+            <i class="fa-solid fa-people-roof"></i> <span class="nav-text">{{ $student->class->name }}</span>
         </a>
         <ul>
             {{-- student by class id in student --}}
-            <li><a href=""><i class="fa-solid fa-users"></i><span>class
-                        teamates</span></a></li>
-            {{-- teacher by class id in student --}}
-            <li><a href="edit-professor.html"> <i class="fa-solid fa-people-group"></i> <span>class
-                        Teachers</span></a></li>
+            <li><a href="{{ route('class.show', $student->class_id) }}"><i class="fa-solid fa-users"></i><span> your
+                        class info
+                    </span></a></li>
+
         </ul>
     </li>
 
@@ -83,7 +82,7 @@
             <li>
                 {{-- fee by student id   --}}
 
-                <a> <i class="fa-solid fa-credit-card"></i><span></span></a>
+                <a> <i class="fa-solid fa-credit-card"></i><span> {{ $student->fee->status }}</span></a>
             </li>
         </ul>
 

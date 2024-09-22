@@ -40,10 +40,12 @@ class ClassController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ClassModel $classModel)
+    public function show(ClassModel $class)
     {
-        return $classModel;
+        $class->load('teachers.user', 'students.user');
+        return view('class.show', compact('class'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -75,8 +77,9 @@ class ClassController extends Controller
     {
         $classModel->delete();
     }
-    public function getClassByTeacherId($teacher_id){
-        $class=ClassModel::with('teachers')->find($teacher_id);
+    public function getClassByTeacherId($teacher_id)
+    {
+        $class = ClassModel::with('teachers')->find($teacher_id);
         return $class;
     }
 }

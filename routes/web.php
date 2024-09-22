@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
@@ -18,7 +18,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/profile/{id}', [StudentController::class, 'profile'])->name('student.profile');
-    Route::post('/set-class/{id}', [StudentController::class, 'setClass'])->name('student.class');
+    Route::post('/storeStudentclass/{id}', [StudentController::class, 'setClass'])->name('student.class');
+    Route::get('/class/{class}', [ClassController::class, 'show'])->name('class.show');
 });
 
 

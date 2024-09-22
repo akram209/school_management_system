@@ -13,8 +13,13 @@
 
         <i class="bi bi-list" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
             aria-controls="offcanvasWithBothOptions"></i>
+        @if (Auth::user()->role == 'student')
+            <a href="{{ route('student.profile', Auth::user()->id) }}">
+        @endif
         <img src="{{ asset('storage/images/' . Auth::user()->image) }}" class="rounded-circle" height="22"
             alt="Avatar" loading="lazy" />
+        </a>
+
     </nav>
 
     <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"

@@ -23,7 +23,7 @@ class StudentList extends Component
      */
     public function render(): View|Closure|string
     {
-        // $student = Student::with(['user', 'class', 'fee'])->where('user_id', $this->userId)->first();
-        return view('components.student-list');
+        $student = Student::with(['user', 'class', 'fee'])->where('user_id', $this->userId)->first();
+        return view('components.student-list', compact('student'));
     }
 }
