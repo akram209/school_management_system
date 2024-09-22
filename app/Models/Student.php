@@ -31,7 +31,7 @@ class Student extends Model
     {
         return $this->hasOne(Fee::class);
     }
-    public function parent()
+    public function parents()
     {
 
         return $this->belongsToMany(ParentModel::class, 'parent_student', 'student_id', 'parent_id');

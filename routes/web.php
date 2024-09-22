@@ -18,6 +18,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/profile/{id}', [StudentController::class, 'profile'])->name('student.profile');
+    Route::get('/your-parents/{student}', [StudentController::class, 'getParentsByStudentId'])->name('student.parent');
     Route::post('/storeStudentclass/{id}', [StudentController::class, 'setClass'])->name('student.class');
     Route::get('/class/{class}', [ClassController::class, 'show'])->name('class.show');
 });

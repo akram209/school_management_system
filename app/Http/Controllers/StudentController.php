@@ -152,6 +152,17 @@ class StudentController extends Controller
         ]);
         return redirect()->route('student.profile', $id);
     }
+    public function getParentsByStudentId(Student $student)
+    {
+        $student = $student->load('parents.user');
+        $parents = $student->parents;
+
+        return view('student.parents', ['parents' => $parents]);
+    }
+
+
+
+    // Api endpoint 
     public function getStudentresults($id)
     {
 

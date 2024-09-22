@@ -6,6 +6,8 @@
     .table-bordered thead td,
     .table-bordered thead th {
         border-bottom-width: 2px;
+        padding: 10px !important;
+
     }
 
     .table thead th {
@@ -16,6 +18,7 @@
     .table-bordered td,
     .table-bordered th {
         border: 1px solid #dee2e6;
+
     }
 
     .table-bordered td,
@@ -113,12 +116,12 @@
             <table class="table table-bordered text-center">
                 <thead>
                     <tr class="bg-light-gray">
-                        <th class="text-uppercase">Date</th>
+                        <th class="text-uppercase">Time</th>
                         <th class="text-uppercase">Sunday</th>
                         <th class="text-uppercase">Monday</th>
                         <th class="text-uppercase">Tuesday</th>
                         <th class="text-uppercase">Wednesday</th>
-                        <th class="text-uppercase">Thursday</th>
+                        <th class="text-uppercase" style="width: 18.5% !important">Thursday</th>
 
 
 
@@ -127,65 +130,65 @@
                 <tbody>
                     @foreach ($student->class->timetable as $time)
                         <tr>
-                            <td>{{ $time->date }}</td>
+                            <td>{{ $time->start_time }}-{{ $time->end_time }}</td>
 
                             <td class="{{ $time->day_name == 'sunday' ? '' : 'bg-light-gray' }}">
                                 @if ($time->day_name == 'sunday')
                                     <span
                                         class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ $time->subject->name }}</span>
-                                    <div class="margin-10px-top font-size14">{{ $time->start_time }}-{{ $time->end_time }}
-                                    </div>
-                                    <div class="font-size13 text-light-gray">
-                                        {{ $time->teacher->first_name . ' ' . $time->teacher->last_name }}</div>
-                                @endif
-                            </td>
-                            <td class="{{ $time->day_name == 'monday' ? '' : 'bg-light-gray' }}">
-                                @if ($time->day_name == 'monday')
-                                    <span
-                                        class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ $time->subject->name }}</span>
-                                    <div class="margin-10px-top font-size14">{{ $time->start_time }}-{{ $time->end_time }}
-                                    </div>
-                                    <div class="font-size13 text-light-gray">
-                                        {{ $time->teacher->first_name . ' ' . $time->teacher->last_name }}</div>
-                                @endif
-                            </td>
-                            <td class="{{ $time->day_name == 'tuesday' ? '' : 'bg-light-gray' }}">
-                                @if ($time->day_name == 'tuesday')
-                                    <span
-                                        class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ $time->subject->name }}</span>
-                                    <div class="margin-10px-top font-size14">{{ $time->start_time }}-{{ $time->end_time }}
-                                    </div>
-                                    <div class="font-size13 text-light-gray">
-                                        {{ $time->teacher->first_name . ' ' . $time->teacher->last_name }}</div>
-                                @endif
-                            </td>
-                            <td class="{{ $time->day_name == 'wednesday' ? '' : 'bg-light-gray' }}">
-                                @if ($time->day_name == 'wednesday')
-                                    <span
-                                        class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ $time->subject->name }}</span>
-                                    <div class="margin-10px-top font-size14">{{ $time->start_time }}-{{ $time->end_time }}
-                                    </div>
-                                    <div class="font-size13 text-light-gray">
-                                        {{ $time->teacher->first_name . ' ' . $time->teacher->last_name }}</div>
-                                @endif
-                            </td>
-                            <td class="{{ $time->day_name == 'thursday' ? '' : 'bg-light-gray' }}">
-                                @if ($time->day_name == 'thursday')
-                                    <span
-                                        class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ $time->subject->name }}</span>
-                                    <div class="margin-10px-top font-size14">{{ $time->start_time }}-{{ $time->end_time }}
-                                    </div>
-                                    <div class="font-size13 text-light-gray">
-                                        {{ $time->teacher->first_name . ' ' . $time->teacher->last_name }}</div>
-                                @endif
-                            </td>
-
-                        </tr>
-                    @endforeach
-
-                </tbody>
-            </table>
+                                    <div class="margin-10px-top font-size14">{{ $time->date }}</div>
         </div>
+        <div class="font-size13 text-light-gray">
+            {{ $time->teacher->first_name . ' ' . $time->teacher->last_name }}</div>
+        @endif
+        </td>
+        <td class="{{ $time->day_name == 'monday' ? '' : 'bg-light-gray' }}">
+            @if ($time->day_name == 'monday')
+                <span
+                    class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ $time->subject->name }}</span>
+                <div class="margin-10px-top font-size14">{{ $time->date }}
+                </div>
+                <div class="font-size13 text-light-gray">
+                    {{ $time->teacher->first_name . ' ' . $time->teacher->last_name }}</div>
+            @endif
+        </td>
+        <td class="{{ $time->day_name == 'tuesday' ? '' : 'bg-light-gray' }}">
+            @if ($time->day_name == 'tuesday')
+                <span
+                    class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ $time->subject->name }}</span>
+                <div class="margin-10px-top font-size14">{{ $time->date }}
+                </div>
+                <div class="font-size13 text-light-gray">
+                    {{ $time->teacher->first_name . ' ' . $time->teacher->last_name }}</div>
+            @endif
+        </td>
+        <td class="{{ $time->day_name == 'wednesday' ? '' : 'bg-light-gray' }}">
+            @if ($time->day_name == 'wednesday')
+                <span
+                    class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ $time->subject->name }}</span>
+                <div class="margin-10px-top font-size14">{{ $time->date }}
+                </div>
+                <div class="font-size13 text-light-gray">
+                    {{ $time->teacher->first_name . ' ' . $time->teacher->last_name }}</div>
+            @endif
+        </td>
+        <td class="{{ $time->day_name == 'thursday' ? '' : 'bg-light-gray' }}">
+            @if ($time->day_name == 'thursday')
+                <span
+                    class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ $time->subject->name }}</span>
+                <div class="margin-10px-top font-size14">{{ $time->date }}
+                </div>
+                <div class="font-size13 text-light-gray">
+                    {{ $time->teacher->first_name . ' ' . $time->teacher->last_name }}</div>
+            @endif
+        </td>
+
+        </tr>
+        @endforeach
+
+        </tbody>
+        </table>
+    </div>
     </div>
     @if ($student->class == null)
         <x-class-form :userId="Auth::user()->id" />

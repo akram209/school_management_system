@@ -1,12 +1,12 @@
 <ul>
     <li>
-        <a href="{{ route('class.show', $student->class_id) }}">
+        <a href="#">
             {{-- class name by class id in student  --}}
             <i class="fa-solid fa-people-roof"></i> <span class="nav-text">{{ $student->class->name }}</span>
         </a>
         <ul>
             {{-- student by class id in student --}}
-            <li><a href="{{ route('class.show', $student->class_id) }}"><i class="fa-solid fa-users"></i><span> your
+            <li><a href="{{ route('class.show', $student->class->id) }}"><i class="fa-solid fa-users"></i><span> your
                         class info
                     </span></a></li>
 
@@ -14,7 +14,7 @@
     </li>
 
     <li>
-        <a href="#">
+        <a href="{{ route('student.parent', $student->id) }}">
             {{-- parent by student id  --}}
             <i class="fa-solid fa-person-breastfeeding"></i>
             <span class="nav-text">Your Parents</span>
@@ -52,16 +52,7 @@
 
         </ul>
     </li>
-    <li>
-        <a href="#">
-            {{-- timetable by class id in student --}}
-            <i class="fa-solid fa-calendar-days"></i>
-            <span class="nav-text">Timetable</span>
-        </a>
-        <ul>
 
-        </ul>
-    </li>
     <li>
         <a href="#">
             {{-- assignment by student id   --}}

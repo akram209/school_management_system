@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Classe')
+@section('title', 'Class')
 @section('title of sidebar', 'Settings')
 
 
