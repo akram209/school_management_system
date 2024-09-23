@@ -2,11 +2,15 @@
     <li>
         <a href="#">
             {{-- class name by class id in student  --}}
-            <i class="fa-solid fa-people-roof"></i> <span class="nav-text">{{ $student->class->name }}</span>
+            <i class="fa-solid fa-people-roof"></i> <span class="nav-text">
+                @if ($student->class)
+                    {{ $student->class->name }}
+                @endif
+            </span>
         </a>
         <ul>
             {{-- student by class id in student --}}
-            <li><a href="{{ route('class.show', $student->class->id) }}"><i class="fa-solid fa-users"></i><span> your
+            <li><a href="{{ route('student.class', $student->id) }}"><i class="fa-solid fa-users"></i><span> your
                         class info
                     </span></a></li>
 
@@ -25,7 +29,7 @@
     </li>
 
     <li>
-        <a href="#">
+        <a href="{{ route('student.subjects', $student->id) }}">
             {{-- All subjects  --}}
             <i class="fa-solid fa-book"></i>
             <span class="nav-text">Subjects</span>

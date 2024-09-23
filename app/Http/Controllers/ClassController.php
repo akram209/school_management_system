@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ClassModel;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class ClassController extends Controller
@@ -81,5 +82,12 @@ class ClassController extends Controller
     {
         $class = ClassModel::with('teachers')->find($teacher_id);
         return $class;
+    }
+    public function getClassByStudentId(Student $student)
+    {
+
+        $class = ClassModel::where('id', $student->class_id)->get()->first();
+        $class->load('teachers.user', 'students.user');
+        return view('class.show', compact('class'));
     }
 }

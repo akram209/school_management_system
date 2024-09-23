@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\ParentModel;
 use Illuminate\Http\Request;
 use App\Models\Permission;
@@ -8,6 +9,7 @@ use App\Models\Student;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+
 class ParentController extends Controller
 {
     /**
@@ -22,10 +24,7 @@ class ParentController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
@@ -47,9 +46,9 @@ class ParentController extends Controller
         // if (!$permission) {
         //     return back()->withErrors(['code' => 'The code is not valid.']);
         // }
-      
 
-      
+
+
 
         if (request()->hasFile('image')) {
             $file = request()->file('image');
@@ -67,13 +66,12 @@ class ParentController extends Controller
                 'user_id' => $user->id,
                 'phone' => $request->phone,
                 'address' => $request->address,
-                
+
             ]);
         }
-       
+
 
         return $parent;
-        
     }
 
     /**
@@ -82,9 +80,8 @@ class ParentController extends Controller
     public function show(string $id)
     {
         $parent = ParentModel::find($id);
-       
-        return [$parent ,$parent->user ];
-       
+
+        return [$parent, $parent->user];
     }
 
     /**
@@ -94,7 +91,6 @@ class ParentController extends Controller
     {
         $parent = ParentModel::find($id);
         return $parent;
-        
     }
 
     /**
@@ -150,23 +146,21 @@ class ParentController extends Controller
         Storage::disk('images')->delete($parent->user->image);
         $parent->user->delete();
         $parent->delete();
-       
     }
-    public function getParentsByStudentId($id){
+    public function getParentsByStudentId(Student $student)
+    {
+        $student = $student->load('parents.user');
+        $parents = $student->parents;
 
-      $students = Student::with('parent')->find($id);
-      if (!$students) {
-        return response()->json(['message' => 'Class not found'], 404);
+        return view('student.parents', ['parents' => $parents]);
     }
-      return $students->parent;
-      
-    }
-    public function profile ($parent_id){
-        $parent=ParentModel::with(['user','students.class'])->find($parent_id);
+    public function profile($parent_id)
+    {
+        $parent = ParentModel::with(['user', 'students.class'])->find($parent_id);
 
         if (!$parent) {
             return response()->json(['message' => 'Parent not found'], 404);
         }
         return $parent;
-}
+    }
 }

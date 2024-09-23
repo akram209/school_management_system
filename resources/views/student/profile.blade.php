@@ -63,7 +63,9 @@
         <p> Full Name: {{ $student->user->first_name }} {{ $student->user->last_name }}</p>
         <p> Email: {{ $student->user->email }}</p>
         <p> Gender: {{ $student->user->gender }}</p>
-        <p> Class: {{ $student->class->name }}</p>
+        @if ($student->class)
+            <p> Class: {{ $student->class->name }}</p>
+        @endif
         <p> Join Date: {{ $student->created_at->format('d/m/Y') }}</p>
 
 
@@ -128,15 +130,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($student->class->timetable as $time)
-                        <tr>
-                            <td>{{ $time->start_time }}-{{ $time->end_time }}</td>
+                    @if ($student->class)
+                        @foreach ($student->class->timetable as $time)
+                            <tr>
+                                <td>{{ $time->start_time }}-{{ $time->end_time }}</td>
 
-                            <td class="{{ $time->day_name == 'sunday' ? '' : 'bg-light-gray' }}">
-                                @if ($time->day_name == 'sunday')
-                                    <span
-                                        class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ $time->subject->name }}</span>
-                                    <div class="margin-10px-top font-size14">{{ $time->date }}</div>
+                                <td class="{{ $time->day_name == 'sunday' ? '' : 'bg-light-gray' }}">
+                                    @if ($time->day_name == 'sunday')
+                                        <span
+                                            class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ $time->subject->name }}</span>
+                                        <div class="margin-10px-top font-size14">{{ $time->date }}</div>
         </div>
         <div class="font-size13 text-light-gray">
             {{ $time->teacher->first_name . ' ' . $time->teacher->last_name }}</div>
@@ -185,13 +188,13 @@
 
         </tr>
         @endforeach
-
+        @endif
         </tbody>
         </table>
     </div>
     </div>
-    @if ($student->class == null)
-        <x-class-form :userId="Auth::user()->id" />
+    @if (!$student->class)
+        <x-class-form :studentId="$student->id" />
     @endif
     <script>
         window.authenticatedUserId = '{{ auth()->user()->id }}';

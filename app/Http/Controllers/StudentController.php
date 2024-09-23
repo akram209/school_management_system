@@ -138,27 +138,16 @@ class StudentController extends Controller
         $student = Student::with(['user',  'class.timeTable.teacher',  'class.timeTable.subject'])->where('user_id', $id)->first();
         return view('student.profile', ['student' => $student]);
     }
-    public function getSudentsByClassId($id)
+
+    public function setClass(Student $student, Request $request)
     {
 
-        $students_by_classId = Student::where('class_id', $id)->get();
-        return $students_by_classId;
-    }
-    public function setClass($id, Request $request)
-    {
-        $student = Student::where('user_id', $id);
         $student->update([
             'class_id' => request()->class_id,
         ]);
-        return redirect()->route('student.profile', $id);
+        return redirect()->route('student.profile', $student->user_id);
     }
-    public function getParentsByStudentId(Student $student)
-    {
-        $student = $student->load('parents.user');
-        $parents = $student->parents;
 
-        return view('student.parents', ['parents' => $parents]);
-    }
 
 
 

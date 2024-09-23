@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,6 @@ class SubjectController extends Controller
     {
         $subjects = Subject::all();
         return $subjects;
-
     }
 
     /**
@@ -40,7 +40,6 @@ class SubjectController extends Controller
         ]);
 
         return $subject;
-
     }
 
     /**
@@ -83,6 +82,11 @@ class SubjectController extends Controller
     public function destroy(Subject $subject)
     {
         $subject->delete();
-        
+    }
+    public function getSubjectsByStudentId(Student $student)
+    {
+        $class = $student->class;
+        $teachers = $class->load('teachers.user')->teachers;
+        return view('student.student-subjects', compact('teachers'));
     }
 }
