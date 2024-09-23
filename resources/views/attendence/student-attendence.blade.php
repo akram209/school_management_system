@@ -15,37 +15,34 @@
             style="width: 40% !important; position: absolute; left: 75% !important">
 
     </form>
+    <form class="d-flex" role="search" id="search-teacher">
+        <input class="form-control me-2" type="search" placeholder="Search by date" aria-label="Search"
+            style="width: 40% !important; position: absolute; left: 30% !important">
+
+    </form>
     <table class="table align-middle mb-4 bg-white" style="left: 30% !important ;top: 15% !important">
         <thead class="bg-light">
-            <!-- Table heading centered -->
             <tr>
                 <th colspan="4" style="text-align: center;">
                     <h1>Attendance</h1>
                 </th>
             </tr>
-            <!-- Table column headers -->
             <tr>
                 <th>Full Name</th>
-                <th>Day</th>
-                <th>Date</th>
-                <th>Status</th>
+                <th style=" padding-right: 20px !important ">Day</th>
+                <th style=" padding-right: 30px !important ">Date</th>
+                <th style=" padding-right: 50px !important ">Status</th>
             </tr>
         </thead>
         <tbody>
-            <!-- Example rows, to be replaced with dynamic content -->
-            <tr>
-                <td>John Doe</td>
-                <td>Monday</td>
-                <td>2024-09-18</td>
-                <td>Present</td>
-            </tr>
-            <tr>
-                <td>Jane Smith</td>
-                <td>Monday</td>
-                <td>2024-09-18</td>
-                <td>Absent</td>
-            </tr>
-            <!-- Add more rows as needed -->
+            @foreach ($attendences as $attendence)
+                <tr>
+                    <td>{{ $attendence->student->user->first_name . ' ' . $attendence->student->user->last_name }}</td>
+                    <td>{{ \Carbon\Carbon::parse($attendence->date)->format('D') }}</td>
+                    <td>{{ $attendence->date }}</td>
+                    <td>{{ $attendence->status }}</td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
     <div class="student-number">
@@ -54,7 +51,7 @@
 
         </div>
         <div>
-            <p style="margin-top: 20% !important ">300</p>
+            <p style="margin-top: 20% !important ">{{ $presents }}</p>
 
         </div>
 
@@ -69,7 +66,7 @@
 
         </div>
         <div>
-            <p style="margin-top: 20% !important ">10</p>
+            <p style="margin-top: 20% !important ">{{ $absents }}</p>
 
         </div>
 

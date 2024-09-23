@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\AttendenceController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
+use App\Models\Attendence;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,10 +22,11 @@ Route::middleware('auth')->group(function () {
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/profile/{id}', [StudentController::class, 'profile'])->name('student.profile');
-    Route::get('/parents/{student}', [ParentController::class, 'getParentsByStudentId'])->name('student.parent');
+    Route::get('/parents/{student}', [ParentController::class, 'getParentsByStudentId'])->name('student.parents');
     Route::get('/subjects/{student}', [SubjectController::class, 'getSubjectsByStudentId'])->name('student.subjects');
     Route::post('/storeStudentclass/{student}', [StudentController::class, 'setClass'])->name('student.storeclass');
     Route::get('/class/{student}', [ClassController::class, 'getClassByStudentId'])->name('student.class');
+    Route::get('/attendence/{student}', [AttendenceController::class, 'getAttendencesByStudentId'])->name('student.attendences');
 });
 
 

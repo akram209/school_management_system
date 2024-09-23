@@ -18,7 +18,7 @@
     </li>
 
     <li>
-        <a href="{{ route('student.parent', $student->id) }}">
+        <a href="{{ route('student.parents', $student->id) }}">
             {{-- parent by student id  --}}
             <i class="fa-solid fa-person-breastfeeding"></i>
             <span class="nav-text">Your Parents</span>
@@ -58,7 +58,7 @@
     </li>
 
     <li>
-        <a href="#">
+        <a href="{{ route('student.attendences', $student->id) }}">
             {{-- assignment by student id   --}}
             <i class="fa-solid fa-clipboard-user"></i>
             <span class="nav-text">Attendance</span>
