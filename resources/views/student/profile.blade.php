@@ -197,7 +197,7 @@
         <x-class-form :studentId="$student->id" />
     @endif
     <script>
-        window.authenticatedUserId = '{{ auth()->user()->id }}';
+        window.studentId = '{{ $student->id }}';
         window.apiToken = '{{ auth()->user()->createToken('API Token')->plainTextToken }}';
     </script>
     <script src="{{ asset('build/assets/js/attend.js') }}"></script>

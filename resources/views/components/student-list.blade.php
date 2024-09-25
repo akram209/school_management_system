@@ -39,7 +39,7 @@
         </ul>
     </li>
     <li>
-        <a href="#">
+        <a href="{{ route('student.exams', $student->id) }}">
             {{-- exams by class id  split to past and upcoming  --}}
             <i class="fa-solid fa-clipboard-list"></i> <span class="nav-text">Exams</span>
         </a>

@@ -136,6 +136,7 @@ class StudentController extends Controller
     public function profile($id)
     {
         $student = Student::with(['user',  'class.timeTable.teacher',  'class.timeTable.subject'])->where('user_id', $id)->first();
+
         return view('student.profile', ['student' => $student]);
     }
 
@@ -143,7 +144,7 @@ class StudentController extends Controller
     {
 
         $student->update([
-            'class_id' => request()->class_id,
+            'class_id' => $request->class_id,
         ]);
         return redirect()->route('student.profile', $student->user_id);
     }
@@ -152,10 +153,10 @@ class StudentController extends Controller
 
 
     // Api endpoint 
-    public function getStudentresults($id)
+    public function getStudentresults(Student $student)
     {
 
-        $student = Student::with('attendence', 'assignments')->where('user_id', $id)->first();
+        $student = $student->load('attendence', 'assignments');
 
         if (!$student) {
             return response()->json(['message' => 'Student not found'], 404);

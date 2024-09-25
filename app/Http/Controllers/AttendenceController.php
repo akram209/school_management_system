@@ -91,7 +91,7 @@ class AttendenceController extends Controller
         $absents = $attendence->where('status', 'absent')->count();
 
 
-        return view('attendence.student-attendence', [
+        return view('student.student-attendence', [
             'attendences' => $attendence,
             'presents' => $presents,
             'absents' => $absents,

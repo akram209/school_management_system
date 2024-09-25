@@ -87,6 +87,7 @@ class SubjectController extends Controller
     {
         $class = $student->class;
         $teachers = $class->load('teachers.user')->teachers;
+
         return view('student.student-subjects', compact('teachers'));
     }
 }

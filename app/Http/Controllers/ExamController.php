@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Exam;
+use App\Models\Student;
+use Database\Seeders\ExamSeeder;
 use Illuminate\Http\Request;
 
 class ExamController extends Controller
@@ -74,7 +76,16 @@ class ExamController extends Controller
     {
         $exam->delete();
     }
-    public function getExamsBySubjectId($subject_id){
+    public function getExamsBySubjectId($subject_id)
+    {
         return Exam::where('subject_id', $subject_id)->get();
+    }
+    public function getExamsByStudentId(Student $student)
+    {
+        $exams = Exam::with('students')->where('class_id', $student->class_id)->get();
+        foreach ($exams as $key => $exam) {
+            $studentScore[$key] = $exam->students->where('id', $student->id)->first();
+        }
+        return view('student.student-exams', ['exams' => $exams, 'student' => $studentScore]);
     }
 }
