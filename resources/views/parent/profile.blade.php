@@ -2,7 +2,55 @@
 @section('title', 'Parent Profile')
 @section('title of sidebar', 'Settings')
 
+<style>
+    .table-bordered thead td,
+    .table-bordered thead th {
+        border-bottom-width: 2px;
+        padding: 10px !important;
 
+    }
+
+    .table thead th {
+        vertical-align: bottom;
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .table-bordered td,
+    .table-bordered th {
+        border: 1px solid #dee2e6;
+
+    }
+
+    .table-bordered td,
+    .table-bordered th {
+        border: 1px solid #dee2e6;
+    }
+
+    .tabl td,
+    .table th {
+        padding: .5rem !important;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .table {
+        position: fixed !important;
+        width: 50% !important;
+        height: 40% !important;
+        top: 50% !important;
+        left: 20% !important;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* p {
+        text-align: center !important;
+        margin-bottom: 30px !important;
+        margin-left: 10px !important;
+        color: #000000;
+
+        font-weight: 600;
+    } */
+</style>
 
 <div class="profile-card">
     <div class="profile-card-header">

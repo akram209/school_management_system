@@ -29,16 +29,7 @@
             </li>
         </ul>
     </li>
-    <li>
-        <a href="#">
-            {{-- timetable by teacher id --}}
-            <i class="fa-solid fa-calendar-days"></i>
-            <span class="nav-text">Timetable</span>
-        </a>
-        <ul>
 
-        </ul>
-    </li>
     <li>
         <a href="#">
 
