@@ -2,55 +2,8 @@
 @section('title', 'Parent Profile')
 @section('title of sidebar', 'Settings')
 
-<style>
-    .table-bordered thead td,
-    .table-bordered thead th {
-        border-bottom-width: 2px;
-        padding: 10px !important;
 
-    }
 
-    .table thead th {
-        vertical-align: bottom;
-        border-bottom: 2px solid #dee2e6;
-    }
-
-    .table-bordered td,
-    .table-bordered th {
-        border: 1px solid #dee2e6;
-
-    }
-
-    .table-bordered td,
-    .table-bordered th {
-        border: 1px solid #dee2e6;
-    }
-
-    .tabl td,
-    .table th {
-        padding: .5rem !important;
-        vertical-align: top;
-        border-top: 1px solid #dee2e6;
-    }
-
-    .table {
-        position: fixed !important;
-        width: 50% !important;
-        height: 40% !important;
-        top: 50% !important;
-        left: 20% !important;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    }
-
-    /* p {
-        text-align: center !important;
-        margin-bottom: 30px !important;
-        margin-left: 10px !important;
-        color: #000000;
-
-        font-weight: 600;
-    } */
-</style>
 
 <div class="profile-card">
     <div class="profile-card-header">
@@ -101,156 +54,50 @@
         </div>
 
     </div>
-    <div class="container">
-        <div class="timetable-img text-center">
-            <img src="img/content/timetable.png" alt="">
-        </div>
-        <div class="table-responsive">
-            <table class="table table-bordered text-center">
-                <thead>
-                    <tr class="bg-light-gray">
-                        <th class="text-uppercase">Time
-                        </th>
-                        <th class="text-uppercase">Monday</th>
-                        <th class="text-uppercase">Tuesday</th>
-                        <th class="text-uppercase">Wednesday</th>
-                        <th class="text-uppercase">Thursday</th>
-                        <th class="text-uppercase">Friday</th>
-                        <th class="text-uppercase">Saturday</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="align-middle">09:00am</td>
-                        <td>
-                            <span
-                                class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">Dance</span>
-                            <div class="margin-10px-top font-size14">9:00-10:00</div>
-                            <div class="font-size13 text-light-gray">Ivana Wong</div>
-                        </td>
-                        <td>
-                            <span
-                                class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Yoga</span>
-                            <div class="margin-10px-top font-size14">9:00-10:00</div>
-                            <div class="font-size13 text-light-gray">Marta Healy</div>
-                        </td>
-
-                        <td>
-                            <span
-                                class="bg-yellow padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Music</span>
-                            <div class="margin-10px-top font-size14">9:00-10:00</div>
-                            <div class="font-size13 text-light-gray">Ivana Wong</div>
-                        </td>
-                        <td>
-                            <span
-                                class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Dance</span>
-                            <div class="margin-10px-top font-size14">9:00-10:00</div>
-                            <div class="font-size13 text-light-gray">Ivana Wong</div>
-                        </td>
-                        <td>
-                            <span
-                                class="bg-purple padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Art</span>
-                            <div class="margin-10px-top font-size14">9:00-10:00</div>
-                            <div class="font-size13 text-light-gray">Kate Alley</div>
-                        </td>
-                        <td>
-                            <span
-                                class="bg-pink padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">English</span>
-                            <div class="margin-10px-top font-size14">9:00-10:00</div>
-                            <div class="font-size13 text-light-gray">James Smith</div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="align-middle">10:00am</td>
-                        <td>
-                            <span
-                                class="bg-yellow padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Music</span>
-                            <div class="margin-10px-top font-size14">10:00-11:00</div>
-                            <div class="font-size13 text-light-gray">Ivana Wong</div>
-                        </td>
-                        <td class="bg-light-gray">
-
-                        </td>
-                        <td>
-                            <span
-                                class="bg-purple padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Art</span>
-                            <div class="margin-10px-top font-size14">10:00-11:00</div>
-                            <div class="font-size13 text-light-gray">Kate Alley</div>
-                        </td>
-                        <td>
-                            <span
-                                class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Yoga</span>
-                            <div class="margin-10px-top font-size14">10:00-11:00</div>
-                            <div class="font-size13 text-light-gray">Marta Healy</div>
-                        </td>
-                        <td>
-                            <span
-                                class="bg-pink padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">English</span>
-                            <div class="margin-10px-top font-size14">10:00-11:00</div>
-                            <div class="font-size13 text-light-gray">James Smith</div>
-                        </td>
-                        <td class="bg-light-gray">
-
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="align-middle">11:00am</td>
-                        <td>
-                            <span
-                                class="bg-lightred padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Break</span>
-                            <div class="margin-10px-top font-size14">11:00-12:00</div>
-                        </td>
-                        <td>
-                            <span
-                                class="bg-lightred padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Break</span>
-                            <div class="margin-10px-top font-size14">11:00-12:00</div>
-                        </td>
-                        <td>
-                            <span
-                                class="bg-lightred padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Break</span>
-                            <div class="margin-10px-top font-size14">11:00-12:00</div>
-                        </td>
-                        <td>
-                            <span
-                                class="bg-lightred padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Break</span>
-                            <div class="margin-10px-top font-size14">11:00-12:00</div>
-                        </td>
-                        <td>
-                            <span
-                                class="bg-lightred padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Break</span>
-                            <div class="margin-10px-top font-size14">11:00-12:00</div>
-                        </td>
-                        <td>
-                            <span
-                                class="bg-lightred padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Break</span>
-                            <div class="margin-10px-top font-size14">11:00-12:00</div>
-                        </td>
-                    </tr>
-
-
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <!-- Modal -->
-    <div style="transition: ease in out .5s; " class="modal fade" id="exampleModal" tabindex="-1"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="accordion accordion-flush" id="accordionFlushExample"
+        style="position: fixed !important; top: 40% !important; width: 60%; left: 10% ; border: 2px solid  #dee2e6;">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    Akram
+                </button>
+            </h2>
+            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the
+                    <code>.accordion-flush</code> class. This is the first item's accordion body.
                 </div>
-                <div class="modal-body">
-                    ...
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    Ayman
+                </button>
+            </h2>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the
+                    <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being
+                    filled with some actual content.
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                    Ahmed
+                </button>
+            </h2>
+            <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the
+                    <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting
+                    happening here in terms of content, but just filling up the space to make it look, at least at first
+                    glance, a bit more representative of how this would look in a real-world application.
                 </div>
             </div>
         </div>
     </div>
+
 @endsection
