@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\AttendenceController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ExamController;
@@ -29,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/class/{student}', [ClassController::class, 'getClassByStudentId'])->name('student.class');
     Route::get('/attendence/{student}', [AttendenceController::class, 'getAttendencesByStudentId'])->name('student.attendences');
     Route::get('/exams/{student}', [ExamController::class, 'getExamsByStudentId'])->name('student.exams');
+    Route::get('/assignments/{student}', [AssignmentController::class, 'getAssignmentsByStudentId'])->name('student.assignments');
 });
 
 

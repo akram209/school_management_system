@@ -48,8 +48,8 @@
         </ul>
     </li>
     <li>
-        <a href="#">
-            {{-- assignment by class id  split to past and present and form for online   --}}
+        <a href="{{ route('student.assignments', $student->id) }}">
+
             <i class="fa-solid fa-file-import"></i> <span class="nav-text">Assignments</span>
         </a>
         <ul>
