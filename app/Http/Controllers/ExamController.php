@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Exam;
 use App\Models\Student;
+use Carbon\Carbon;
 use Database\Seeders\ExamSeeder;
 use Illuminate\Http\Request;
 
@@ -83,9 +84,17 @@ class ExamController extends Controller
     public function getExamsByStudentId(Student $student)
     {
         $exams = Exam::with('students')->where('class_id', $student->class_id)->get();
+        $upcoming = 0;
+        $past = 0;
         foreach ($exams as $key => $exam) {
             $studentScore[$key] = $exam->students->where('id', $student->id)->first();
+            if (Carbon::parse($exam->date)->gte(now())) {
+                $upcoming = 1;
+            }
+            if (Carbon::parse($exam->date)->lt(now())) {
+                $past = 1;
+            }
         }
-        return view('student.student-exams', ['exams' => $exams, 'student' => $studentScore]);
+        return view('student.student-exams', ['exams' => $exams, 'student' => $studentScore, 'upcoming' => $upcoming, 'past' => $past]);
     }
 }
