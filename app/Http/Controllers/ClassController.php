@@ -91,4 +91,10 @@ class ClassController extends Controller
 
         return view('student.student-class', compact('class'));
     }
+    public function getClassByClassId(ClassModel $class)
+    {
+        $class->load('teachers.user', 'students.user', 'subjects.teachers');
+        return $class;
+    }
+    
 }
