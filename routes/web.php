@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/attendence/{student}', [AttendenceController::class, 'getAttendencesByStudentId'])->name('student.attendences');
     Route::get('/exams/{student}', [ExamController::class, 'getExamsByStudentId'])->name('student.exams');
     Route::get('/assignments/{student}', [AssignmentController::class, 'getAssignmentsByStudentId'])->name('student.assignments');
+    // Route::get('/attendence/{class_id}', [AttendenceController::class, 'createAttendenceByClassId'])->name('attendence.create');
 });
 
 

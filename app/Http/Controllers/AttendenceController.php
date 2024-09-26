@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Attendence;
 use App\Models\Student;
-
+use App\Models\ClassModel ;
 class AttendenceController extends Controller
 {
     /**
@@ -97,4 +97,10 @@ class AttendenceController extends Controller
             'absents' => $absents,
         ]);
     }
+    public function createAttendenceByClassId($class_id)
+    {
+        $class = ClassModel::with('students')->findOrFail($class_id);
+        return $class;
+    }
+
 }
