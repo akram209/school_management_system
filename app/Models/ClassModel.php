@@ -17,10 +17,6 @@ class ClassModel extends Model
         return $this->hasMany(Student::class, 'class_id');
     }
 
-    public function teachers()
-    {
-        return $this->belongsToMany(Teacher::class, 'class_teacher', 'class_id', 'teacher_id');
-    }
 
     public function timeTable()
     {
@@ -36,7 +32,13 @@ class ClassModel extends Model
     {
         return $this->hasMany(Grade::class, 'class_id');
     }
-    public function subjects(){
-        return $this->belongsToMany(Subject::class, 'class_subject', 'class_id','subject_id');
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class, 'class_subject_teacher', 'class_id', 'subject_id')->withPivot('teacher_id');
+    }
+
+    public function teachers()
+    {
+        return $this->belongsToMany(Teacher::class, 'class_subject_teacher', 'class_id', 'teacher_id')->withPivot('subject_id');
     }
 }

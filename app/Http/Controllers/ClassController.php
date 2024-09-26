@@ -87,7 +87,8 @@ class ClassController extends Controller
     {
 
         $class = ClassModel::where('id', $student->class_id)->get()->first();
-        $class->load('teachers.user', 'students.user');
+        $class->load('teachers.user', 'students.user', 'subjects.teachers');
+
         return view('student.student-class', compact('class'));
     }
 }

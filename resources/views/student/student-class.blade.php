@@ -37,7 +37,7 @@
                     <td>{{ $teacher->id }}</td>
                     <td>{{ $teacher->user->first_name . ' ' . $teacher->user->last_name }}</td>
                     <td>{{ $teacher->user->gender }}</td>
-                    <td>{{ $teacher->subject->name }}</td>
+                    <td>{{ $teacher->subjects[0]->name }}</td>
 
                 </tr>
             @endforeach
@@ -97,11 +97,11 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($class->teachers as $teacher)
+            @foreach ($class->subjects as $subject)
                 <tr>
-                    <td>{{ $teacher->subject->name }}</td>
-                    <td>{{ $teacher->user->first_name . ' ' . $teacher->user->last_name }}</td>
-                    <td style="width: 50%">{{ $teacher->subject->description }}</td>
+                    <td>{{ $subject->name }}</td>
+                    <td>{{ $subject->teachers[0]->user->first_name . ' ' . $subject->teachers[0]->user->last_name }}</td>
+                    <td style="width: 50%">{{ $subject->description }}</td>
                 </tr>
             @endforeach
 

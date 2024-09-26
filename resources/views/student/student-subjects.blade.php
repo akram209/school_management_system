@@ -5,27 +5,27 @@
 
 
 @section('content')
-    @if (count($teachers) > 0)
+    @if (count($subjects) > 0)
         <div class="accordion accordion-flush" id="accordionFlushExample"
             style="position: fixed !important; top: 10% !important; width: 80%; left: 10% ; border: 2px solid  #dee2e6; ">
             <div class="accordion-item">
                 <h3 style="text-align: center; background-color: #dee2e6">Subjects</h3>
-                @foreach ($teachers as $key => $teacher)
+                @foreach ($subjects as $key => $subject)
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#flush-collapse{{ $key }}" aria-expanded="false"
                             aria-controls="flush-collapse{{ $key }}">
-                            {{ $teacher->subject->name }}
+                            {{ $subject->name }}
                         </button>
                     </h2>
                     <div id="flush-collapse{{ $key }}" class="accordion-collapse collapse"
                         data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            <p> Teacher Name : {{ $teacher->user->first_name }}
-                                {{ $teacher->user->last_name }}</p>
-                            <img src="{{ asset('storage/images/' . $teacher->user->image) }}"
+                            <p> Teacher Name : {{ $subject->teachers[0]->user->first_name }}
+                                {{ $subject->teachers[0]->user->last_name }}</p>
+                            <img src="{{ asset('storage/images/' . $subject->teachers[0]->user->image) }}"
                                 style="width: 50px !important; height: 50px !important" alt="">
-                            <p>Description : {{ $teacher->subject->description }}</p>
+                            <p>Description : {{ $subject->description }}</p>
 
 
 

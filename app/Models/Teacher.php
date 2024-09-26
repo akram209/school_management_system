@@ -39,4 +39,13 @@ class Teacher extends Model
     {
         return $this->hasMany(Timetable::class);
     }
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class, 'class_subject_teacher', 'teacher_id', 'subject_id')->withPivot('class_id');
+    }
+
+    public function classes()
+    {
+        return $this->belongsToMany(ClassModel::class, 'class_subject_teacher', 'teacher_id', 'class_id')->withPivot('subject_id');
+    }
 }

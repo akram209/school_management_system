@@ -86,8 +86,9 @@ class SubjectController extends Controller
     public function getSubjectsByStudentId(Student $student)
     {
         $class = $student->class;
-        $teachers = $class->load('teachers.user')->teachers;
+        $subjects =  $class->load('subjects.teachers.user');
 
-        return view('student.student-subjects', compact('teachers'));
+        $subjects = $subjects->subjects;
+        return view('student.student-subjects', compact('subjects'));
     }
 }

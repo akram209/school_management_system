@@ -11,10 +11,7 @@ class Subject extends Model
     protected $fillable = [
         'name'
     ];
-    public function teachers()
-    {
-        return $this->hasMany(Teacher::class);
-    }
+
 
 
 
@@ -29,6 +26,11 @@ class Subject extends Model
     }
     public function classes()
     {
-        return $this->belongsToMany(ClassModel::class, 'class_subject', 'subject_id', 'class_id');
+        return $this->belongsToMany(ClassModel::class, 'class_subject_teacher', 'subject_id', 'class_id')->withPivot('teacher_id');
+    }
+
+    public function teachers()
+    {
+        return $this->belongsToMany(Teacher::class, 'class_subject_teacher', 'subject_id', 'teacher_id')->withPivot('class_id');
     }
 }
