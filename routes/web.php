@@ -8,6 +8,7 @@ use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\TimetableController;
 use App\Models\Attendence;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/exams/{student}', [ExamController::class, 'getExamsByStudentId'])->name('student.exams');
     Route::get('/assignments/{student}', [AssignmentController::class, 'getAssignmentsByStudentId'])->name('student.assignments');
     // Route::get('/attendence/{class_id}', [AttendenceController::class, 'createAttendenceByClassId'])->name('attendence.create');
+    Route::get('/timetable/{student}', [TimetableController::class, 'getTimetableByStudentId'])->name('student.timetable');
 });
 
 
