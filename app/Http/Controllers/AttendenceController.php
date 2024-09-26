@@ -97,7 +97,7 @@ class AttendenceController extends Controller
             'absents' => $absents,
         ]);
     }
-    public function createAttendenceByClassId($class_id)
+    public function takeAttendenceByClassId($class_id)
     {
         $class = ClassModel::with('students')->findOrFail($class_id);
         return $class;
