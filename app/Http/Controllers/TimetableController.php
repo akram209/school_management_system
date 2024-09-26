@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use App\Models\Timetable;
 use Illuminate\Http\Request;
 
@@ -112,5 +113,10 @@ class TimetableController extends Controller
     {
         $timetable = Timetable::where('teacher_id', $classId)->get();
         dd($timetable);
+    }
+    public function getTimetableByStudentId( Student $student)
+    {
+        $student->load('class.timeTable');  
+        return $student->class->timeTable;
     }
 }

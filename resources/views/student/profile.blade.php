@@ -115,7 +115,7 @@
     <div class="container">
 
         <div class="table-responsive">
-            <table class="table table-bordered text-center">
+            <table class="table text-center table-bordered">
                 <thead>
                     <tr class="bg-light-gray">
                         <th class="text-uppercase">Time</th>
@@ -138,7 +138,7 @@
                                 <td class="{{ $time->day_name == 'sunday' ? '' : 'bg-light-gray' }}">
                                     @if ($time->day_name == 'sunday')
                                         <span
-                                            class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ $time->subject->name }}</span>
+                                            class="text-white bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13">{{ $time->subject->name }}</span>
                                         <div class="margin-10px-top font-size14">{{ $time->date }}</div>
         </div>
         <div class="font-size13 text-light-gray">
@@ -148,7 +148,7 @@
         <td class="{{ $time->day_name == 'monday' ? '' : 'bg-light-gray' }}">
             @if ($time->day_name == 'monday')
                 <span
-                    class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ $time->subject->name }}</span>
+                    class="text-white bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13">{{ $time->subject->name }}</span>
                 <div class="margin-10px-top font-size14">{{ $time->date }}
                 </div>
                 <div class="font-size13 text-light-gray">
@@ -158,7 +158,7 @@
         <td class="{{ $time->day_name == 'tuesday' ? '' : 'bg-light-gray' }}">
             @if ($time->day_name == 'tuesday')
                 <span
-                    class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ $time->subject->name }}</span>
+                    class="text-white bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13">{{ $time->subject->name }}</span>
                 <div class="margin-10px-top font-size14">{{ $time->date }}
                 </div>
                 <div class="font-size13 text-light-gray">
@@ -168,7 +168,7 @@
         <td class="{{ $time->day_name == 'wednesday' ? '' : 'bg-light-gray' }}">
             @if ($time->day_name == 'wednesday')
                 <span
-                    class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ $time->subject->name }}</span>
+                    class="text-white bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13">{{ $time->subject->name }}</span>
                 <div class="margin-10px-top font-size14">{{ $time->date }}
                 </div>
                 <div class="font-size13 text-light-gray">
@@ -178,7 +178,7 @@
         <td class="{{ $time->day_name == 'thursday' ? '' : 'bg-light-gray' }}">
             @if ($time->day_name == 'thursday')
                 <span
-                    class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ $time->subject->name }}</span>
+                    class="text-white bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13">{{ $time->subject->name }}</span>
                 <div class="margin-10px-top font-size14">{{ $time->date }}
                 </div>
                 <div class="font-size13 text-light-gray">
@@ -202,7 +202,6 @@
     </script>
     <script src="{{ asset('build/assets/js/attend.js') }}"></script>
 
-    </script>
 
     </div>
 

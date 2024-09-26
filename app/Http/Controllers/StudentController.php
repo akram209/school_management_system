@@ -164,4 +164,12 @@ class StudentController extends Controller
 
         return response()->json($student);
     }
+    public function profileByStudentId(Student $student)
+    {
+      
+        $student->load(['user', 'class.timeTable.teacher', 'class.timeTable.subject']);
+    
+        return $student;
+        // return view('student.profile', ['student' => $student]);
+    }
 }

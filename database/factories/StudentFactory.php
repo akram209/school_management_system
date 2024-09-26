@@ -31,7 +31,7 @@ class StudentFactory extends Factory
     {
         return $this->afterCreating(function (Student $student) use ($count) {
             $parents = ParentModel::factory()->count($count)->create();
-            $student->parent()->attach($parents->pluck('id')); // Attach parents via pivot
+            $student->parents()->attach($parents->pluck('id')); // Attach parents via pivot
         });
     }
 
