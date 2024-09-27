@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
     // Route::get('/attendence/{class_id}', [AttendenceController::class, 'createAttendenceByClassId'])->name('attendence.create');
     Route::get('/timetable/{student}', [TimetableController::class, 'getTimetableByStudentId'])->name('student.timetable');
 });
+Route::get('getAssignmentsByTeacherId/{id}',[AssignmentController::class , 'getAssignmentsByTeacherId']);
 
 
 require __DIR__ . '/auth.php';

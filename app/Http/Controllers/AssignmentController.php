@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Assignment;
 use App\Models\Student;
+use App\Models\Teacher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AssignmentController extends Controller
 {
@@ -81,5 +83,19 @@ class AssignmentController extends Controller
         }
 
         return view('student.student-assignments', ['assignments' => $assignments, 'student' => $studentScore, 'upcoming' => $upcoming, 'past' => $past]);
+    }
+    public function getAssignmentsByTeacherId( $teacher_id){
+        $assignments = DB::table('assignments')
+        ->join('class_subject_teacher', function ($join) {
+            $join->on('assignments.class_id', '=', 'class_subject_teacher.class_id')
+                 ->on('assignments.subject_id', '=', 'class_subject_teacher.subject_id');
+        })
+        ->where('class_subject_teacher.teacher_id', $teacher_id)
+        ->select('assignments.*', 'class_subject_teacher.teacher_id', 'class_subject_teacher.subject_id')
+        ->distinct()
+        ->get();
+
+        return $assignments;
+         
     }
 }

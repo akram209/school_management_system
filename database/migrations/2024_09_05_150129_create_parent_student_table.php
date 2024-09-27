@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('parent_student', function (Blueprint $table) {
-            $table->foreignId('parent_id')->constrained()->onDelete('cascade');
-            $table->foreignId('student_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('student_id');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+
+            $table->unsignedBigInteger('parent_id');
+            $table->foreign('parent_id')->references('id')->on('parents')->onDelete('cascade');
+
+            $table->primary(['parent_id', 'student_id']);
             $table->timestamps();
         });
     }
