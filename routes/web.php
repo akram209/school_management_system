@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/student/class/{student}', [ClassController::class, 'getClassByStudentId'])->name('student.class');
     Route::get('/subjects/{student}', [SubjectController::class, 'getSubjectsByStudentId'])->name('student.subjects');
     Route::get('/attendence/{student}', [AttendenceController::class, 'getAttendencesByStudentId'])->name('student.attendences');
-    // Route::get('/attendence/{class_id}', [AttendenceController::class, 'createAttendenceByClassId'])->name('attendence.create');
+    // Route::get('/exam/{subject_id}/{class_id}', [ExamController::class, 'getExamsBySubjectIdAndClassId'])->name('attendence.create');
     Route::get('/exams/{student}', [ExamController::class, 'getExamsByStudentId'])->name('student.exams');
     Route::get('/teacher/assignments/{teacher}/', [AssignmentController::class, 'getAssignmentsByTeacherId'])->name('teacher.assignments');
     Route::get('/assignments/{student}', [AssignmentController::class, 'getAssignmentsByStudentId'])->name('student.assignments');

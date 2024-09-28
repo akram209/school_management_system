@@ -97,4 +97,39 @@ class ExamController extends Controller
         }
         return view('student.student-exams', ['exams' => $exams, 'student' => $studentScore, 'upcoming' => $upcoming, 'past' => $past]);
     }
+    public function getExamsBySubjectIdAndClassId( $subjectId, $classId)
+    {
+        // Retrieve exams for the given teacher, subject, and class
+        $exam = Exam::where('subject_id', $subjectId)->where('class_id', $classId)->get();
+
+        // Return view or JSON with the exam details
+        return $exam;
+}
+public function getExamsByTeacherId(Teacher $teacher)
+    {
+        //join assignments table with class_subject_teacher table
+
+        $exams = Assignment::join('class_subject_teacher', function ($join) use ($teacher) {
+            $join->on('exams.class_id', '=', 'class_subject_teacher.class_id')
+                ->on('exams.subject_id', '=', 'class_subject_teacher.subject_id')
+                ->where('class_subject_teacher.teacher_id', '=', $teacher->id);
+        })
+            ->select('exams.*')
+            ->distinct()
+            ->get();
+        //load subject data;
+        $exams =  $exams->load('subject');
+        $upcoming = 0;
+        $past = 0;
+        foreach ($exams as $key => $exams) {
+            if (Carbon::parse($exam->deadline)->gte(now())) {
+                $upcoming = 1;
+            }
+            if (Carbon::parse($exams->deadline)->lt(now())) {
+                $past = 1;
+            }
+        }
+
+        return view('exam.teacher-exams', ['exams' => $exams,  'upcoming' => $upcoming, 'past' => $past]);
+    }
 }
