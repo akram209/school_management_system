@@ -1,15 +1,24 @@
 <ul>
     <li>
+        <a href="{{ route('teacher.profile', Auth::user()->id) }}">
+            <i class="fa-solid fa-user"></i><span class="nav-text">Profile</span>
+        </a>
+        <ul>
+
+        </ul>
+    </li>
+
+    <li>
         <a href="#">
             <i class="fa-solid fa-people-roof"></i> <span class="nav-text">Your Classes</span>
         </a>
         <ul>
-            {{-- {{ $classes id by teacherid by with }} --}}
-            <li><a href=""><i class="fa-solid fa-users-between-lines"></i><span>class 1
-                    </span></a></li>
-            <li><a href="edit-professor.html"><i class="fa-solid fa-users-between-lines"></i>
-                    <span>class 2
-                    </span></a></li>
+            @foreach ($teacher->classes as $class)
+                <li><a href="{{ route('class.show', $class->id) }}"><i
+                            class="fa-solid fa-users-between-lines"></i><span>{{ $class->name }}
+                        </span></a></li>
+            @endforeach
+
         </ul>
     </li>
     <li>
@@ -17,16 +26,11 @@
             <i class="fa-solid fa-clipboard-user"></i><span class="nav-text">Attendance</span>
         </a>
         <ul>
-            {{-- {{ $classes id by teacherid by with }} --}}
-            <li><a href=""><i class="fa-solid fa-newspaper"></i></i><span> class 1
-                    </span></a>
-            </li>
-            <li><a href=""><i class="fa-solid fa-newspaper"></i></i><span> class 2
-                    </span></a>
-            </li>
-            <li><a href=""><i class="fa-solid fa-newspaper"></i></i><span> class 3
-                    </span></a>
-            </li>
+            @foreach ($teacher->classes as $class)
+                <li><a href=""><i class="fa-solid fa-newspaper"></i></i><span> {{ $class->name }}
+                        </span></a>
+                </li>
+            @endforeach
         </ul>
     </li>
 
@@ -37,12 +41,13 @@
         </a>
         <ul>
             {{-- form for assignment --}}
-            <li><a href=""><i class="fa-regular fa-file-lines"></i><span> add Assignment
+            <li><a href=""><i class="fa-regular fa-file-lines"></i><span> add assignment
                     </span></a></li>
-            {{-- all assignment by class id and subject id --}}
-            <li><a href="edit-professor.html"><i class="fa-solid fa-file-signature"></i>
-                    <span>all assignment
-                    </span></a></li>
+            @foreach ($teacher->classes as $class)
+                <li><a href="edit-professor.html"><i class="fa-solid fa-file-signature"></i>
+                        <span> {{ $class->name }} assignment
+                        </span></a></li>
+            @endforeach
         </ul>
     </li>
     <li>
@@ -52,13 +57,14 @@
             <i class="fa-solid fa-clipboard-list"></i> <span class="nav-text">Exams</span>
         </a>
         <ul>
-            <li><a href=""><i class="fa-regular fa-file-lines"></i><span> add Exam
+            <li><a href=""><i class="fa-regular fa-file-lines"></i><span> add axam
                     </span></a></li>
-            {{-- all exams by class id and subject id --}}
-
-            <li><a href="edit-professor.html"><i class="fa-solid fa-check-double"></i> <span>all
-                        Exams
-                    </span></a></li>
+            @foreach ($teacher->classes as $class)
+                <li><a href="edit-professor.html"><i class="fa-solid fa-check-double"></i> <span>
+                            {{ $class->name }}
+                            axams
+                        </span></a></li>
+            @endforeach
         </ul>
     </li>
     {{-- <li>

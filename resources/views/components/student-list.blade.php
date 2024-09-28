@@ -1,5 +1,15 @@
 @if ($student)
+
     <ul>
+
+        <li>
+            <a href="{{ route('student.profile', Auth::user()->id) }}">
+                <i class="fa-solid fa-user"></i><span class="nav-text">Profile</span>
+            </a>
+            <ul>
+
+            </ul>
+        </li>
         <li>
             <a href="#">
                 {{-- class name by class id in student  --}}

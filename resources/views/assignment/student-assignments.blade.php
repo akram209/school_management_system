@@ -10,7 +10,6 @@
     #imageIcon {
         cursor: pointer;
         width: 25%;
-        margin: 8px;
         font-size: 30px;
         border-radius: 10px;
     }
@@ -45,11 +44,11 @@
                             <p class="card-text" style="text-align: left">Type: {{ $assignment->type }}</p>
                             @if ($assignment->type == 'online')
                                 @if ($student[$key]->pivot->path !== null)
-                                    <span class="card-text" style="text-align: left; float: right">
+                                    <p class="card-text" style="text-align: left; float: top">
                                         submitted successfully
-                                    </span>
+                                    </p>
                                 @else
-                                    <span class="card-text" style="float: right">
+                                    <span class="card-text" style=" float: top">
                                         <div id="imageDiv">
                                             <form action="" method="POST" enctype="multipart/form-data">
                                                 @csrf
@@ -62,7 +61,7 @@
                                     </span>
                                 @endif
                             @endif
-                            <p class="card-text" style="text-align: left"> Date: {{ $assignment->deadline }}</p>
+                            <p class="card-text" style="text-align: left"> Deadline: {{ $assignment->deadline }}</p>
                             <div class="btn-group" style="float: right">
                                 <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                                     data-bs-auto-close="outside" aria-expanded="false">
@@ -104,7 +103,7 @@
                             <p class="card-text" style="text-align: left"> Description: {{ $assignment->description }}</p>
                             <p class="card-text" style="text-align: left">Type: {{ $assignment->type }}</p>
 
-                            <p class="card-text" style="text-align: left"> Date: {{ $assignment->deadline }}</p>
+                            <p class="card-text" style="text-align: left"> Deadline: {{ $assignment->deadline }}</p>
 
                             <div class="btn-group" style="float: right">
                                 <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"

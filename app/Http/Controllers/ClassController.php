@@ -43,7 +43,8 @@ class ClassController extends Controller
      */
     public function show(ClassModel $class)
     {
-        $class->load('teachers.user', 'students.user');
+
+        $class->load('teachers.user', 'students.user', 'subjects.teachers');
         return view('class.show', compact('class'));
     }
 
@@ -94,7 +95,6 @@ class ClassController extends Controller
     public function getClassByClassId(ClassModel $class)
     {
         $class->load('teachers.user', 'students.user', 'subjects.teachers');
-        return $class;
+        return view('student.student-class', compact('class'));
     }
-    
 }

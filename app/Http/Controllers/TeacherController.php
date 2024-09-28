@@ -17,9 +17,8 @@ class TeacherController extends Controller
      */
     public function index()
     {
-       $teacher = Teacher::all();
-       return $teacher;
-
+        $teacher = Teacher::all();
+        return $teacher;
     }
 
     /**
@@ -82,8 +81,6 @@ class TeacherController extends Controller
             'salary' => request()->salary,
             'subject_id' => request()->subject_id,
         ]);
-
-        
     }
 
     /**
@@ -92,7 +89,6 @@ class TeacherController extends Controller
     public function show(Teacher $teacher)
     {
         return $teacher;
-        
     }
 
     /**
@@ -156,9 +152,6 @@ class TeacherController extends Controller
         ]);
 
         return $teacher;
-        
-
-       
     }
 
     /**
@@ -166,12 +159,10 @@ class TeacherController extends Controller
      */
     public function destroy(Teacher $teacher)
     {
-        
+
         Storage::disk('images')->delete($teacher->user->image);
         $teacher->delete();
         $teacher->user->delete();
-        
-        
     }
     public function getTeachersByClassId($id)
     {
@@ -181,12 +172,9 @@ class TeacherController extends Controller
         }
         return $class->teachers;
     }
-    public function profile ($teacher_id){
-        $teacher = Teacher::with(['user', 'subject'])->find($teacher_id);
-        if (!$teacher) {
-            return response()->json(['message' => 'Teacher not found'], 404);
-        }
-        return $teacher;
+    public function profile($userId)
+    {
+        $teacher = Teacher::with(['user', 'subjects', 'timetables.class'])->where('user_id', $userId)->first();
+        return view('teacher.profile', ['teacher' => $teacher]);
     }
-    
 }

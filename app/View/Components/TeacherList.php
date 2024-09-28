@@ -22,7 +22,7 @@ class TeacherList extends Component
      */
     public function render(): View|Closure|string
     {
-        $teacher = Teacher::with(['user', 'subject', 'class'])->where('user_id', $this->userId)->first();
+        $teacher = Teacher::with(['user', 'subjects', 'classes'])->where('user_id', $this->userId)->first();
         return view('components.teacher-list', compact('teacher'));
     }
 }

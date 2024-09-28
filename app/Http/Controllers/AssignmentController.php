@@ -82,20 +82,33 @@ class AssignmentController extends Controller
             }
         }
 
-        return view('student.student-assignments', ['assignments' => $assignments, 'student' => $studentScore, 'upcoming' => $upcoming, 'past' => $past]);
+        return view('assignment.student-assignments', ['assignments' => $assignments, 'student' => $studentScore, 'upcoming' => $upcoming, 'past' => $past]);
     }
-    public function getAssignmentsByTeacherId( $teacher_id){
-        $assignments = DB::table('assignments')
-        ->join('class_subject_teacher', function ($join) {
-            $join->on('assignments.class_id', '=', 'class_subject_teacher.class_id')
-                 ->on('assignments.subject_id', '=', 'class_subject_teacher.subject_id');
-        })
-        ->where('class_subject_teacher.teacher_id', $teacher_id)
-        ->select('assignments.*', 'class_subject_teacher.teacher_id', 'class_subject_teacher.subject_id')
-        ->distinct()
-        ->get();
+    public function getAssignmentsByTeacherId(Teacher $teacher)
+    {
+        //join assignments table with class_subject_teacher table
 
-        return $assignments;
-         
+        $assignments = Assignment::join('class_subject_teacher', function ($join) use ($teacher) {
+            $join->on('assignments.class_id', '=', 'class_subject_teacher.class_id')
+                ->on('assignments.subject_id', '=', 'class_subject_teacher.subject_id')
+                ->where('class_subject_teacher.teacher_id', '=', $teacher->id);
+        })
+            ->select('assignments.*')
+            ->distinct()
+            ->get();
+        //load subject data;
+        $assignments =  $assignments->load('subject');
+        $upcoming = 0;
+        $past = 0;
+        foreach ($assignments as $key => $assignment) {
+            if (Carbon::parse($assignment->deadline)->gte(now())) {
+                $upcoming = 1;
+            }
+            if (Carbon::parse($assignment->deadline)->lt(now())) {
+                $past = 1;
+            }
+        }
+
+        return view('assignment.teacher-assignments', ['assignments' => $assignments,  'upcoming' => $upcoming, 'past' => $past]);
     }
 }

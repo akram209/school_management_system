@@ -1,6 +1,15 @@
-<ul>
-    @if ($parent)
+@if ($parent)
+    <ul>
 
+
+        <li>
+            <a href="{{ route('parent.profile', Auth::user()->id) }}">
+                <i class="fa-solid fa-user"></i><span class="nav-text">Profile</span>
+            </a>
+            <ul>
+
+            </ul>
+        </li>
         <li>
             {{-- your childs classes by with students.class --}}
             <a href="#"> <i class="fa-solid fa-people-roof"></i> <span class="nav-text">Your
@@ -126,5 +135,5 @@
 
             </ul>
         </li>
-</ul>
+    </ul>
 @endif

@@ -109,11 +109,11 @@ class TimetableController extends Controller
         $timetable = Timetable::where('class_id', $classId)->get();
         dd($timetable);
     }
-    public function getTimetableByTeacherId($classId)
-    {
-        $timetable = Timetable::where('teacher_id', $classId)->get();
-        dd($timetable);
-    }
+    // public function getTimetableByTeacherId($classId)
+    // {
+    //     $timetable = Timetable::where('teacher_id', $classId)->get();
+    //     dd($timetable);
+    // }
     public function getTimetableByStudentId(Student $student)
     {
         $student = $student->load('class.timeTable.teacher', 'class.timeTable.subject');

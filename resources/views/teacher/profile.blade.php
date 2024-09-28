@@ -44,17 +44,18 @@
 
 <div class="profile-card">
     <div class="profile-card-header">
-
+        {{-- <img src="{{ asset('storage/images/' . $teacher->user->image) }}" alt="profile"
+        class="profile-card-header-profile-img"> --}}
         <img src="{{ asset('build/assets/images/Screenshot 2024-09-11 174254.png') }}" alt="profile"
             class="profile-card-header-profile-img">
     </div>
     <hr>
     <div class="profile-card-body">
-        <p>Full Name</p>
-        <p>Gender</p>
-        <p>Qualification</p>
-        <p>Excperience</p>
-        <p>Join Date</p>
+        <p> Full Name: {{ $teacher->user->first_name }} {{ $teacher->user->last_name }}</p>
+        <p> Gender: {{ $teacher->user->gender }}</p>
+        <p> Qualification: {{ $teacher->qualification }}</p>
+        <p> Experience Years: {{ $teacher->experience_years }}</p>
+        <p> Join Date: {{ $teacher->created_at->format('d/m/Y') }}</p>
     </div>
 </div>
 
@@ -67,17 +68,17 @@
         </div>
 
         <div class="teacher-info-body">
-            <p>address :</p>
+            <p>address : {{ $teacher->address }}</p>
             <hr>
-            <p> phone : </p>
+            <p> phone :{{ $teacher->phone }} </p>
             <hr>
-            <p>Email : </p>
+            <p>Email :{{ $teacher->user->email }} </p>
         </div>
 
     </div>
     <div class="teacher-subject">
         <div class="teacher-subject-header">
-            <h3>Subject</h3>
+            <h3>{{ $teacher->subjects[0]->name }}</h3>
 
         </div>
 
@@ -87,136 +88,84 @@
 
     </div>
     <div class="container">
-        <div class="timetable-img text-center">
-            <img src="img/content/timetable.png" alt="">
-        </div>
+
         <div class="table-responsive">
-            <table class="table table-bordered text-center">
+            <table class="table text-center table-bordered">
                 <thead>
                     <tr class="bg-light-gray">
-                        <th class="text-uppercase">Time
-                        </th>
+                        <th class="text-uppercase">Time</th>
+                        <th class="text-uppercase">Sunday</th>
                         <th class="text-uppercase">Monday</th>
                         <th class="text-uppercase">Tuesday</th>
                         <th class="text-uppercase">Wednesday</th>
-                        <th class="text-uppercase">Thursday</th>
-                        <th class="text-uppercase">Friday</th>
-                        <th class="text-uppercase">Saturday</th>
+                        <th class="text-uppercase" style="width: 18.5% !important">Thursday</th>
+
+
+
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="align-middle">09:00am</td>
-                        <td>
-                            <span
-                                class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">Dance</span>
-                            <div class="margin-10px-top font-size14">9:00-10:00</div>
-                            <div class="font-size13 text-light-gray">Ivana Wong</div>
-                        </td>
-                        <td>
-                            <span
-                                class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Yoga</span>
-                            <div class="margin-10px-top font-size14">9:00-10:00</div>
-                            <div class="font-size13 text-light-gray">Marta Healy</div>
-                        </td>
+                    @if ($teacher)
+                        @foreach ($teacher->timetables as $time)
+                            <tr>
+                                <td>{{ $time->start_time }}-{{ $time->end_time }}</td>
 
-                        <td>
-                            <span
-                                class="bg-yellow padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Music</span>
-                            <div class="margin-10px-top font-size14">9:00-10:00</div>
-                            <div class="font-size13 text-light-gray">Ivana Wong</div>
-                        </td>
-                        <td>
-                            <span
-                                class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Dance</span>
-                            <div class="margin-10px-top font-size14">9:00-10:00</div>
-                            <div class="font-size13 text-light-gray">Ivana Wong</div>
-                        </td>
-                        <td>
-                            <span
-                                class="bg-purple padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Art</span>
-                            <div class="margin-10px-top font-size14">9:00-10:00</div>
-                            <div class="font-size13 text-light-gray">Kate Alley</div>
-                        </td>
-                        <td>
-                            <span
-                                class="bg-pink padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">English</span>
-                            <div class="margin-10px-top font-size14">9:00-10:00</div>
-                            <div class="font-size13 text-light-gray">James Smith</div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="align-middle">10:00am</td>
-                        <td>
-                            <span
-                                class="bg-yellow padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Music</span>
-                            <div class="margin-10px-top font-size14">10:00-11:00</div>
-                            <div class="font-size13 text-light-gray">Ivana Wong</div>
-                        </td>
-                        <td class="bg-light-gray">
-
-                        </td>
-                        <td>
-                            <span
-                                class="bg-purple padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Art</span>
-                            <div class="margin-10px-top font-size14">10:00-11:00</div>
-                            <div class="font-size13 text-light-gray">Kate Alley</div>
-                        </td>
-                        <td>
-                            <span
-                                class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Yoga</span>
-                            <div class="margin-10px-top font-size14">10:00-11:00</div>
-                            <div class="font-size13 text-light-gray">Marta Healy</div>
-                        </td>
-                        <td>
-                            <span
-                                class="bg-pink padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">English</span>
-                            <div class="margin-10px-top font-size14">10:00-11:00</div>
-                            <div class="font-size13 text-light-gray">James Smith</div>
-                        </td>
-                        <td class="bg-light-gray">
-
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="align-middle">11:00am</td>
-                        <td>
-                            <span
-                                class="bg-lightred padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Break</span>
-                            <div class="margin-10px-top font-size14">11:00-12:00</div>
-                        </td>
-                        <td>
-                            <span
-                                class="bg-lightred padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Break</span>
-                            <div class="margin-10px-top font-size14">11:00-12:00</div>
-                        </td>
-                        <td>
-                            <span
-                                class="bg-lightred padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Break</span>
-                            <div class="margin-10px-top font-size14">11:00-12:00</div>
-                        </td>
-                        <td>
-                            <span
-                                class="bg-lightred padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Break</span>
-                            <div class="margin-10px-top font-size14">11:00-12:00</div>
-                        </td>
-                        <td>
-                            <span
-                                class="bg-lightred padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Break</span>
-                            <div class="margin-10px-top font-size14">11:00-12:00</div>
-                        </td>
-                        <td>
-                            <span
-                                class="bg-lightred padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Break</span>
-                            <div class="margin-10px-top font-size14">11:00-12:00</div>
-                        </td>
-                    </tr>
-
-
-                </tbody>
-            </table>
+                                <td class="{{ $time->day_name == 'sunday' ? '' : 'bg-light-gray' }}">
+                                    @if ($time->day_name == 'sunday')
+                                        <span
+                                            class="text-white bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13">{{ $time->class->name }}</span>
+                                        <div class="margin-10px-top font-size14">{{ $time->date }}</div>
         </div>
+        {{-- <div class="font-size13 text-light-gray">
+            {{ $time->teacher->first_name . ' ' . $time->teacher->last_name }}</div> --}}
+        @endif
+        </td>
+        <td class="{{ $time->day_name == 'monday' ? '' : 'bg-light-gray' }}">
+            @if ($time->day_name == 'monday')
+                <span
+                    class="text-white bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13">{{ $time->class->name }}</span>
+                <div class="margin-10px-top font-size14">{{ $time->date }}
+                </div>
+                {{-- <div class="font-size13 text-light-gray">
+                    {{ $time->teacher->first_name . ' ' . $time->teacher->last_name }}</div> --}}
+            @endif
+        </td>
+        <td class="{{ $time->day_name == 'tuesday' ? '' : 'bg-light-gray' }}">
+            @if ($time->day_name == 'tuesday')
+                <span
+                    class="text-white bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13">{{ $time->class->name }}</span>
+                <div class="margin-10px-top font-size14">{{ $time->date }}
+                </div>
+                {{-- <div class="font-size13 text-light-gray">
+                    {{ $time->teacher->first_name . ' ' . $time->teacher->last_name }}</div> --}}
+            @endif
+        </td>
+        <td class="{{ $time->day_name == 'wednesday' ? '' : 'bg-light-gray' }}">
+            @if ($time->day_name == 'wednesday')
+                <span
+                    class="text-white bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13">{{ $time->class->name }}</span>
+                <div class="margin-10px-top font-size14">{{ $time->date }}
+                </div>
+                {{-- <div class="font-size13 text-light-gray">
+                    {{ $time->teacher->first_name . ' ' . $time->teacher->last_name }}</div> --}}
+            @endif
+        </td>
+        <td class="{{ $time->day_name == 'thursday' ? '' : 'bg-light-gray' }}">
+            @if ($time->day_name == 'thursday')
+                <span
+                    class="text-white bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13">{{ $time->class->name }}</span>
+                <div class="margin-10px-top font-size14">{{ $time->date }}
+                </div>
+                {{-- <div class="font-size13 text-light-gray">
+                    {{ $time->teacher->first_name . ' ' . $time->teacher->last_name }}</div> --}}
+            @endif
+        </td>
+
+        </tr>
+        @endforeach
+        @endif
+        </tbody>
+        </table>
+    </div>
     </div>
 @endsection
