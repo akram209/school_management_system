@@ -156,11 +156,12 @@ class ParentController extends Controller
     }
     public function profile($parent_id)
     {
-        $parent = ParentModel::with(['user', 'students.class'])->find($parent_id);
+        $parent = ParentModel::with(['user', 'students.user', 'students.fee'])->where('user_id', $parent_id)->first();
 
         if (!$parent) {
             return response()->json(['message' => 'Parent not found'], 404);
         }
-        return $parent;
+
+        return view('parent.profile', ['parent' => $parent]);
     }
 }

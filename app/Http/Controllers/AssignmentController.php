@@ -72,6 +72,7 @@ class AssignmentController extends Controller
         $assignments = Assignment::with('students')->where('class_id', $student->class_id)->get();
         $upcoming = 0;
         $past = 0;
+        $studentScore = [];
         foreach ($assignments as $key => $assignment) {
             $studentScore[$key] = $assignment->students->where('id', $student->id)->first();
             if (Carbon::parse($assignment->deadline)->gte(now())) {

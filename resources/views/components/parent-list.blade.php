@@ -17,16 +17,12 @@
             </a>
 
             <ul>
-                {{-- {{ $classes id by classid  }} --}}
-                <li><a href=""><i class="fa-solid fa-newspaper"></i></i><span> Akram
-                        </span></a>
-                </li>
-                <li><a href=""><i class="fa-solid fa-newspaper"></i></i><span> Ahmed
-                        </span></a>
-                </li>
-                <li><a href=""><i class="fa-solid fa-newspaper"></i></i><span> Ayman
-                        </span></a>
-                </li>
+                @foreach ($parent->students as $student)
+                    <li><a href="{{ route('student.class', $student->id) }}"><i
+                                class="fa-solid fa-newspaper"></i></i><span> {{ $student->user->first_name }}
+                            </span></a>
+                    </li>
+                @endforeach
             </ul>
         </li>
         <li>
@@ -36,15 +32,12 @@
                 <span class="nav-text">Your Children</span>
             </a>
             <ul>
-                <li><a href=""><i class="fa-solid fa-child"></i></i></i><span> Akram
-                        </span></a>
-                </li>
-                <li><a href=""><i class="fa-solid fa-child"></i></i></i><span> Ahmed
-                        </span></a>
-                </li>
-                <li><a href=""><i class="fa-solid fa-child"></i></i></i><span> Ayman
-                        </span></a>
-                </li>
+                @foreach ($parent->students as $student)
+                    <li><a href="{{ route('student.profile', $student->user->id) }}"><i
+                                class="fa-solid fa-child"></i></i></i><span> {{ $student->user->first_name }}
+                            </span></a>
+                    </li>
+                @endforeach
 
             </ul>
         </li>
@@ -72,16 +65,12 @@
             </a>
             <ul>
 
-
-                <li><a href=""><i class="fa-solid fa-child"></i></i></i><span> Akram
-                        </span></a>
-                </li>
-                <li><a href=""><i class="fa-solid fa-child"></i></i></i><span> Ahmed
-                        </span></a>
-                </li>
-                <li><a href=""><i class="fa-solid fa-child"></i></i></i><span> Ayman
-                        </span></a>
-                </li>
+                @foreach ($parent->students as $student)
+                    <li><a href="{{ route('student.attendences', $student->id) }}"><i
+                                class="fa-solid fa-child"></i></i></i><span> {{ $student->user->first_name }}
+                            </span></a>
+                    </li>
+                @endforeach
 
             </ul>
 
@@ -92,15 +81,12 @@
                 <i class="fa-solid fa-file-import"></i> <span class="nav-text">Assignments</span>
             </a>
             <ul>
-                <li><a href=""><i class="fa-solid fa-child"></i></i></i><span> Akram
-                        </span></a>
-                </li>
-                <li><a href=""><i class="fa-solid fa-child"></i></i></i><span> Ahmed
-                        </span></a>
-                </li>
-                <li><a href=""><i class="fa-solid fa-child"></i></i></i><span> Ayman
-                        </span></a>
-                </li>
+                @foreach ($parent->students as $student)
+                    <li><a href="{{ route('student.assignments', $student->id) }}"><i
+                                class="fa-solid fa-child"></i></i></i><span>{{ $student->user->first_name }}
+                            </span></a>
+                    </li>
+                @endforeach
             </ul>
         </li>
         <li>
@@ -109,15 +95,12 @@
                 <i class="fa-solid fa-file-import"></i> <span class="nav-text">Exams</span>
             </a>
             <ul>
-                <li><a href=""><i class="fa-solid fa-child"></i></i></i><span> Akram
-                        </span></a>
-                </li>
-                <li><a href=""><i class="fa-solid fa-child"></i></i></i><span> Ahmed
-                        </span></a>
-                </li>
-                <li><a href=""><i class="fa-solid fa-child"></i></i></i><span> Ayman
-                        </span></a>
-                </li>
+                @foreach ($parent->students as $student)
+                    <li><a href="{{ route('student.exams', $student->id) }}"><i
+                                class="fa-solid fa-child"></i></i></i><span>{{ $student->user->first_name }}
+                            </span></a>
+                    </li>
+                @endforeach
             </ul>
         </li>
         <li>

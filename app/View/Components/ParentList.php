@@ -22,7 +22,7 @@ class ParentList extends Component
      */
     public function render(): View|Closure|string
     {
-        $parent = ParentModel::with(['user', 'students'])->where('user_id', $this->userId)->first();
+        $parent = ParentModel::with(['user', 'students.user'])->where('user_id', $this->userId)->first();
         return view('components.parent-list', compact('parent'));
     }
 }

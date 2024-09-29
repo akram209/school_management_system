@@ -5,7 +5,7 @@
 
 
 
-<div class="profile-card">
+<div class="profile-card" style="height: 70vh">
     <div class="profile-card-header">
 
         <img src="{{ asset('build/assets/images/Screenshot 2024-09-11 174254.png') }}" alt="profile"
@@ -13,91 +13,52 @@
     </div>
     <hr>
     <div class="profile-card-body">
-        <p>Parent ID</p>
-        <p>Full Name</p>
-        <p>Gender</p>
-        <p>Join Date</p>
+        <p> Parent ID : {{ $parent->id }} </p>
+        <p>Full Name: {{ $parent->user->first_name }} {{ $parent->user->last_name }}</p>
+        <p>Gender : {{ $parent->user->gender }}</p>
+        <p>Join Date : {{ $parent->created_at->format('d/m/Y') }}</p>
 
     </div>
 </div>
 
 @section('content')
-    <div class="teacher-info">
+    <div class="teacher-info" style="width: 60%">
         <div class="teacher-info-header">
             <h3>Contact me</h3>
         </div>
 
         <div class="teacher-info-body">
-            <p>address :</p>
+            <p>address : {{ $parent->address }}</p>
             <hr>
-            <p> phone : </p>
+            <p> phone : {{ $parent->phone }}</p>
             <hr>
-            <p>Email : </p>
+            <p>Email : {{ $parent->user->email }}</p>
         </div>
 
     </div>
-    <div class="teacher-subject">
-        <div class="teacher-subject-header">
-            <h3>Your Children</h3>
 
-        </div>
-        <div class="teacher-info-body">
-            <p style="text-align: center">Akram Hesham</p>
-            <hr>
-            <p style="text-align: center">Ahmed Hesham </p>
-            <hr>
-            <p style="text-align: center">Ayman Hesham</p>
-        </div>
 
-        <div class="teacher-subject-body">
-
-        </div>
-
-    </div>
     <div class="accordion accordion-flush" id="accordionFlushExample"
-        style="position: fixed !important; top: 40% !important; width: 60%; left: 10% ; border: 2px solid  #dee2e6;">
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                    Akram
-                </button>
-            </h2>
-            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the
-                    <code>.accordion-flush</code> class. This is the first item's accordion body.
+        style="position: fixed !important; top: 40% !important; width: 60%; left: 11% ; border: 2px solid  #dee2e6;">
+        @foreach ($parent->students as $key => $student)
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapse{{ $key }}" aria-expanded="false"
+                        aria-controls="flush-collapse{{ $key }}">
+                        {{ $student->user->first_name }}
+                    </button>
+                </h2>
+                <div id="flush-collapse{{ $key }}" class="accordion-collapse collapse"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <p>Student ID : {{ $student->id }}</p>
+                        <p>Class : {{ $student->class->name }}</p>
+                        <p>Fee : {{ $student->fee->status }}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                    Ayman
-                </button>
-            </h2>
-            <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the
-                    <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being
-                    filled with some actual content.
-                </div>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                    Ahmed
-                </button>
-            </h2>
-            <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the
-                    <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting
-                    happening here in terms of content, but just filling up the space to make it look, at least at first
-                    glance, a bit more representative of how this would look in a real-world application.
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
 
 @endsection

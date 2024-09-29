@@ -87,6 +87,8 @@ class ExamController extends Controller
         $exams = Exam::with('students')->where('class_id', $student->class_id)->get();
         $upcoming = 0;
         $past = 0;
+        $studentScore = [];
+
         foreach ($exams as $key => $exam) {
             $studentScore[$key] = $exam->students->where('id', $student->id)->first();
             if (Carbon::parse($exam->date)->gte(now())) {
