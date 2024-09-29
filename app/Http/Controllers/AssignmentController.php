@@ -82,7 +82,7 @@ class AssignmentController extends Controller
             }
         }
 
-        return view('assignment.student-assignments', ['assignments' => $assignments, 'student' => $studentScore, 'upcoming' => $upcoming, 'past' => $past]);
+        return view('student.student-assignments', ['assignments' => $assignments, 'student' => $studentScore, 'upcoming' => $upcoming, 'past' => $past]);
     }
     public function getAssignmentsByTeacherId(Teacher $teacher)
     {
@@ -109,6 +109,6 @@ class AssignmentController extends Controller
             }
         }
 
-        return view('assignment.teacher-assignments', ['assignments' => $assignments,  'upcoming' => $upcoming, 'past' => $past]);
+        return view('teacher.teacher-assignments', ['assignments' => $assignments,  'upcoming' => $upcoming, 'past' => $past]);
     }
 }

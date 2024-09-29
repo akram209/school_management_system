@@ -27,7 +27,8 @@
         </a>
         <ul>
             @foreach ($teacher->classes as $class)
-                <li><a href=""><i class="fa-solid fa-newspaper"></i></i><span> {{ $class->name }}
+                <li><a href="{{ route('teacher.take-attendence', $class->id) }}"><i
+                            class="fa-solid fa-newspaper"></i></i><span> {{ $class->name }}
                         </span></a>
                 </li>
             @endforeach
@@ -44,7 +45,8 @@
             <li><a href=""><i class="fa-regular fa-file-lines"></i><span> add assignment
                     </span></a></li>
             @foreach ($teacher->classes as $class)
-                <li><a href="edit-professor.html"><i class="fa-solid fa-file-signature"></i>
+                <li><a href="{{ route('teacher.assignments', $teacher->id) }}"><i
+                            class="fa-solid fa-file-signature"></i>
                         <span> {{ $class->name }} assignment
                         </span></a></li>
             @endforeach
@@ -60,7 +62,7 @@
             <li><a href=""><i class="fa-regular fa-file-lines"></i><span> add axam
                     </span></a></li>
             @foreach ($teacher->classes as $class)
-                <li><a href="edit-professor.html"><i class="fa-solid fa-check-double"></i> <span>
+                <li><a href="{{ route('teacher.exams', $teacher->id) }}"><i class="fa-solid fa-check-double"></i> <span>
                             {{ $class->name }}
                             axams
                         </span></a></li>
