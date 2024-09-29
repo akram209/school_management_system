@@ -8,6 +8,7 @@ use App\Models\Teacher;
 use Carbon\Carbon;
 use Database\Seeders\ExamSeeder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ExamController extends Controller
 {
@@ -23,9 +24,10 @@ class ExamController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Teacher $teacher)
     {
-        //
+        $classes = $teacher->classes;
+        return view('exam.create', ['teacher' => $teacher, 'classes' => $classes]);
     }
 
     /**
@@ -33,10 +35,25 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'subject_id' => ['required', 'exists:subjects,id'],
-            'class_id' => ['required', 'exists:classes,id'],
+        $class_id = $request->class_id;
+        $teacher_id = $request->teacher_id;
+        $subject_id = DB::table('class_subject_teacher')->where('class_id', $class_id)->where('teacher_id', $teacher_id)->value('subject_id');
+        Exam::create([
+            'subject_id' => $subject_id,
+            'class_id' => $class_id,
+            'title' => $request->title,
+            'date' => $request->date,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
+            'description' => $request->description,
+            'mark' => $request->mark,
         ]);
+        return redirect()->back()->with('success', 'Exam created successfully');
+        // $request->validate([
+        //     'subject_id' => ['required', 'exists:subjects,id'],
+        //     'class_id' => ['required', 'exists:classes,id'],
+        // ]);
+
     }
 
     /**

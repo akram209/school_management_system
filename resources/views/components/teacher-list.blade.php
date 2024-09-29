@@ -59,7 +59,8 @@
             <i class="fa-solid fa-clipboard-list"></i> <span class="nav-text">Exams</span>
         </a>
         <ul>
-            <li><a href=""><i class="fa-regular fa-file-lines"></i><span> add axam
+            <li><a href="{{ route('exam.create', $teacher->id) }}"><i class="fa-regular fa-file-lines"></i><span> add
+                        axam
                     </span></a></li>
             @foreach ($teacher->classes as $class)
                 <li><a href="{{ route('teacher.exams', $teacher->id) }}"><i class="fa-solid fa-check-double"></i> <span>
