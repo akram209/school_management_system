@@ -15,7 +15,7 @@ class Assignment extends Model
         'description',
         'type',
         'mark',
-        'deadlie',
+        'deadline',
     ];
     public function subject()
     {

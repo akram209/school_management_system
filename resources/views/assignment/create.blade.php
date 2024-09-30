@@ -17,14 +17,14 @@
 
 @section('content')
     <div class="container" style="position: absolute; top: 20%; left: 10%">
-        <h3 style="text-align: center">Create Exam</h3>
+        <h3 style="text-align: center">Create Assignment</h3>
         @if (session('success'))
             <div class="alert alert-success" style="text-align: center">
                 {{ session('success') }}
             </div>
         @endif
 
-        <form class="row g-3" method="POST" action="{{ route('exam.store') }}">
+        <form class="row g-3" method="POST" action="{{ route('assignment.store') }}">
             @csrf
             <div class="row g-3">
                 {{-- message --}}
@@ -42,15 +42,12 @@
                 {{-- message --}}
 
                 <div class="col">
-                    <input type="date" class="form-control" name="date" style="width: 100%" title="date">
-                </div>
-                {{-- message --}}
-                <div class="col">
-                    <input type="time" class="form-control" name="start_time" style="width: 100%" title="start time">
+                    <input type="date" class="form-control" name="deadline" style="width: 100%" title="deadline">
                 </div>
                 <div class="col">
-                    <input type="time" class="form-control" name="end_time" style="width: 100%" title="end time">
+                    <input type="time" class="form-control" name="time" style="width: 100%" title="deadline time">
                 </div>
+
             </div>
             <div class="row g-3" style="margin-left: -30px !important">
                 <div class="col-4">
@@ -66,24 +63,19 @@
                     <select class="form-select" name="type" aria-label="Default select example" style="height: 50px;"
                         title="type">
                         <option selected disabled hidden>type</option>
-                        <option value="mid">midterm</option>
-                        <option value="final">final</option>
+                        <option value="mid">online</option>
+                        <option value="final">offline</option>
                     </select>
                 </div>
                 <div class="col-4">
                     <select class="form-select" name="mark" aria-label="Default select example" style="height: 50px;"
                         title="ful mark">
                         <option selected disabled hidden>mark</option>
-
+                        <option value="5">5</option>
+                        <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="30">30</option>
-                        <option value="40">40</option>
-                        <option value="50">50</option>
-                        <option value="60">60</option>
-                        <option value="70">70</option>
-                        <option value="80">80</option>
-                        <option value="90">90</option>
-                        <option value="100">100</option>
+
                     </select>
                 </div>
             </div>

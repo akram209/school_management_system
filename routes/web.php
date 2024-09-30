@@ -41,12 +41,14 @@ Route::middleware('auth')->group(function () {
     // Route::get('/exam/{subject_id}/{class_id}', [ExamController::class, 'getExamsBySubjectIdAndClassId'])->name('attendence.create');
     Route::get('/teacher/exams/{teacher}/', [ExamController::class, 'getExamsByTeacherId'])->name('teacher.exams');
     Route::get('/student/exams/{student}', [ExamController::class, 'getExamsByStudentId'])->name('student.exams');
-    Route::get('/exam/{teacher}', [ExamController::class, 'create'])->name('exam.create');
+    Route::get('/exam/{teacher}', [ExamController::class, 'createByTeacher'])->name('teacher.create-exam');
     Route::post('/exam', [ExamController::class, 'store'])->name('exam.store');
 
     Route::get('/teacher/assignments/{teacher}/', [AssignmentController::class, 'getAssignmentsByTeacherId'])->name('teacher.assignments');
     Route::get('/student/assignments/{student}', [AssignmentController::class, 'getAssignmentsByStudentId'])->name('student.assignments');
     Route::get('getAssignmentsByTeacherId/{id}', [AssignmentController::class, 'getAssignmentsByTeacherId']);
+    Route::get('/assignment/{teacher}', [AssignmentController::class, 'createByTeacher'])->name('teacher.create-assignment');
+    Route::post('/assignment', [AssignmentController::class, 'store'])->name('assignment.store');
     Route::get('/timetable/{student}', [TimetableController::class, 'getTimetableByStudentId'])->name('student.timetable');
 });
 

@@ -18,22 +18,41 @@ class AssignmentController extends Controller
     {
         //
     }
+    public function createByTeacher(Teacher $teacher)
+    {
+        $classes = $teacher->classes;
+        return view('assignment.create', ['teacher' => $teacher, 'classes' => $classes]);
+    }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function store(Request $request)
     {
-        //
+        $class_id = $request->class_id;
+        if (!$request->subject_id) {
+            $teacher_id = $request->teacher_id;
+            $subject_id = DB::table('class_subject_teacher')->where('class_id', $class_id)->where('teacher_id', $teacher_id)->value('subject_id');
+        }
+        $time = $request->time;
+        $deadline = Carbon::parse($request->deadline . ' ' . $time)->format('Y-m-d H:i:s');
+
+
+        Assignment::create([
+            'subject_id' => $subject_id,
+            'class_id' => $class_id,
+            'title' => $request->title,
+            'deadline' => $deadline,
+            'description' => $request->description,
+            'mark' => $request->mark,
+        ]);
+        return redirect()->back()->with('success', 'Assignment created successfully');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
+
 
     /**
      * Display the specified resource.

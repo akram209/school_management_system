@@ -42,7 +42,9 @@
         </a>
         <ul>
             {{-- form for assignment --}}
-            <li><a href=""><i class="fa-regular fa-file-lines"></i><span> add assignment
+            <li><a href="{{ route('teacher.create-assignment', $teacher->id) }}"><i
+                        class="fa-regular fa-file-lines"></i><span>
+                        add assignment
                     </span></a></li>
             @foreach ($teacher->classes as $class)
                 <li><a href="{{ route('teacher.assignments', $teacher->id) }}"><i
@@ -59,13 +61,14 @@
             <i class="fa-solid fa-clipboard-list"></i> <span class="nav-text">Exams</span>
         </a>
         <ul>
-            <li><a href="{{ route('exam.create', $teacher->id) }}"><i class="fa-regular fa-file-lines"></i><span> add
-                        axam
+            <li><a href="{{ route('teacher.create-exam', $teacher->id) }}"><i
+                        class="fa-regular fa-file-lines"></i><span> add
+                        exam
                     </span></a></li>
             @foreach ($teacher->classes as $class)
                 <li><a href="{{ route('teacher.exams', $teacher->id) }}"><i class="fa-solid fa-check-double"></i> <span>
                             {{ $class->name }}
-                            axams
+                            exams
                         </span></a></li>
             @endforeach
         </ul>
