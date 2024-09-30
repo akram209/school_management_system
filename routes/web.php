@@ -38,7 +38,6 @@ Route::middleware('auth')->group(function () {
     Route::get('teacher/take-attendence/{class}', [AttendenceController::class, 'takeAttendenceByClassId'])->name('teacher.take-attendence');
 
 
-    // Route::get('/exam/{subject_id}/{class_id}', [ExamController::class, 'getExamsBySubjectIdAndClassId'])->name('attendence.create');
     Route::get('/teacher/exams/{teacher}/', [ExamController::class, 'getExamsByTeacherId'])->name('teacher.exams');
     Route::get('/student/exams/{student}', [ExamController::class, 'getExamsByStudentId'])->name('student.exams');
     Route::get('/exam/{teacher}', [ExamController::class, 'createByTeacher'])->name('teacher.create-exam');
@@ -46,7 +45,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/teacher/assignments/{teacher}/', [AssignmentController::class, 'getAssignmentsByTeacherId'])->name('teacher.assignments');
     Route::get('/student/assignments/{student}', [AssignmentController::class, 'getAssignmentsByStudentId'])->name('student.assignments');
-    Route::get('getAssignmentsByTeacherId/{id}', [AssignmentController::class, 'getAssignmentsByTeacherId']);
+    Route::get('assignment/set-score/{assignment}', [AssignmentController::class, 'setScore'])->name('assignment.set-score');
+    Route::get('teacher/{teacher}/assignment/edit/{assignment}', [AssignmentController::class, 'editByTeacher'])->name('teacher.edit-assignment');
+    Route::put('assignment/update/{assignment}', [AssignmentController::class, 'update'])->name('assignment.update');
+    Route::delete('assignment/delete/{assignment}', [AssignmentController::class, 'destroy'])->name('assignment.destroy');
     Route::get('/assignment/{teacher}', [AssignmentController::class, 'createByTeacher'])->name('teacher.create-assignment');
     Route::post('/assignment', [AssignmentController::class, 'store'])->name('assignment.store');
     Route::get('/timetable/{student}', [TimetableController::class, 'getTimetableByStudentId'])->name('student.timetable');
