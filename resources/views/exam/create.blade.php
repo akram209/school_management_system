@@ -28,11 +28,16 @@
             @csrf
             <div class="row g-3">
                 {{-- message --}}
-
+                @error('description')
+                <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
+                @enderror
                 <div class="col-8">
                     <input type="text" name="description" class="form-control" id="inputAddress"
                         placeholder="description" style="width: 100%" title="description">
                 </div>
+                @error('title')
+                <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
+                @enderror
                 <div class="col">
                     <input type="text" name="title" class="form-control" id="inputCity" placeholder="title"
                         style="width: 100%" title="title">
@@ -40,19 +45,30 @@
             </div>
             <div class="row g-3">
                 {{-- message --}}
-
+                @error('date')
+                <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
+                @enderror
                 <div class="col">
                     <input type="date" class="form-control" name="date" style="width: 100%" title="date">
                 </div>
                 {{-- message --}}
+                @error('start_time')
+                <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
+                @enderror
                 <div class="col">
                     <input type="time" class="form-control" name="start_time" style="width: 100%" title="start time">
                 </div>
+                @error('end_time')
+                <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
+                @enderror
                 <div class="col">
                     <input type="time" class="form-control" name="end_time" style="width: 100%" title="end time">
                 </div>
             </div>
             <div class="row g-3" style="margin-left: -30px !important">
+                @error('class_id')
+                <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
+                @enderror
                 <div class="col-4">
                     <select class="form-select" name="class_id" aria-label="Default select example" style="height: 50px;"
                         title="class">
@@ -62,6 +78,9 @@
                         @endforeach
                     </select>
                 </div>
+                @error('type')
+                <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
+                @enderror
                 <div class="col-4">
                     <select class="form-select" name="type" aria-label="Default select example" style="height: 50px;"
                         title="type">
@@ -70,6 +89,9 @@
                         <option value="final">final</option>
                     </select>
                 </div>
+                @error('mark')
+                <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
+                @enderror
                 <div class="col-4">
                     <select class="form-select" name="mark" aria-label="Default select example" style="height: 50px;"
                         title="ful mark">

@@ -29,6 +29,16 @@ class AssignmentController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => ['required','max:20'],
+            'deadline' => ['required , date'],
+            'description' => ['required','max:80'],
+            'mark' => 'required',
+            'class_id' => 'required',
+            'subject_id' => 'required',
+            'time' => 'required',
+            
+        ]);
         $class_id = $request->class_id;
         if (!$request->subject_id) {
             $teacher_id = $request->teacher_id;
@@ -36,7 +46,7 @@ class AssignmentController extends Controller
         }
         $time = $request->time;
         $deadline = Carbon::parse($request->deadline . ' ' . $time)->format('Y-m-d H:i:s');
-
+        
 
         Assignment::create([
             'subject_id' => $subject_id,
