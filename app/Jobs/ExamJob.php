@@ -34,12 +34,11 @@ class ExamJob implements ShouldQueue
         $students = $class->students;
         $exams = Exam::where('class_id', $this->classId)->get();
         foreach ($exams as $exam) {
-            if (Carbon::parse($exam->date)->lt(now())) {
-                if ($exam->students->count() == 0) {
-                    foreach ($students as $student) {
-                        // Attach only if the combination doesn't already exist
-                        $exam->students()->sync($student->id);
-                    }
+
+            if ($exam->students->count() == 0) {
+                foreach ($students as $student) {
+                    // Attach only if the combination doesn't already exist
+                    $exam->students()->sync($student->id);
                 }
             }
         }

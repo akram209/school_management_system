@@ -172,7 +172,9 @@ class AssignmentController extends Controller
     }
     public function setScore(Assignment $assignment)
     {
-
+        if (Carbon::parse($assignment->deadline)->lt(now())) {
+            return redirect()->back()->with('error', 'Assignment deadline has passed');
+        }
         $assignment = $assignment->load('students.user');
         $students = $assignment->students;
 

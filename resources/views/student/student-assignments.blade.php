@@ -22,13 +22,11 @@
 
 @section('content')
     @if ($assignments->count() > 0)
-
         @if ($upcoming)
             <div class="card" style="width: 50rem; margin: auto;   margin-bottom: 2%; top: 100px !important">
                 <h5 class="card-title" style="text-align: center"> Upcoming Assignments</h5>
 
             </div>
-
 
             {{-- Loop through upcoming exams --}}
             @foreach ($assignments as $key => $assignment)
@@ -68,11 +66,9 @@
                                     mark
                                 </button>
                                 <ul class="dropdown-menu">
-                                    @if ($student[$key])
-                                        @if ($student[$key]->pivot->score !== null)
-                                            <li style="text-align: center;">
-                                                {{ $student[$key]->pivot->score }}/{{ $assignment->mark }}</li>
-                                        @endif
+                                    @if ($student[$key] && $student[$key]->pivot->score !== null)
+                                        <li style="text-align: center;">
+                                            {{ $student[$key]->pivot->score }}/{{ $assignment->mark }}</li>
                                     @else
                                         <li style="text-align: center;"> not marked</li>
                                     @endif
@@ -111,11 +107,9 @@
                                     mark
                                 </button>
                                 <ul class="dropdown-menu">
-                                    @if ($student[$key])
-                                        @if ($student[$key]->pivot->score !== null)
-                                            <li style="text-align: center;">{{ $student[$key]->pivot->score }} /
-                                                {{ $assignment->mark }}</li>
-                                        @endif
+                                    @if ($student[$key] && $student[$key]->pivot->score !== null)
+                                        <li style="text-align: center;">
+                                            {{ $student[$key]->pivot->score }}/{{ $assignment->mark }}</li>
                                     @else
                                         <li style="text-align: center;"> not marked</li>
                                     @endif

@@ -32,10 +32,9 @@
                                     mark
                                 </button>
                                 <ul class="dropdown-menu">
-                                    @if ($student[$key])
-                                        @if ($student[$key]->pivot->score !== null)
-                                            <li style="text-align: center;">{{ $student[$key]->pivot->score }}</li>
-                                        @endif
+                                    @if ($student[$key] && $student[$key]->pivot->score !== null)
+                                        <li style="text-align: center;">
+                                            {{ $student[$key]->pivot->score }}/{{ $assignment->mark }}</li>
                                     @else
                                         <li style="text-align: center;"> not marked</li>
                                     @endif
@@ -72,11 +71,9 @@
                                     mark
                                 </button>
                                 <ul class="dropdown-menu">
-                                    @if ($student[$key])
-                                        @if ($student[$key]->pivot->score !== null)
-                                            <li style="text-align: center;">{{ $student[$key]->pivot->score }} /
-                                                {{ $exam->mark }}</li>
-                                        @endif
+                                    @if ($student[$key] && $student[$key]->pivot->score !== null)
+                                        <li style="text-align: center;">
+                                            {{ $student[$key]->pivot->score }}/{{ $assignment->mark }}</li>
                                     @else
                                         <li style="text-align: center;"> not marked</li>
                                     @endif
