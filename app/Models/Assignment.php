@@ -21,7 +21,10 @@ class Assignment extends Model
     {
         return $this->belongsTo(Subject::class);
     }
-
+    public function class()
+    {
+        return $this->belongsTo(ClassModel::class, 'class_id');
+    }
     public function students()
     {
         return $this->belongsToMany(Student::class, 'assignment_student', 'assignment_id', 'student_id')->withPivot('score', 'path');

@@ -7,6 +7,7 @@ use App\Models\Student;
 use App\Models\Teacher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AssignmentController extends Controller
@@ -29,24 +30,14 @@ class AssignmentController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => ['required','max:20'],
-            'deadline' => ['required , date'],
-            'description' => ['required','max:80'],
-            'mark' => 'required',
-            'class_id' => 'required',
-            'subject_id' => 'required',
-            'time' => 'required',
-            
-        ]);
         $class_id = $request->class_id;
         if (!$request->subject_id) {
             $teacher_id = $request->teacher_id;
             $subject_id = DB::table('class_subject_teacher')->where('class_id', $class_id)->where('teacher_id', $teacher_id)->value('subject_id');
         }
-        $time = $request->time;
-        $deadline = Carbon::parse($request->deadline . ' ' . $time)->format('Y-m-d H:i:s');
-        
+
+        $deadline = Carbon::parse($request->deadline . ' ' . $$request->time)->format('Y-m-d H:i:s');
+
 
         Assignment::create([
             'subject_id' => $subject_id,
@@ -75,25 +66,48 @@ class AssignmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function editByTeacher(Teacher $teacher, Assignment $assignment)
     {
-        //
+
+        $classes = $teacher->classes;
+        return view('assignment.edit', ['teacher' => $teacher, 'assignment' => $assignment, 'classes' => $classes]);
     }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Assignment $assignment)
     {
-        //
+        $class_id = $request->class_id;
+        if (!$request->subject_id) {
+            $teacher_id = $request->teacher_id;
+            $subject_id = DB::table('class_subject_teacher')->where('class_id', $class_id)->where('teacher_id', $teacher_id)->value('subject_id');
+        }
+
+        $deadline = Carbon::parse($request->deadline . ' ' . $request->time)->format('Y-m-d H:i:s');
+
+        $assignment->update([
+            'subject_id' => $subject_id,
+            'class_id' => $class_id,
+            'title' => $request->title,
+            'deadline' => $deadline,
+            'description' => $request->description,
+            'mark' => $request->mark,
+        ]);
+        if (Auth::user()->role == 'teacher') {
+            return redirect()->route('teacher.assignments', $teacher_id);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Assignment $assignment)
     {
-        //
+
+        $assignment->delete();
+        return redirect()->back()->with('success', 'Assignment deleted successfully');
     }
     public function getAssignmentsByStudentId(Student $student)
     {
@@ -139,6 +153,14 @@ class AssignmentController extends Controller
             }
         }
 
-        return view('teacher.teacher-assignments', ['assignments' => $assignments,  'upcoming' => $upcoming, 'past' => $past]);
+        return view('teacher.teacher-assignments', ['teacher' => $teacher, 'assignments' => $assignments,  'upcoming' => $upcoming, 'past' => $past]);
+    }
+    public function setScore(Assignment $assignment)
+    {
+
+        $assignment = $assignment->load('students.user');
+        $students = $assignment->students;
+
+        return view('assignment.set-score', ['students' => $students, 'assignment' => $assignment]);
     }
 }
