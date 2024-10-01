@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -12,13 +13,27 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('exam_student', function (Blueprint $table) {
-            // Drop the existing primary key (if there's one)
+
             $table->dropColumn('id');
 
-            // Add composite primary key on `exam_id` and `student_id`
+            $table->dropForeign(['exam_id']);
+            $table->dropForeign(['student_id']);
+
+            // Re-add the foreign keys with ON DELETE CASCADE
+            $table->foreign('exam_id')
+                ->references('id')
+                ->on('exams')
+                ->onDelete('cascade');
+
+            $table->foreign('student_id')
+                ->references('id')
+                ->on('students')
+                ->onDelete('cascade');
+
             $table->primary(['exam_id', 'student_id']);
         });
     }
+
     /**
      * Reverse the migrations.
      */

@@ -28,9 +28,7 @@
                 <th>Email</th>
                 <th style="padding-left: 5% ">Student ID</th>
                 <th>Full Name</th>
-                @if ($assignment->type == 'online')
-                    <th>assignment</th>
-                @endif
+
                 <th>score</th>
 
 
@@ -59,15 +57,11 @@
                     <td>
                         {{ $student->user->first_name . ' ' . $student->user->last_name }}
                     </td>
-                    @if ($assignment->type == 'online')
-                        <td>
-                            {{-- <a href="{{ asset('storage/' . $student->pivot->assignment) }}" download>download</a> --}}
-                        </td>
-                    @endif
-                    <td>
-                        <input type="number" id="score" name="score{{ $student->id }}"
-                            value="{{ old('score', $student->pivot->score) }}" min="0" max="{{ $assignment->mark }}"
-                            class="form-control">
+
+                    <td style="padding-left: 7% ">
+                        <input type="number" id="score{{ $student->id }}" name="score{{ $student->id }}"
+                            value="{{ old('score' . $student->id, $student->pivot->score) }}" min="0"
+                            max="{{ $exam->mark }}" class="form-control" style="width: 100px">
                     </td>
 
                 </tr>

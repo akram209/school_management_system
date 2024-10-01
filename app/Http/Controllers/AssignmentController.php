@@ -7,6 +7,7 @@ use App\Models\Student;
 use App\Models\Teacher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AssignmentController extends Controller
@@ -94,7 +95,9 @@ class AssignmentController extends Controller
             'description' => $request->description,
             'mark' => $request->mark,
         ]);
-        return redirect()->route('teacher.assignments', $teacher_id);
+        if (Auth::user()->role == 'teacher') {
+            return redirect()->route('teacher.assignments', $teacher_id);
+        }
     }
 
     /**
