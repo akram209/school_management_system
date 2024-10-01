@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Teacherattendence extends Model
+class TeacherAttendence extends Model
 {
     use HasFactory;
     protected $fillable = ['teacher_id', 'date', 'status'];
-    public function student()
+    public function teacher()
     {
-        return $this->belongsTo(Teacherattendence::class);
+        return $this->belongsTo(TeacherAttendence::class);
     }
 }

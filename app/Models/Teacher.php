@@ -34,7 +34,7 @@ class Teacher extends Model
     {
         return $this->belongsToMany(ClassModel::class, 'class_teacher', 'teacher_id', 'class_id');
     }
-    public function attendence()
+    public function teacherAttendences()
     {
         return $this->hasMany(TeacherAttendence::class);
     }
