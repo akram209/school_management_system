@@ -34,6 +34,10 @@ class Teacher extends Model
     {
         return $this->belongsToMany(ClassModel::class, 'class_teacher', 'teacher_id', 'class_id');
     }
+    public function attendence()
+    {
+        return $this->hasMany(TeacherAttendence::class);
+    }
 
     public function timeTables()
     {
