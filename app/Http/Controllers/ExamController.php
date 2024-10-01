@@ -6,8 +6,8 @@ use App\Models\Exam;
 use App\Models\Student;
 use App\Models\Teacher;
 use Carbon\Carbon;
-use Database\Seeders\ExamSeeder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ExamController extends Controller
@@ -36,22 +36,23 @@ class ExamController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => ['required','max:20'],
-            'description' => ['required','max:80'],
+            'title' => ['required', 'max:20'],
+            'description' => ['required', 'max:80'],
             'mark' => 'required',
             'class_id' => 'required',
             'subject_id' => 'required',
             'start_time' => 'required',
             'end_time' => 'required',
             'date' => 'required',
-            
+            'type' => ['required', 'in:mid,final'],
+
         ]);
         $class_id = $request->class_id;
         if (!$request->subject_id) {
             $teacher_id = $request->teacher_id;
             $subject_id = DB::table('class_subject_teacher')->where('class_id', $class_id)->where('teacher_id', $teacher_id)->value('subject_id');
         }
-     
+
         Exam::create([
             'subject_id' => $subject_id,
             'class_id' => $class_id,
@@ -76,25 +77,40 @@ class ExamController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Exam $exam)
+    public function editByTeacher(Teacher $teacher, Exam $exam)
     {
-        return $exam;
+
+        $classes = $teacher->classes;
+        return view('exam.edit', ['teacher' => $teacher, 'exam' => $exam, 'classes' => $classes]);
     }
+
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Exam $exam)
     {
-        $request->validate([
-            'subject_id' => ['required', 'exists:subjects,id'],
-            'class_id' => ['required', 'exists:classes,id'],
-        ]);
+        $class_id = $request->class_id;
+        if (!$request->subject_id) {
+            $teacher_id = $request->teacher_id;
+            $subject_id = DB::table('class_subject_teacher')->where('class_id', $class_id)->where('teacher_id', $teacher_id)->value('subject_id');
+        }
+
+
+
         $exam->update([
-            'subject_id' => $request->subject_id,
-            'class_id' => $request->class_id,
+            'subject_id' => $subject_id,
+            'class_id' => $class_id,
+            'title' => $request->title,
+            'date' => $request->date,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
+            'description' => $request->description,
+            'mark' => $request->mark,
         ]);
-        $exam->update($request->all());
+        if (Auth::user()->role == 'teacher') {
+            return redirect()->route('teacher.exams', $teacher_id);
+        }
     }
 
     /**
@@ -103,6 +119,7 @@ class ExamController extends Controller
     public function destroy(Exam $exam)
     {
         $exam->delete();
+        return redirect()->back()->with('success', 'Exam deleted successfully');
     }
     public function getExamsBySubjectId($subject_id)
     {
@@ -151,6 +168,14 @@ class ExamController extends Controller
                 $past = 1;
             }
         }
-        return view('teacher.teacher-exams', ['exams' => $exams, 'upcoming' => $upcoming, 'past' => $past]);
+        return view('teacher.teacher-exams', ['teacher' => $teacher, 'exams' => $exams, 'upcoming' => $upcoming, 'past' => $past]);
+    }
+    public function setScore(Exam $exam)
+    {
+
+        $exam = $exam->load('students.user');
+        $students = $exam->students;
+
+        return view('exam.set-score', ['students' => $students, 'exam' => $exam]);
     }
 }

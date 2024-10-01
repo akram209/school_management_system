@@ -2,6 +2,8 @@
 
 namespace App\View\Components;
 
+use App\Jobs\Assignmentjob;
+use App\Jobs\ExamJob;
 use App\Models\Teacher;
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -23,6 +25,10 @@ class TeacherList extends Component
     public function render(): View|Closure|string
     {
         $teacher = Teacher::with(['user', 'subjects', 'classes'])->where('user_id', $this->userId)->first();
+        foreach ($teacher->classes as $class) {
+            dispatch(new ExamJob($class->id));
+            dispatch(new Assignmentjob($class->id));
+        }
         return view('components.teacher-list', compact('teacher'));
     }
 }
