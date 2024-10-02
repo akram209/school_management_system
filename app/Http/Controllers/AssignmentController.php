@@ -31,7 +31,6 @@ class AssignmentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => ['required', 'max:20'],
             'date' => ['required ', ' date'],
             'time' => ['required', ' time'],
             'description' => ['required', 'max:80'],
@@ -94,6 +93,15 @@ class AssignmentController extends Controller
      */
     public function update(Request $request, Assignment $assignment)
     {
+        $request->validate([
+            'description' => ['required', 'max:80'],
+            'title' => ['required', 'max:20'],
+            'description' => ['required', 'max:80'],
+            'mark' => 'required',
+            'class_id' => 'required',
+            'subject_id' => 'required',
+
+        ]);
         $class_id = $request->class_id;
         if (!$request->subject_id) {
             $teacher_id = $request->teacher_id;

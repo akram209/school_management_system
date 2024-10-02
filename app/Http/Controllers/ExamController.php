@@ -90,13 +90,22 @@ class ExamController extends Controller
      */
     public function update(Request $request, Exam $exam)
     {
+        $request->validate([
+            'title' => ['required', 'max:20'],
+            'description' => ['required', 'max:80'],
+            'mark' => 'required',
+            'class_id' => 'required',
+            'subject_id' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
+            'date' => 'required',
+
+        ]);
         $class_id = $request->class_id;
         if (!$request->subject_id) {
             $teacher_id = $request->teacher_id;
             $subject_id = DB::table('class_subject_teacher')->where('class_id', $class_id)->where('teacher_id', $teacher_id)->value('subject_id');
         }
-
-
 
         $exam->update([
             'subject_id' => $subject_id,
