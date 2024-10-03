@@ -3,3 +3,4 @@
 </script>
 <script src="{{ asset('build/assets/js/Profile.js') }}"></script>
 <script src="{{ asset('build/assets/js/assignment.js') }}"></script>
+@livewireScripts

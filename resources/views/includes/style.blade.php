@@ -4,3 +4,4 @@
 <link rel="stylesheet" href="{{ asset('build/assets/css/Profile.css') }}">
 <link rel="stylesheet" href="{{ asset('build/assets/css/all.css') }}">
 <link rel="stylesheet" href="{{ asset('build/assets/css/all.min.css') }}">
+@livewireStyles

@@ -5,59 +5,44 @@
 
 @section('content')
 
-    <form class="d-flex" role="search" id="search-teacher">
-        <input class="form-control me-2" type="search" placeholder="search by teacher name " aria-label="Search">
+    <style>
+        input {
+            width: 200px !important;
+            height: 30px !important;
+            border-radius: 5px !important;
+            border: 1px solid rgb(32, 90, 227)
+        }
 
-    </form>
-    <h3 id="teacher-list">
-        Teacher List
-    </h3>
+        input:focus {
+            outline: none !important;
+            border: 1px solid rgb(183, 204, 247) !important;
+
+        }
+    </style>
+
+    @livewire('class-teacher-list', ['classId' => $class->id])
+
+
+
+
     <table class="table align-middle mb-4 bg-white"
-        style=" position: absolute !important; width: 80% !important; height: 30% !important; left: 10% !important; top: 15% !important ">
-        <thead class="bg-light">
-            <tr style="border-top: 2px solid">
-                <th style="padding-right: 100px !important ">Profile</th>
-                <th>Email</th>
-                <th>Teacher ID</th>
-                <th>Full Name</th>
-                <th>Gender</th>
-                <th>subject</th>
+        style=" position: absolute !important; width: 80% !important; height: 30% !important; left: 10% !important; top: 50% !important ">
+        <thead>
+            <tr>
+                <th colspan="2" style="padding-left: 25% !important">
+                    <h3>Students</h3>
+
+                </th>
+                <th style="padding-left: 20% !important">
+                    <form class="d-flex float-end" role="search" id="search-teacher">
+                        <input type="search" placeholder="search ">
+
+                    </form>
+                </th>
             </tr>
         </thead>
-        <tbody>
-            @foreach ($class->teachers as $teacher)
-                <tr>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <img src="{{ asset('storage/' . $teacher->user->image) }}" alt="Student Image"
-                                style="width: 45px; height: 45px" class="rounded-circle" />
-                        </div>
-                    </td>
-                    <td>{{ $teacher->user->email }}</td>
-                    <td>{{ $teacher->id }}</td>
-                    <td>{{ $teacher->user->first_name . ' ' . $teacher->user->last_name }}</td>
-                    <td>{{ $teacher->user->gender }}</td>
-                    <td>{{ $teacher->subjects[0]->name }}</td>
-
-                </tr>
-            @endforeach
-
-        </tbody>
-
-    </table>
-    <form class="d-flex" role="search" id="search-student">
-        <input class="form-control me-2" type="search" placeholder="search by student name" aria-label="Search">
-    </form>
-    <h3 id="student-list">
-        Student List
-    </h3>
-
-
-
-    <table class="table align-middle mb-4 bg-white"
-        style=" position: absolute !important; width: 80% !important; height: 30% !important; left: 10% !important; top: 55% !important ">
         <thead class="bg-light">
-            <tr style="border-top: 2px solid">
+            <tr>
                 <th style="padding-right: 100px !important ">Profile</th>
                 <th>Email</th>
                 <th>Student ID</th>
@@ -88,9 +73,18 @@
     </table>
 
     <table class="table align-middle mb-4 bg-white"
-        style=" position: absolute !important; width: 80% !important; height: 25% !important; left: 10% !important; top: 88% !important ; overflow:visible !important">
+        style=" position: absolute !important; width: 80% !important; height: 20% !important; left: 10% !important; top: 90% !important ; overflow:visible !important">
+        <thead>
+            <tr>
+                <th colspan="2" style="padding-right: 10% !important">
+                    <h3>Subjects</h3>
+
+                </th>
+
+            </tr>
+        </thead>
         <thead class="bg-light">
-            <tr style="border-top: 2px solid ">
+            <tr>
                 <th style="padding-right: 10% !important ">subject</th>
                 <th style="padding-right: 100% !important ">teacher</th>
                 <th style="padding-right: 15% !important ">description</th>
@@ -110,5 +104,4 @@
 
         </tbody>
     </table>
-
 @endsection
