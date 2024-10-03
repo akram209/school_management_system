@@ -52,7 +52,8 @@
                     <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
                 @enderror
                 <div class="col">
-                    <input type="date" class="form-control" name="deadline" style="width: 100%" title="deadline">
+                    <input type="date" class="form-control" name="deadline" style="width: 100%" title="deadline"
+                        min="{{ now()->format('Y-m-d') }}" max="{{ now()->addMonth()->format('Y-m-d') }}">
                 </div>
                 @error('time')
                     <div class="alert alert-danger" style="width:100%">{{ $message }}</div>

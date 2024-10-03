@@ -26,14 +26,15 @@
             <div class="row g-3">
                 {{-- message --}}
                 @error('description')
-                <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
+                    <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
                 @enderror
                 <div class="col-8">
-                    <input type="text" name="description" class="form-control" id="inputAddress" placeholder="description"
-                        style="width: 100%" title="description" value="{{ old('description', $exam->description) }}">
+                    <input type="text" name="description" class="form-control" id="inputAddress"
+                        placeholder="description" style="width: 100%" title="description"
+                        value="{{ old('description', $exam->description) }}">
                 </div>
                 @error('title')
-                <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
+                    <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
                 @enderror
                 <div class="col">
                     <input type="text" name="title" class="form-control" id="inputCity" placeholder="title"
@@ -43,21 +44,22 @@
             <div class="row g-3">
                 {{-- message --}}
                 @error('date')
-                <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
+                    <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
                 @enderror
                 <div class="col">
                     <input type="date" class="form-control" name="date" style="width: 100%" title="date"
-                        value="{{ old('date', $exam->date) }}">
+                        value="{{ old('date', $exam->date) }}" min="{{ now()->format('Y-m-d') }}"
+                        max="{{ now()->addMonths(2)->format('Y-m-d') }}">
                 </div>
                 @error('start_time')
-                <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
+                    <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
                 @enderror
                 <div class="col">
                     <input type="time" class="form-control" name="start_time" style="width: 100%" title="start time"
                         value="{{ old('start_time', $exam->start_time) }}">
                 </div>
                 @error('end_time')
-                <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
+                    <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
                 @enderror
                 <div class="col">
                     <input type="time" class="form-control" name="end_time" style="width: 100%" title="end time"
@@ -67,7 +69,7 @@
             </div>
             <div class="row g-3" style="margin-left: -30px !important">
                 @error('class_id')
-                <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
+                    <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
                 @enderror
                 <div class="col-4">
                     <select class="form-select" name="class_id" aria-label="Default select example" style="height: 50px;"
@@ -79,7 +81,7 @@
                     </select>
                 </div>
                 @error('type')
-                <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
+                    <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
                 @enderror
                 <div class="col-4">
                     <select class="form-select" name="type" aria-label="Default select example" style="height: 50px;"
@@ -92,7 +94,7 @@
                     </select>
                 </div>
                 @error('mark')
-                <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
+                    <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
                 @enderror
                 <div class="col-4">
                     <select class="form-select" name="mark" aria-label="Default select example" style="height: 50px;"
