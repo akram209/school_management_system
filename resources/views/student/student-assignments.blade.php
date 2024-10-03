@@ -16,7 +16,50 @@
 
     .fa-solid:hover {
         color: rgb(100, 100, 100);
-        background-color: rgb(255, 255, 255);
+        background-color: rgb(255, 250, 250);
+    }
+
+    .modal {
+        position: absolute !important;
+        z-index: 1050 !important;
+        height: 35vh !important;
+        width: 30vw !important;
+        overflow: hidden !important;
+        left: 25% !important;
+        border-radius: 10px !important;
+        background-color: rgba(255, 255, 255, 0) !important;
+
+        /* Bootstrap's default z-index for modals */
+    }
+
+    /* Optional: Center modal vertically */
+    .modal-dialog {
+
+        align-items: center !important;
+        height: 100vh;
+        width: 200vw !important;
+
+    }
+
+    .modal-content {
+        width: 100%;
+        left: 20% !important;
+        bottom: 10px !important;
+
+
+    }
+
+
+    /* Optional: Adjust modal backdrop if needed */
+    .modal-backdrop {
+        z-index: 1040 !important;
+        /* Ensure the backdrop is below the modal */
+    }
+
+    .modal-body {
+
+        height: 100%;
+        width: 100%;
     }
 </style>
 
@@ -54,9 +97,41 @@
                             <p class="card-text" style="text-align: left">Type: {{ $assignment->type }}</p>
                             @if ($assignment->type == 'online')
                                 @if ($student[$key]->pivot->path !== null)
-                                    <p class="card-text" style="text-align: left; float: top">
-                                        Submitted successfully
-                                    </p>
+                                    <a style="text-align: left; float: top ; margin-left: 5px"
+                                        href="{{ route('assignment.view', ['assignment' => $assignment->id, 'student' => $student[$key]->pivot->student_id]) }}"
+                                        target="_blank">
+                                        <i class="fa-regular fa-file-pdf"></i>
+                                    </a>
+                                    <a class="text-danger" style="text-align: left; float: right; margin-right: 95%;"
+                                        href="#" data-bs-toggle="modal"
+                                        data-bs-target="#deleteModal{{ $assignment->id }}-{{ $student[$key]->pivot->student_id }}">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </a>
+
+                                    {{-- Delete Modal --}}
+                                    <div class="modal fade"
+                                        id="deleteModal{{ $assignment->id }}-{{ $student[$key]->pivot->student_id }}"
+                                        tabindex="10" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+
+                                                <div class="modal-body">
+                                                    Are you sure you want to delete this assignment for the student?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <form
+                                                        action="{{ route('assignment.delete', ['assignment' => $assignment->id, 'student' => $student[$key]->pivot->student_id]) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Cancel</button>
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @else
                                     <span class="card-text" style="float: top">
                                         <div id="fileUpload{{ $assignment->id }}">

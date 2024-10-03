@@ -59,6 +59,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/assignment', [AssignmentController::class, 'store'])->name('assignment.store');
     Route::post('student/{student}/assignment/{assignment}/', [AssignmentController::class, 'uploadAssignment'])->name('assignment.upload');
     Route::get('/student/{student}/assignment/{assignment}/', [AssignmentController::class, 'viewAssignment'])->name('assignment.view');
+    Route::delete('/student/{student}/assignment/{assignment}/', [AssignmentController::class, 'deleteAssignment'])->name('assignment.delete');
     Route::get('/timetable/{student}', [TimetableController::class, 'getTimetableByStudentId'])->name('student.timetable');
 });
 
