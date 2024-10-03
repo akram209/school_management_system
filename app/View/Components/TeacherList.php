@@ -25,10 +25,6 @@ class TeacherList extends Component
     public function render(): View|Closure|string
     {
         $teacher = Teacher::with(['user', 'subjects', 'classes'])->where('user_id', $this->userId)->first();
-        foreach ($teacher->classes as $class) {
-            dispatch(new ExamJob($class->id));
-            dispatch(new Assignmentjob($class->id));
-        }
         return view('components.teacher-list', compact('teacher'));
     }
 }

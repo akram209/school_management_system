@@ -40,7 +40,7 @@
 
                 <div class="col">
                     <input type="date" class="form-control" name="date" style="width: 100%" title="date"
-                        value="{{ old('deadline', $exam->date) }}">
+                        value="{{ old('date', $exam->date) }}">
                 </div>
                 <div class="col">
                     <input type="time" class="form-control" name="start_time" style="width: 100%" title="start time"
@@ -58,9 +58,7 @@
                         title="class">
                         <option selected disabled hidden>class</option>
                         @foreach ($classes as $class)
-                            <option value="{{ $class->id }}"
-                                {{ old('class_id', $exam->class_id) == $class->id ? 'selected' : '' }}>{{ $class->name }}
-                            </option>
+                            <option value="{{ $class->id }}">{{ $class->name }}</option>
                         @endforeach
                     </select>
                 </div>

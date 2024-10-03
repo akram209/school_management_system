@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\Assignmentjob;
+use App\Jobs\ExamJob;
 use App\Models\Assignment;
 use App\Models\Student;
 use App\Models\Teacher;
@@ -9,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class AssignmentController extends Controller
 {
@@ -31,36 +34,39 @@ class AssignmentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'date' => ['required ', ' date'],
-            'time' => ['required', ' time'],
-            'description' => ['required', 'max:80'],
+            'deadline' => ['required', 'date', 'after:today'],
+            'time' => ['required'],
             'title' => ['required', 'max:20'],
-            'date' => ['required ', ' date'],
-            'time' => ['required', ' time'],
             'description' => ['required', 'max:80'],
             'mark' => 'required',
             'class_id' => 'required',
-            'subject_id' => 'required',
             'type' => ['required', 'in:online,offline'],
-
         ]);
+
         $class_id = $request->class_id;
-        if (!$request->subject_id) {
+        $subject_id = $request->subject_id;
+
+        if (!$subject_id) {
             $teacher_id = $request->teacher_id;
             $subject_id = DB::table('class_subject_teacher')->where('class_id', $class_id)->where('teacher_id', $teacher_id)->value('subject_id');
         }
 
-        $deadline = Carbon::parse($request->deadline . ' ' . $$request->time)->format('Y-m-d H:i:s');
+        // Combine deadline and time
+        $deadline = Carbon::parse($request->deadline . ' ' . $request->time);
 
 
-        Assignment::create([
+        $assignment =  Assignment::create([
             'subject_id' => $subject_id,
             'class_id' => $class_id,
             'title' => $request->title,
             'deadline' => $deadline,
             'description' => $request->description,
             'mark' => $request->mark,
+            'type' => $request->type,
         ]);
+
+        dispatch(new Assignmentjob($class_id, $assignment->id));
+
         return redirect()->back()->with('success', 'Assignment created successfully');
     }
 
@@ -94,21 +100,24 @@ class AssignmentController extends Controller
     public function update(Request $request, Assignment $assignment)
     {
         $request->validate([
-            'description' => ['required', 'max:80'],
+            'deadline' => ['required', 'date', 'after:today'],
+            'time' => ['required'],
             'title' => ['required', 'max:20'],
             'description' => ['required', 'max:80'],
             'mark' => 'required',
             'class_id' => 'required',
-            'subject_id' => 'required',
-
+            'type' => ['required', 'in:online,offline'],
         ]);
         $class_id = $request->class_id;
-        if (!$request->subject_id) {
+        $subject_id = $request->subject_id;
+
+        if (!$subject_id) {
             $teacher_id = $request->teacher_id;
             $subject_id = DB::table('class_subject_teacher')->where('class_id', $class_id)->where('teacher_id', $teacher_id)->value('subject_id');
         }
 
-        $deadline = Carbon::parse($request->deadline . ' ' . $request->time)->format('Y-m-d H:i:s');
+
+        $deadline = Carbon::parse($request->deadline . ' ' . $request->time);
 
         $assignment->update([
             'subject_id' => $subject_id,
@@ -117,6 +126,7 @@ class AssignmentController extends Controller
             'deadline' => $deadline,
             'description' => $request->description,
             'mark' => $request->mark,
+            'type' => $request->type,
         ]);
         if (Auth::user()->role == 'teacher') {
             return redirect()->route('teacher.assignments', $teacher_id);
@@ -149,6 +159,7 @@ class AssignmentController extends Controller
             }
         }
 
+
         return view('student.student-assignments', ['assignments' => $assignments, 'student' => $studentScore, 'upcoming' => $upcoming, 'past' => $past]);
     }
     public function getAssignmentsByTeacherId(Teacher $teacher)
@@ -180,12 +191,37 @@ class AssignmentController extends Controller
     }
     public function setScore(Assignment $assignment)
     {
-        if (Carbon::parse($assignment->deadline)->lt(now())) {
-            return redirect()->back()->with('error', 'Assignment deadline has passed');
+        if (Carbon::parse($assignment->deadline)->gte(now())) {
+            return redirect()->back()->with('error', 'Assignment deadline has not passed');
         }
         $assignment = $assignment->load('students.user');
         $students = $assignment->students;
 
         return view('assignment.set-score', ['students' => $students, 'assignment' => $assignment]);
+    }
+    public function uploadAssignment(Request $request, Student $student, Assignment $assignment)
+    {
+
+        $request->validate([
+            'assignmentFile' => ['required', 'mimes:pdf'],
+        ]);
+        if ($request->hasFile('assignmentFile')) {
+
+            $file = $request->file('assignmentFile');
+            $path = Storage::disk('assignments')->put('students', $file);
+            $assignment->students()->updateExistingPivot($student->id, ['path' => $path]);
+            return redirect()->back()->with('success', 'Assignment ' . $assignment->title . 'Score uploaded successfully');
+        } else {
+
+            return redirect()->back()->with('error', 'File not uploaded');
+        }
+    }
+    public function viewAssignment(Student $student, Assignment $assignment)
+    {
+
+        $path = $assignment->students()->where('student_id', $student->id)->first()->pivot->path;
+
+
+        return view('assignment.view', compact('assignment', 'path', 'student'));
     }
 }

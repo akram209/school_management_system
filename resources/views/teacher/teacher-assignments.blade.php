@@ -28,7 +28,12 @@
             {{ session('success') }}
         </div>
     @endif
-
+    @if (session('error'))
+        <div class="alert alert-danger text-center"
+            style="position: absolute !important; top: 50px !important; width: 60%; left: 20% ; padding: 10px !important;  border: 2px solid  #dee2e6;">
+            {{ session('error') }}
+        </div>
+    @endif
 
     @if ($assignments->count() > 0)
 

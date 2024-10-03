@@ -16,6 +16,7 @@
 
 
 @section('content')
+
     <div class="container" style="position: absolute; top: 20%; left: 10%">
         <h3 style="text-align: center">Create Assignment</h3>
         @if (session('success'))
@@ -29,19 +30,9 @@
             <div class="row g-3">
                 {{-- message --}}
 
-
-
                 @error('description')
                     <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
                 @enderror
-
-
-
-
-                @error('description')
-                    <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
-                @enderror
-
 
                 <div class="col-8">
                     <input type="text" name="description" class="form-control" id="inputAddress"
@@ -91,8 +82,8 @@
                     <select class="form-select" name="type" aria-label="Default select example" style="height: 50px;"
                         title="type">
                         <option selected disabled hidden>type</option>
-                        <option value="mid">online</option>
-                        <option value="final">offline</option>
+                        <option value="online">online</option>
+                        <option value="offline">offline</option>
                     </select>
                 </div>
                 @error('mark')
@@ -111,7 +102,6 @@
                 </div>
             </div>
             <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
-
             <div class="col-12">
                 <button type="submit" class="btn btn-primary" style="width: 100%">save</button>
             </div>

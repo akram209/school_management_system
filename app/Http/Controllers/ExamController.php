@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ExamJob;
 use App\Models\Exam;
 use App\Models\Student;
 use App\Models\Teacher;
@@ -40,7 +41,6 @@ class ExamController extends Controller
             'description' => ['required', 'max:80'],
             'mark' => 'required',
             'class_id' => 'required',
-            'subject_id' => 'required',
             'start_time' => 'required',
             'end_time' => 'required',
             'date' => 'required',
@@ -48,12 +48,14 @@ class ExamController extends Controller
 
         ]);
         $class_id = $request->class_id;
-        if (!$request->subject_id) {
+        $subject_id = $request->subject_id;
+
+        if (!$subject_id) {
             $teacher_id = $request->teacher_id;
             $subject_id = DB::table('class_subject_teacher')->where('class_id', $class_id)->where('teacher_id', $teacher_id)->value('subject_id');
         }
 
-        Exam::create([
+        $exam =    Exam::create([
             'subject_id' => $subject_id,
             'class_id' => $class_id,
             'title' => $request->title,
@@ -62,7 +64,10 @@ class ExamController extends Controller
             'end_time' => $request->end_time,
             'description' => $request->description,
             'mark' => $request->mark,
+            'type' => $request->type,
         ]);
+        dispatch(new ExamJob($class_id, $exam->id));
+
         return redirect()->back()->with('success', 'Exam created successfully');
     }
 
@@ -95,14 +100,16 @@ class ExamController extends Controller
             'description' => ['required', 'max:80'],
             'mark' => 'required',
             'class_id' => 'required',
-            'subject_id' => 'required',
             'start_time' => 'required',
             'end_time' => 'required',
             'date' => 'required',
+            'type' => ['required', 'in:mid,final'],
 
         ]);
         $class_id = $request->class_id;
-        if (!$request->subject_id) {
+        $subject_id = $request->subject_id;
+
+        if (!$subject_id) {
             $teacher_id = $request->teacher_id;
             $subject_id = DB::table('class_subject_teacher')->where('class_id', $class_id)->where('teacher_id', $teacher_id)->value('subject_id');
         }
@@ -116,6 +123,7 @@ class ExamController extends Controller
             'end_time' => $request->end_time,
             'description' => $request->description,
             'mark' => $request->mark,
+            'type' => $request->type,
         ]);
         if (Auth::user()->role == 'teacher') {
             return redirect()->route('teacher.exams', $teacher_id);

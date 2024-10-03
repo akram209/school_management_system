@@ -15,6 +15,7 @@
 
 
 
+
 @section('content')
     <div class="container" style="position: absolute; top: 20%; left: 10%">
         <h3 style="text-align: center">Edit Assignment</h3>
@@ -54,7 +55,7 @@
                         title="class">
                         <option selected disabled hidden>class</option>
                         @foreach ($classes as $class)
-                            {{ old('class_id', $assignment->class_id) == $class->id ? 'selected' : '' }}>{{ $class->name }}
+                            <option value="{{ $class->id }}">{{ $class->name }}</option>
                         @endforeach
                     </select>
                 </div>

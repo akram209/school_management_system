@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\ClassModel;
 use App\Models\Exam;
+use App\Models\Student;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Foundation\Queue\Queueable;
@@ -16,31 +17,29 @@ use PgSql\Lob;
 class ExamJob implements ShouldQueue
 {
     use Queueable;
+    public $timeout = 120;
 
     /**
      * Create a new job instance.
      */
-    public function __construct(public $classId)
+    public function __construct(public $classId, public $examId)
     {
         //
     }
+
 
     /**
      * Execute the job.
      */
     public function handle(): void
     {
-        $class = ClassModel::with('students')->find($this->classId);
-        $students = $class->students;
-        $exams = Exam::where('class_id', $this->classId)->get();
-        foreach ($exams as $exam) {
+        $students = Student::where('class_id', $this->classId)->get();
 
-            if ($exam->students->count() == 0) {
-                foreach ($students as $student) {
-                    // Attach only if the combination doesn't already exist
-                    $exam->students()->sync($student->id);
-                }
-            }
+
+        foreach ($students as $student) {
+            $student->exams()->syncWithoutDetaching($this->examId, [
+                'score' => 0,
+            ]);
         }
     }
 }

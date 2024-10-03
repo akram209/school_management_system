@@ -60,9 +60,18 @@
                         {{ $student->user->first_name . ' ' . $student->user->last_name }}
                     </td>
                     @if ($assignment->type == 'online')
-                        <td>
-                            {{-- <a href="{{ asset('storage/' . $student->pivot->assignment) }}" download>download</a> --}}
-                        </td>
+                        @if ($student->pivot->path !== null)
+                            <td>
+                                <a href="{{ route('assignment.view', ['assignment' => $assignment->id, 'student' => $student->id]) }}"
+                                    target="_blank">
+                                    <i class="fa-regular fa-file-pdf"></i>
+                                </a>
+                            </td>
+                        @else
+                            <td>
+                                <p> not uploaded </p>
+                            </td>
+                        @endif
                     @endif
                     <td>
                         <input type="number" id="score" name="score{{ $student->id }}"

@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\Assignment;
 use App\Models\ClassModel;
+use App\Models\Student;
 use Carbon\Carbon;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -14,11 +15,11 @@ use Illuminate\Queue\SerializesModels;
 class Assignmentjob implements ShouldQueue
 {
     use Queueable;
-
+    public $timeout = 120;
     /**
      * Create a new job instance.
      */
-    public function __construct(public $classId)
+    public function __construct(public $classId, public $assignmentId)
     {
         //
     }
@@ -29,17 +30,14 @@ class Assignmentjob implements ShouldQueue
     public function handle(): void
     {
 
-        $class = ClassModel::with('students')->find($this->classId);
-        $students = $class->students;
-        $assignments = Assignment::where('class_id', $this->classId)->get();
-        foreach ($assignments as $assignment) {
+        $students = Student::where('class_id', $this->classId)->get();
 
-            if ($assignment->students->count() == 0) {
-                foreach ($students as $student) {
-                    // Attach only if the combination doesn't already exist
-                    $assignment->students()->sync($student->id);
-                }
-            }
+
+        foreach ($students as $student) {
+            $student->assignments()->syncWithoutDetaching($this->assignmentId, [
+                'score' => 0,
+                'path' => null,
+            ]);
         }
     }
 }

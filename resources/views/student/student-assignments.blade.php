@@ -7,14 +7,14 @@
 
     }
 
-    #imageIcon {
+    .fa-solid {
         cursor: pointer;
         width: 25%;
         font-size: 30px;
         border-radius: 10px;
     }
 
-    #imageIcon:hover {
+    .fa-solid:hover {
         color: rgb(100, 100, 100);
         background-color: rgb(255, 255, 255);
     }
@@ -22,6 +22,18 @@
 
 @section('content')
     @if ($assignments->count() > 0)
+        @if (session('success'))
+            <div class="alert alert-success"
+                style="text-align: center;position: absolute; width: 60%; height: 50px; top: 6%; left: 20%">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if (session('error'))
+            <div class="alert alert-danger"
+                style="text-align: center;position: absolute; width: 60%; height: 50px; top: 6%; left: 20%">
+                {{ session('error') }}
+            </div>
+        @endif
         @if ($upcoming)
             <div class="card" style="width: 50rem; margin: auto;   margin-bottom: 2%; top: 100px !important">
                 <h5 class="card-title" style="text-align: center"> Upcoming Assignments</h5>
@@ -43,18 +55,38 @@
                             @if ($assignment->type == 'online')
                                 @if ($student[$key]->pivot->path !== null)
                                     <p class="card-text" style="text-align: left; float: top">
-                                        submitted successfully
+                                        Submitted successfully
                                     </p>
                                 @else
-                                    <span class="card-text" style=" float: top">
-                                        <div id="imageDiv">
-                                            <form action="" method="POST" enctype="multipart/form-data">
+                                    <span class="card-text" style="float: top">
+                                        <div id="fileUpload{{ $assignment->id }}">
+                                            <form
+                                                action="{{ route('assignment.upload', [$student[$key]->pivot->student_id, $assignment->id]) }}"
+                                                method="POST" enctype="multipart/form-data">
                                                 @csrf
-                                                <input type="file" id="image" name="image">
-                                                <i id="imageIcon" class="fa-solid fa-cloud-arrow-up"></i>
-                                                <p id="imageError"></p>
-                                            </form>
 
+                                                <input type="file" id="assignmentFile{{ $assignment->id }}"
+                                                    name="assignmentFile" onchange="showButtons({{ $assignment->id }})"
+                                                    aria-label="Upload Assignment" required>
+
+                                                <!-- Clicking the icon will trigger the file input -->
+                                                <i id="file{{ $assignment->id }}" class="fa-solid fa-cloud-arrow-up"
+                                                    aria-hidden="true"
+                                                    onclick="document.getElementById('assignmentFile{{ $assignment->id }}').click();"></i>
+
+                                                @error('assignmentFile')
+                                                    <span style="width: 100%;" class="alert alert-danger">
+                                                        {{ $message }}
+                                                    </span>
+                                                @enderror
+
+                                                <!-- Buttons are hidden initially -->
+                                                <div id="buttons{{ $assignment->id }}" style="display: none;">
+                                                    <button type="submit" class="btn btn-success">Submit</button>
+                                                    <button type="button" class="btn btn-danger"
+                                                        onclick="cancelUpload({{ $assignment->id }})">Cancel</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </span>
                                 @endif
