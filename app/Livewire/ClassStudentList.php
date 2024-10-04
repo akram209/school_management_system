@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\ClassModel;
+use App\Models\Student;
 use Livewire\Component;
 
 class ClassStudentList extends Component
@@ -15,13 +16,13 @@ class ClassStudentList extends Component
     }
     public function render()
     {
-        $class = ClassModel::find($this->classId);
-        $students = $class->students()
+
+        $students = Student::where('class_id', $this->classId)
             ->whereHas('user', function ($query) {
                 $query->where('first_name', 'like', '%' . $this->search . '%')
                     ->orWhere('last_name', 'like', '%' . $this->search . '%');
             })
             ->get();
-        return view('livewire.class-student-list',['students'=>$students]);
+        return view('livewire.class-student-list', ['students' => $students]);
     }
 }

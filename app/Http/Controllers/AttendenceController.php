@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Attendence;
 use App\Models\Student;
 use App\Models\ClassModel;
+use App\Models\Teacher;
 
 class AttendenceController extends Controller
 {
@@ -98,35 +99,17 @@ class AttendenceController extends Controller
             'absents' => $absents,
         ]);
     }
-    public function takeAttendenceByClassId(ClassModel $class)
+    public function takeAttendenceByClassId(Teacher $teacher, ClassModel $class)
     {
-        $class = ClassModel::with('students.user', 'students.attendence')->find($class->id);
-        $class = ClassModel::with('students.user', 'students.attendence')->find($class->id);
-        $students = $class->students;
-        $status = [];
 
-        foreach ($students as $studentKey => $student) {
-            if ($student->attendence) {
-                // Filter attendance for today's date outside the inner loop
-                $todayAttendance = $student->attendence->where('date', now()->format('Y-m-d'))->first();
 
-                if ($todayAttendance) {
-                    if ($todayAttendance->status == 'absent') {
-                        $status[$studentKey] = 0; // Mark as absent
-                    } else {
-                        $status[$studentKey] = 1; // Mark as present
-                    }
-                } else {
-                    $status[$studentKey] = 0; // No attendance record means absent
-                }
-            } else {
-                $status[$studentKey] = 0; // No attendance relationship, mark as absent
-            }
-        }
+
+
 
         return view('attendence.take-attendence', [
-            'status' => $status,
-            'students' => $students
+
+            'class' => $class,
+            'teacher' => $teacher
         ]);
     }
 }

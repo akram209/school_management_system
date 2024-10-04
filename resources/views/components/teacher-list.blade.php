@@ -27,7 +27,7 @@
         </a>
         <ul>
             @foreach ($teacher->classes as $class)
-                <li><a href="{{ route('teacher.take-attendence', $class->id) }}"><i
+                <li><a href="{{ route('teacher.take-attendence', [$teacher->id, $class->id]) }}"><i
                             class="fa-solid fa-newspaper"></i></i><span> {{ $class->name }}
                         </span></a>
                 </li>
