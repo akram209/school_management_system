@@ -18,6 +18,11 @@
             border: 1px solid rgb(183, 204, 247) !important;
 
         }
+
+        table,
+        th {
+            border-bottom: 1px solid rgb(32, 90, 227) !important;
+        }
     </style>
 
     @livewire('class-teacher-list', ['classId' => $class->id])
@@ -25,38 +30,67 @@
     @livewire('class-student-list', ['classId' => $class->id])
 
 
+    <div class="student-number"
+        style=" position: absolute !important;
+         left: 10% !important; top: 85% !important ; overflow:visible !important">
 
+        <div class="teacher-subject-header">
+            <h4>Students </h4>
 
-    <table class="table mb-4 align-middle bg-white"
-        style=" position: absolute !important; width: 80% !important; height: 20% !important; left: 10% !important; top: 90% !important ; overflow:visible !important">
-        <thead>
-            <tr>
-                <th colspan="2" style="padding-right: 10% !important">
-                    <h3>Subjects</h3>
+        </div>
+        <div>
+            <p>{{ $student_count }}</p>
+            <h5 style="display: inline-block ;position:relative; left: 50px">
+                {{ $male_students_count }} <i class="fa-solid fa-mars"></i>
+            </h5>
+            <h5 style="display: inline-block ;position:relative; left: 120px">
+                {{ $female_students_count }} <i class="fa-solid fa-venus"> </i></h5>
+        </div>
 
-                </th>
+        <div class="teacher-subject-body">
 
-            </tr>
-        </thead>
-        <thead class="bg-light">
-            <tr>
-                <th style="padding-right: 10% !important ">subject</th>
-                <th style="padding-right: 100% !important ">teacher</th>
-                <th style="padding-right: 15% !important ">description</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($class->subjects as $subject)
-                <tr>
-                    <td>{{ $subject->name }}</td>
-                    <td>{{ $subject->teachers[0]->user->first_name . ' ' . $subject->teachers[0]->user->last_name }}</td>
-                    <td style="width: 50%">{{ $subject->description }}</td>
-                </tr>
-            @endforeach
+        </div>
 
+    </div>
+    <div class="student-number"
+        style=" position: absolute !important;
+     left: 40% !important; top: 85% !important ; overflow:visible !important">
 
+        <div class="teacher-subject-header">
+            <h4>Teachers </h4>
 
+        </div>
+        <div>
+            <p>{{ $teacher_count }}</p>
+            <h5 style="display: inline-block ;position:relative; left: 50px">
+                {{ $male_teachers_count }} <i class="fa-solid fa-mars"></i>
+            </h5>
+            <h5 style="display: inline-block ;position:relative; left: 120px">
+                {{ $female_teachers_count }} <i class="fa-solid fa-venus"> </i></h5>
+        </div>
 
-        </tbody>
-    </table>
+        <div class="teacher-subject-body">
+
+        </div>
+
+    </div>
+    <div class="student-number"
+        style=" position: absolute !important;
+ left: 70% !important; top: 85% !important ; overflow:visible !important">
+
+        <div class="teacher-subject-header">
+            <h4> Subjects </h4>
+
+        </div>
+        <div>
+            <p>{{ $subject_count }}</p>
+
+        </div>
+
+        <div class="teacher-subject-body">
+
+        </div>
+
+    </div>
+
 @endsection

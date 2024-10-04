@@ -21,8 +21,10 @@
                     <div id="flush-collapse{{ $key }}" class="accordion-collapse collapse"
                         data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            <img src="{{ asset('storage/images/' . $parent->user->image) }}"
-                                style="width: 50px !important; height: 50px !important" alt="">
+                            <a href="{{ route('student.profile', $parent->user->id) }}">
+                                <img src="{{ asset('storage/images/' . $parent->user->image) }}"
+                                    style="width: 50px !important; height: 50px !important" alt="">
+                            </a>
                             <p>Parent ID : {{ $parent->id }}</p>
 
                             <p>Gender : {{ $parent->user->gender }}</p>

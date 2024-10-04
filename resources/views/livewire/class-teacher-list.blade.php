@@ -28,10 +28,12 @@
         @foreach ($teachers as $teacher)
             <tr>
                 <td>
-                    <div class="d-flex align-items-center">
-                        <img src="{{ asset('storage/' . $teacher->user->image) }}" alt="Student Image"
-                            style="width: 45px; height: 45px" class="rounded-circle" />
-                    </div>
+                    <a href="{{ route('teacher.profile', $teacher->user->id) }}">
+                        <div class="d-flex align-items-center">
+                            <img src="{{ asset('storage/' . $teacher->user->image) }}" alt="Student Image"
+                                style="width: 45px; height: 45px" class="rounded-circle" />
+                        </div>
+                    </a>
                 </td>
                 <td>{{ $teacher->user->email }}</td>
                 <td>{{ $teacher->id }}</td>
