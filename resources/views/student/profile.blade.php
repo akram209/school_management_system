@@ -53,9 +53,14 @@
 </style>
 <div class="profile-card">
     <div class="profile-card-header">
+        @if ($student->user->image)
+            <img src="{{ asset('storage/images/' . $student->user->image) }}" alt="profile"
+                class="profile-card-header-profile-img">
+        @else
+            <img src="{{ asset('build/assets/images/profile.jpg') }}" alt="profile"
+                class="profile-card-header-profile-img">
+        @endif
 
-        <img src="{{ asset('storage/images/' . $student->user->image) }}" alt="profile"
-            class="profile-card-header-profile-img">
     </div>
     <hr>
     <div class="profile-card-body">

@@ -44,10 +44,14 @@
 
 <div class="profile-card">
     <div class="profile-card-header">
-        {{-- <img src="{{ asset('storage/images/' . $teacher->user->image) }}" alt="profile"
-        class="profile-card-header-profile-img"> --}}
-        <img src="{{ asset('build/assets/images/Screenshot 2024-09-11 174254.png') }}" alt="profile"
-            class="profile-card-header-profile-img">
+        @if ($teacher->user->image)
+            <img src="{{ asset('storage/images/' . $teacher->user->image) }}" alt="profile"
+                class="profile-card-header-profile-img">
+        @else
+            <img src="{{ asset('build/assets/images/profile.jpg') }}" alt="profile"
+                class="profile-card-header-profile-img">
+        @endif
+
     </div>
     <hr>
     <div class="profile-card-body">

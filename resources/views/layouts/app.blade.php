@@ -15,9 +15,18 @@
             aria-controls="offcanvasWithBothOptions"></i>
         @if (Auth::user()->role == 'student')
             <a href="{{ route('student.profile', Auth::user()->id) }}">
+            @elseif (Auth::user()->role == 'teacher')
+                <a href="{{ route('teacher.profile', Auth::user()->id) }}">
+                @elseif (Auth::user()->role == 'parent')
+                    <a href="{{ route('parent.profile', Auth::user()->id) }}">
+                    @else
+                        <a href="{{ route('admin.profile', Auth::user()->id) }}">
         @endif
         <img src="{{ asset('storage/images/' . Auth::user()->image) }}" class="rounded-circle" height="22"
-            alt="Avatar" loading="lazy" />
+            loading="lazy" />
+        <span class="nav-text" style="color: white; float: left">{{ Auth::user()->first_name }}
+            {{ Auth::user()->last_name }} ({{ Auth::user()->role }})</span>
+
         </a>
 
     </nav>
@@ -42,7 +51,8 @@
                     @can('parent-list', Auth::user()->id)
                         <x-parent-list :userId="Auth::user()->id" />
                     @endcan
-                    @can('admin')
+                    @can('admin-list', Auth::user()->id)
+                        <x-admin-list :userId="Auth::user()->id" />
                     @endcan
                 </div>
             </div>

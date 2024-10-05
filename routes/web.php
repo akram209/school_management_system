@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\AttendenceController;
 use App\Http\Controllers\ClassController;
@@ -17,9 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard/{user}', [AdminController::class, 'profile'])->middleware(['auth', 'verified'])->name('admin.profile');
 
 Route::middleware('auth')->group(function () {
 

@@ -7,9 +7,14 @@
 
 <div class="profile-card" style="height: 70vh">
     <div class="profile-card-header">
+        @if ($parent->user->image)
+            <img src="{{ asset('storage/images/' . $parent->user->image) }}" alt="profile"
+                class="profile-card-header-profile-img">
+        @else
+            <img src="{{ asset('build/assets/images/profile.jpg') }}" alt="profile"
+                class="profile-card-header-profile-img">
+        @endif
 
-        <img src="{{ asset('build/assets/images/Screenshot 2024-09-11 174254.png') }}" alt="profile"
-            class="profile-card-header-profile-img">
     </div>
     <hr>
     <div class="profile-card-body">
