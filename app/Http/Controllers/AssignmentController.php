@@ -196,10 +196,9 @@ class AssignmentController extends Controller
         if (Carbon::parse($assignment->deadline)->gte(now())) {
             return redirect()->back()->with('error', 'Assignment deadline has not passed');
         }
-        $assignment = $assignment->load('students.user');
-        $students = $assignment->students;
 
-        return view('assignment.set-score', ['students' => $students, 'assignment' => $assignment]);
+
+        return view('assignment.set-score', ['assignment' => $assignment]);
     }
     public function uploadAssignment(Request $request, Student $student, Assignment $assignment)
     {

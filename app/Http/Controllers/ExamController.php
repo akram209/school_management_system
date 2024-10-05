@@ -189,12 +189,11 @@ class ExamController extends Controller
     }
     public function setScore(Exam $exam)
     {
-        if (Carbon::parse($exam->date . ' ' . $exam->end_time)->lt(now())) {
+        if (Carbon::parse($exam->date . ' ' . $exam->end_time)->gte(now())) {
             return redirect()->back()->with('error', 'Exam deadline has passed');
         }
-        $exam = $exam->load('students.user');
-        $students = $exam->students;
 
-        return view('exam.set-score', ['students' => $students, 'exam' => $exam]);
+
+        return view('exam.set-score', ['exam' => $exam]);
     }
 }
