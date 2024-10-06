@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Student Profile')
+@section('title', $student->user->first_name . ' ' . $student->user->last_name)
 @section('title of sidebar', 'Settings')
 
 <style>

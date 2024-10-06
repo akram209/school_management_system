@@ -13,6 +13,18 @@
 
         <i class="bi bi-list" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
             aria-controls="offcanvasWithBothOptions"></i>
+        @can('admin-list', Auth::user()->id)
+            @livewire('admin-search')
+        @endcan
+        @can('teacher-list', Auth::user()->id)
+            @livewire('teacher-search')
+        @endcan
+        @can('student-list', Auth::user()->id)
+            @livewire('student-search')
+        @endcan
+        @can('parent-list', Auth::user()->id)
+            @livewire('parent-search')
+        @endcan
         @if (Auth::user()->role == 'student')
             <a href="{{ route('student.profile', Auth::user()->id) }}">
             @elseif (Auth::user()->role == 'teacher')
@@ -28,6 +40,7 @@
             {{ Auth::user()->last_name }} ({{ Auth::user()->role }})</span>
 
         </a>
+
 
     </nav>
 

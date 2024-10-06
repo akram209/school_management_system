@@ -19,9 +19,8 @@
 
         }
 
-        table,
-        th {
-            border-bottom: 1px solid rgb(32, 90, 227) !important;
+        table {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;
         }
     </style>
 

@@ -68,7 +68,7 @@
     }
 </style>
 
-<div class="profile-card" style="height: 65vh">
+<div class="profile-card" style="height: 75vh">
     <div class="profile-card-header">
         @if ($user->image)
             <img src="{{ asset('storage/images/' . $user->image) }}" alt="profile"
@@ -125,6 +125,125 @@
         <p id="classes">Classes</p>
         <h1 style="text-align: center; margin-top: 10%">{{ $totalClasses }}</h1>
     </div>
+    <table class="table align-middle mb-4 bg-white"
+        style=" position: absolute !important; top : 75% !important ; left : 5% !important ; width : 65% !important ; height : 50vh !important ;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;">
+        <thead class="bg-light">
+            <tr>
+                <th style="padding-right: 10% !important ">Profile</th>
+                <th>Email</th>
+                <th>Student ID</th>
+                <th>Full Name</th>
+                <th>Fee</th>
+                {{-- <th>Actions</th> --}}
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($students as $student)
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <a href="{{ route('student.profile', $student->user_id) }}">
+                                @if ($student->user->path)
+                                    <img src="{{ asset('storage/images/' . $student->user->path) }}" alt="profile"
+                                        style="width: 45px; height: 45px" class="rounded-circle">
+                                @else
+                                    <img src="{{ asset('build/assets/images/profile.jpg') }}" alt="profile"
+                                        style="width: 45px; height: 45px" class="rounded-circle">
+                                @endif
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        {{ $student->user->email }}
+
+                    </td>
+
+                    <td>
+                        {{ $student->id }}
+                    </td>
+                    <td>
+                        {{ $student->user->first_name . ' ' . $student->user->last_name }}
+                    </td>
+                    @php
+                        $now = \Carbon\Carbon::now();
+                        $feeUpdatedAt = $student->fee->updated_at
+                            ? \Carbon\Carbon::parse($student->fee->updated_at)
+                            : null;
+
+                        // Initialize default class
+                        $buttonClass = 'btn btn-sm btn-rounded';
+
+                        // Check if the feeUpdatedAt is not null before calculating the difference
+                        if ($feeUpdatedAt) {
+                            $diffInDays = $feeUpdatedAt->diffInDays($now);
+
+                            // Determine the button class based on the difference in days
+                            if ($diffInDays > 30) {
+                                $buttonClass .= ' btn-danger';
+                            } elseif ($diffInDays > 14) {
+                                $buttonClass .= ' btn-warning';
+                            }
+                        }
+                    @endphp
+
+                    <td>
+                        <div type="button" class="{{ $buttonClass }}">
+                            {{ $student->fee->status }}
+                        </div>
+                    </td>
+            @endforeach
+        </tbody>
+    </table>
+    <table class="table align-middle mb-4 bg-white"
+        style=" position: absolute !important; top : 130% !important ; left : 5% !important ; width : 65% !important ; height : 50vh !important ;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;">
+        <thead class="bg-light">
+            <tr>
+                <th style="padding-right: 10% !important ">Profile</th>
+                <th>Email</th>
+                <th>Teacher ID</th>
+                <th>Full Name</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($teachers as $teacher)
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <a href="{{ route('student.profile', $teacher->user_id) }}">
+                                @if ($teacher->user->path)
+                                    <img src="{{ asset('storage/images/' . $teacher->user->path) }}" alt="profile"
+                                        style="width: 45px; height: 45px" class="rounded-circle">
+                                @else
+                                    <img src="{{ asset('build/assets/images/profile.jpg') }}" alt="profile"
+                                        style="width: 45px; height: 45px" class="rounded-circle">
+                                @endif
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        {{ $teacher->user->email }}
+
+                    </td>
+
+                    <td>
+                        {{ $teacher->id }}
+                    </td>
+                    <td>
+                        {{ $teacher->user->first_name . ' ' . $teacher->user->last_name }}
+                    </td>
+
+
+                    <td>
+                        <div type="button" class="btn btn-sm btn-rounded">
+                            {{ $teacher->status }}
+                        </div>
+                    </td>
+            @endforeach
+        </tbody>
+    </table>
     <script>
         window.apiToken = '{{ auth()->user()->createToken('API Token')->plainTextToken }}';
     </script>

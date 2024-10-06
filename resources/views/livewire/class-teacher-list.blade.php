@@ -1,5 +1,5 @@
 <table class="table align-middle mb-4 bg-white"
-    style=" position: absolute !important; width: 80% !important; height: 40% !important; left: 10% !important; top: 5% !important ">
+    style=" position: absolute !important; width: 80% !important; height: 40% !important; left: 10% !important; top: 8% !important ">
     <thead>
         <tr>
             <th colspan="2" style="padding-left: 25% !important">
