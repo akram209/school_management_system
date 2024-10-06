@@ -87,7 +87,24 @@
         </div>
 
         <div class="teacher-subject-body">
-            <img id="img-subject" src="{{ asset('build/assets/images/subject.png') }}" alt="">
+            @if ($teacher->subjects[0]->name == 'English')
+                <img id="img-subject" src="{{ asset('build/assets/images/english.png') }}" alt="">
+            @elseif($teacher->subjects[0]->name == 'Maths')
+                <img id="img-subject" src="{{ asset('build/assets/images/math.png') }}" alt="">
+            @elseif($teacher->subjects[0]->name == 'Science')
+                <img id="img-subject" src="{{ asset('build/assets/images/science.png') }}" alt="">
+            @elseif($teacher->subjects[0]->name == 'History')
+                <img id="img-subject" src="{{ asset('build/assets/images/history.png') }}" alt="">
+            @elseif($teacher->subjects[0]->name == 'Geography')
+                <img id="img-subject" src="{{ asset('build/assets/images/geography.png') }}" alt="">
+            @elseif($teacher->subjects[0]->name == 'Chemistry')
+                <img id="img-subject" src="{{ asset('build/assets/images/chemistry.png') }}" alt="">
+            @elseif($teacher->subjects[0]->name == 'Physics')
+                <img id="img-subject" src="{{ asset('build/assets/images/physics.png') }}" alt="">
+            @elseif($teacher->subjects[0]->name == 'Biology')
+                <img id="img-subject" src="{{ asset('build/assets/images/biology.png') }}" alt="">
+            @endif
+
         </div>
 
     </div>
