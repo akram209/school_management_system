@@ -12,8 +12,8 @@ class FeeController extends Controller
      */
     public function index()
     {
-        $index = Fee::all();
-        return $index;
+        $fees = Fee::all();
+        return response()->json($fees);
     }
 
     /**

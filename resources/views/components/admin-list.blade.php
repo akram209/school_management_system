@@ -93,7 +93,7 @@
             <a href="#">
 
                 <i class="fa-solid fa-people-roof"></i> <span class="nav-text">
-                    Classes
+                    Exams
                 </span>
             </a>
             <ul>
