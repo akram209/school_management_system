@@ -118,7 +118,6 @@
 
     </div>
     <div class="container">
-
         <div class="table-responsive">
             <table class="table text-center table-bordered">
                 <thead>
@@ -129,75 +128,78 @@
                         <th class="text-uppercase">Tuesday</th>
                         <th class="text-uppercase">Wednesday</th>
                         <th class="text-uppercase" style="width: 18.5% !important">Thursday</th>
-
-
-
                     </tr>
                 </thead>
                 <tbody>
                     @if ($student->class)
-                        @foreach ($student->class->timetable as $time)
+                        {{-- Group timetable data by start_time --}}
+                        @php
+                            $timetables = $student->class->timetable->groupBy('start_time');
+                        @endphp
+
+                        @foreach ($timetables as $startTime => $time)
                             <tr>
-                                <td>{{ $time->start_time }}-{{ $time->end_time }}</td>
+                                {{-- Show Time Period --}}
+                                <td>{{ $time->first()->start_time }} - {{ $time->first()->end_time }}</td>
 
-                                <td class="{{ $time->day_name == 'sunday' ? '' : 'bg-light-gray' }}">
-                                    @if ($time->day_name == 'sunday')
+                                {{-- Days --}}
+                                <td>
+                                    @if ($sunday = $time->where('day_name', 'sunday')->first())
                                         <span
-                                            class="text-white bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13">{{ $time->subject->name }}</span>
-                                        <div class="margin-10px-top font-size14">{{ $time->date }}</div>
-        </div>
-        <div class="font-size13 text-light-gray">
-            {{ $time->teacher->first_name . ' ' . $time->teacher->last_name }}</div>
-        @endif
-        </td>
-        <td class="{{ $time->day_name == 'monday' ? '' : 'bg-light-gray' }}">
-            @if ($time->day_name == 'monday')
-                <span
-                    class="text-white bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13">{{ $time->subject->name }}</span>
-                <div class="margin-10px-top font-size14">{{ $time->date }}
-                </div>
-                <div class="font-size13 text-light-gray">
-                    {{ $time->teacher->first_name . ' ' . $time->teacher->last_name }}</div>
-            @endif
-        </td>
-        <td class="{{ $time->day_name == 'tuesday' ? '' : 'bg-light-gray' }}">
-            @if ($time->day_name == 'tuesday')
-                <span
-                    class="text-white bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13">{{ $time->subject->name }}</span>
-                <div class="margin-10px-top font-size14">{{ $time->date }}
-                </div>
-                <div class="font-size13 text-light-gray">
-                    {{ $time->teacher->first_name . ' ' . $time->teacher->last_name }}</div>
-            @endif
-        </td>
-        <td class="{{ $time->day_name == 'wednesday' ? '' : 'bg-light-gray' }}">
-            @if ($time->day_name == 'wednesday')
-                <span
-                    class="text-white bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13">{{ $time->subject->name }}</span>
-                <div class="margin-10px-top font-size14">{{ $time->date }}
-                </div>
-                <div class="font-size13 text-light-gray">
-                    {{ $time->teacher->first_name . ' ' . $time->teacher->last_name }}</div>
-            @endif
-        </td>
-        <td class="{{ $time->day_name == 'thursday' ? '' : 'bg-light-gray' }}">
-            @if ($time->day_name == 'thursday')
-                <span
-                    class="text-white bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13">{{ $time->subject->name }}</span>
-                <div class="margin-10px-top font-size14">{{ $time->date }}
-                </div>
-                <div class="font-size13 text-light-gray">
-                    {{ $time->teacher->first_name . ' ' . $time->teacher->last_name }}</div>
-            @endif
-        </td>
+                                            class="text-white bg-yellow padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13">
+                                            {{ $sunday->subject->name }}
+                                        </span>
+                                        <div class="font-size15 text-gray">{{ $sunday->teacher->user->first_name }}
+                                    @endif
+                                </td>
 
-        </tr>
-        @endforeach
-        @endif
-        </tbody>
-        </table>
+                                <td>
+                                    @if ($monday = $time->where('day_name', 'monday')->first())
+                                        <span
+                                            class="text-white bg-black padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13">
+                                            {{ $monday->subject->name }}
+                                        </span>
+                                        <div class="font-size15 text-gray">{{ $sunday->teacher->user->first_name }}
+                                    @endif
+                                </td>
+
+                                <td>
+                                    @if ($tuesday = $time->where('day_name', 'tuesday')->first())
+                                        <span
+                                            class="text-white bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13">
+                                            {{ $tuesday->subject->name }}
+                                        </span>
+                                        <div class="font-size15 text-gray">{{ $sunday->teacher->user->first_name }}
+                                    @endif
+                                </td>
+
+                                <td>
+                                    @if ($wednesday = $time->where('day_name', 'wednesday')->first())
+                                        <span
+                                            class="text-white bg-pink padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13">
+                                            {{ $wednesday->subject->name }}
+                                        </span>
+                                        <div class="font-size15 text-gray">{{ $sunday->teacher->user->first_name }}
+                                    @endif
+                                </td>
+
+                                <td>
+                                    @if ($thursday = $time->where('day_name', 'thursday')->first())
+                                        <span
+                                            class="text-white bg-blue padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13">
+                                            {{ $thursday->subject->name }}
+                                        </span>
+                                        <div class="font-size15 text-gray">{{ $sunday->teacher->user->first_name }}
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
+                </tbody>
+            </table>
+        </div>
     </div>
-    </div>
+
     @if (!$student->class)
         <x-class-form :studentId="$student->id" />
     @endif

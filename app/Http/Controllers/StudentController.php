@@ -135,7 +135,7 @@ class StudentController extends Controller
     }
     public function profile($id)
     {
-        $student = Student::with(['user',  'class.timeTable.teacher',  'class.timeTable.subject'])->where('user_id', $id)->first();
+        $student = Student::with(['user',  'class.timetable.teacher',  'class.timetable.subject'])->where('user_id', $id)->first();
 
         return view('student.profile', ['student' => $student]);
     }
@@ -163,13 +163,5 @@ class StudentController extends Controller
         }
 
         return response()->json($student);
-    }
-    public function profileByStudentId(Student $student)
-    {
-      
-        $student->load(['user', 'class.timeTable.teacher', 'class.timeTable.subject']);
-    
-        return $student;
-        // return view('student.profile', ['student' => $student]);
     }
 }
