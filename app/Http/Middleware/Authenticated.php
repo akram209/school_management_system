@@ -30,5 +30,7 @@ class Authenticated
                 return redirect()->route('admin.profile', Auth::user()->id);
             }
         }
+
+        return $next($request);
     }
 }
