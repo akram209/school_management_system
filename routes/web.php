@@ -30,8 +30,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/parent/profile/{id}', [ParentController::class, 'profile'])->name('parent.profile');
     Route::get('/parents/{student}', [ParentController::class, 'getParentsByStudentId'])->name('student.parents');
 
+    Route::get('/class', [ClassController::class, 'index'])->name('class.index');
+    Route::get('/class/create', [ClassController::class, 'create'])->name('class.create');
     Route::get('/class/{class}', [ClassController::class, 'show'])->name('class.show');
     Route::get('/student/class/{student}', [ClassController::class, 'getClassByStudentId'])->name('student.class');
+    Route::post('/class', [ClassController::class, 'store'])->name('class.store');
 
     Route::get('/subjects/{student}', [SubjectController::class, 'getSubjectsByStudentId'])->name('student.subjects');
 

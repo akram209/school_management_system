@@ -11,12 +11,12 @@
             </a>
             <ul>
                 <li>
-                    <a href="">
+                    <a href="{{ route('class.create') }}">
                         <i class="fa-solid fa-plus"></i> <span>Add Class</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{ route('class.index') }}">
                         <i class="fa-solid fa-border-all"></i> <span>All Classes</span>
                     </a>
                 </li>

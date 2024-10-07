@@ -14,8 +14,8 @@ class ClassController extends Controller
      */
     public function index()
     {
-        $index = ClassModel::all();
-        return $index;
+        $classes = ClassModel::all();
+        return view('class.index', ['classes' => $classes]);
     }
 
     /**
@@ -23,7 +23,7 @@ class ClassController extends Controller
      */
     public function create()
     {
-        //
+        return view('class.create');
     }
 
     /**
@@ -32,11 +32,12 @@ class ClassController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:30', 'min:3'],
+            'name' => ['required', 'string', 'max:30', 'min:3', 'unique:classes,name', 'in:1st,2nd,3rd,4th,5th,6th,7th,8th,9th,10th,11th,12th'],
         ]);
         ClassModel::create([
             'name' => $request->name,
         ]);
+        return redirect()->back()->with('success', 'Class created successfully');
     }
 
     /**

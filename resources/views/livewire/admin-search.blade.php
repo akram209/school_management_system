@@ -1,7 +1,7 @@
 <div>
     <form class="d-flex" role="search">
         <input wire:model.live.debounce.500ms="search" class="form-control me-2" type="search" placeholder="Search"
-            aria-label="Search" style="width: 500px !important;height: 35px !important ;">
+            aria-label="Search" style="width: 500px !important;height: 35px !important ; ">
     </form>
     <ul class="list-group mt-2"
         style="position: absolute; width: 30% !important;  !important; left: 29% !important ;  top: 78% !important">
