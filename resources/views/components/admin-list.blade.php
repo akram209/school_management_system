@@ -159,17 +159,14 @@
             </a>
             <ul>
 
-
-
                 <li>
-                    <a href=""></a>
-                    <i class="fa-solid fa-plus"></i> <span>Add Student Attendance</span>
+                    <a href="">
+                        <i class="fa-solid fa-plus"></i> <span>Add Student Attendance</span>
                     </a>
-
                 </li>
                 <li>
-                    <a href=""></a>
-                    <i class="fa-solid fa-border-all"></i> <span>All Student Attendance</span>
+                    <a href="">
+                        <i class="fa-solid fa-border-all"></i> <span>All Student Attendance</span>
                     </a>
                 </li>
             </ul>
@@ -180,16 +177,14 @@
             </a>
             <ul>
 
-
-
                 <li>
-                    <a href=""></a>
-                    <i class="fa-solid fa-plus"></i> <span>Add Teacher Attendance</span>
+                    <a href="">
+                        <i class="fa-solid fa-plus"></i> <span>Add Teacher Attendance</span>
                     </a>
                 </li>
                 <li>
-                    <a href=""></a>
-                    <i class="fa-solid fa-border-all"></i> <span>All Teacher Attendance</span>
+                    <a href="">
+                        <i class="fa-solid fa-border-all"></i> <span>All Teacher Attendance</span>
                     </a>
                 </li>
             </ul>
