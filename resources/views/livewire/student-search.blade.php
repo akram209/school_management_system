@@ -5,7 +5,7 @@
     </form>
     <ul class="list-group mt-2"
         style="position: absolute; width: 30% !important;  !important; left: 29% !important ;  top: 78% !important">
-        @forelse ($users as $user)
+        @forelse ($users as $key => $user)
             <a href="{{ route($user->role . '.profile', $user->id) }}" style="text-decoration: none">
                 <li class="list-group-item"
                     style="margin-bottom: 10px;  height: 20px ;padding-bottom: 55px; padding-top: 0px">
@@ -18,9 +18,12 @@
                             style="width: 40px;height: 40px;">
                     @endif
                     <span style="font: 700"> {{ $user->first_name }} {{ $user->last_name }}</span>
-                </li>
-            </a>
-        @empty
-        @endforelse
-    </ul>
+                    @if ($key == 5)
+                    @break
+                @endif
+            </li>
+        </a>
+    @empty
+    @endforelse
+</ul>
 </div>
