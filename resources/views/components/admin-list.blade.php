@@ -60,12 +60,12 @@
             </a>
             <ul>
                 <li>
-                    <a href="">
+                    <a href="{{ route('student.create') }}">
                         <i class="fa-solid fa-plus"></i> <span>Add Student</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{ route('student.index') }}">
                         <i class="fa-solid fa-border-all"></i> <span>All Students</span>
                     </a>
                 </li>
@@ -104,7 +104,7 @@
             <ul>
                 <li>
                     <a href="">
-                        <i class="fa-solid fa-clipboard-list"></i> <span>Add Exams</span>
+                        <i class="fa-solid fa-plus"></i> <span>Add Exams</span>
                     </a>
                 </li>
                 <li>

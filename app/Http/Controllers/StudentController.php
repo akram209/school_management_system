@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClassModel;
+use App\Models\Fee;
 use App\Models\Permission;
 use App\Models\Student;
 use App\Models\User;
@@ -17,7 +19,8 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::all();
-        return $students;
+        $students->load('user', 'class', 'fee');
+        return view('student.index', ['students' => $students]);
     }
 
     /**
@@ -25,7 +28,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        $classes = ClassModel::all();
+        return view('student.create', ['classes' => $classes]);
     }
 
     /**
@@ -35,27 +39,23 @@ class StudentController extends Controller
     {
 
         $request->validate([
-            'firstname' => ['required', 'string', 'max:30', 'min:3'],
-            'lastname' => ['required', 'string', 'max:30', 'min:3'],
+            'first_name' => ['required', 'string', 'max:30', 'min:3'],
+            'last_name' => ['required', 'string', 'max:30', 'min:3'],
             'gender' => ['required'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required'],
-            // 'code' => ['required'],
             'image' => ['required', 'image', 'mimes:jpeg,png,jpg'],
             'class_id' => ['required', 'exists:classes,id'],
         ]);
-        // $permission = Permission::where('code', $request->code)->where('email', $request->email)->first();
-        // if (!$permission) {
-        //     return back()->withErrors(['code' => 'The code is not valid.']);
-        // }
+
         if (request()->hasFile('image')) {
             $file = request()->file('image');
             $path = Storage::disk('images')->put('students', $file);
         }
 
         $user = User::create([
-            'first_name' => $request->firstname,
-            'last_name' => $request->lastname,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
             'gender' => $request->gender,
             'role' => 'student',
             'email' => $request->email,
@@ -68,6 +68,12 @@ class StudentController extends Controller
             'class_id' => $request->class_id,
 
         ]);
+        Fee::create([
+            'student_id' => $student->id,
+            'status' => 'unpaid',
+        ]);
+
+        return redirect()->back()->with('success', 'Student created successfully');
     }
 
     /**
@@ -75,27 +81,33 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        return $student;
+        $student->load('user', 'class', 'fee', 'parents.user');
+
+        return view('student.show', ['student' => $student]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id) {}
+    public function edit(Student $student)
+    {
+
+        $classes = ClassModel::all();
+        return view('student.edit', ['student' => $student, 'classes' => $classes]);
+    }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Student $student)
+    public function update(Student $student, Request $request)
     {
         request()->validate([
-            'firstname' => ['required', 'string', 'max:30', 'min:3'],
-            'lastname' => ['required', 'string', 'max:30', 'min:3'],
+            'first_name' => ['required', 'string', 'max:30', 'min:3'],
+            'last_name' => ['required', 'string', 'max:30', 'min:3'],
             'gender' => ['required'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255'],
             'password' => ['required'],
-            'code' => ['required'],
-            'image' => ['image', 'mimes:jpeg,png,jpg'],
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg'],
             'class_id' => ['required', 'exists:classes,id'],
         ]);
         $student->update([
@@ -104,23 +116,26 @@ class StudentController extends Controller
         ]);
 
         if (request()->hasFile('image')) {
+            if ($student->user->path) {
+                Storage::disk('images')->delete($student->user->path);
+            }
             $file = request()->file('image');
-            Storage::disk('images')->delete($student->image);
             $path = Storage::disk('images')->put('students', $file);
-            $student->user->update([
-                'image' => $path,
-            ]);
+        }
+
+        if (!request()->hasFile('image')) {
+            $path = $student->user->path;
         }
         $student->user->update([
-            'first_name' => request()->first_name,
-            'last_name' => request()->last_name,
-            'gender' => request()->gender,
-            'role' => 'student',
-            'email' => request()->email,
-            'password' => Hash::make(request()->password),
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'gender' => $request->gender,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'path' => $path
         ]);
 
-        return $student;
+        return redirect()->back()->with('success', 'Student updated successfully');
     }
 
     /**
@@ -132,6 +147,7 @@ class StudentController extends Controller
         Storage::disk('images')->delete($student->user->image);
         $student->user->delete();
         $student->delete();
+        return redirect()->back()->with('success', 'Student deleted successfully');
     }
     public function profile($id)
     {

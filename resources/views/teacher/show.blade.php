@@ -15,7 +15,6 @@
             </h4>
             <p class="card-text"><strong>Gender:</strong> {{ $teacher->user->gender }}</p>
             <p class="card-text"><strong>Address:</strong> {{ $teacher->address }}</p>
-            <p class="card-text"><strong>Gender:</strong> {{ $teacher->user->gender }}></p>
             <p class="card-text"><strong>Phone:</strong> {{ $teacher->phone }}</p>
             <p class="card-text"><strong>Email:</strong> {{ $teacher->user->email }}</p>
             <p class="card-text"><strong>Qualification:</strong> {{ $teacher->qualification }}></p>

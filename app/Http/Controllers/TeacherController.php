@@ -122,7 +122,9 @@ class TeacherController extends Controller
         $user = User::find($teacher->user_id);
 
         if (request()->hasFile('image')) {
-            Storage::disk('images')->delete($teacher->user->path);
+            if ($teacher->user->path) {
+                Storage::disk('images')->delete($teacher->user->path);
+            }
             $file = request()->file('image');
             $path = Storage::disk('images')->put('teachers', $file);
         }

@@ -1,282 +1,102 @@
 @extends('layouts.app')
-@section('title', 'Students')
+@section('title', ' Students')
 @section('title of sidebar', 'Settings')
-
-
 @section('content')
     <style>
         .table {
-            width: 80% !important;
-            left: 18% !important;
+            width: 90% !important;
+            left: 5% !important;
+            top: 15% !important;
+            height: 80vh !important;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;
         }
 
         td:nth-child(6) {
             width: 120px !important;
         }
+
+        input[type="search"] {
+            margin-top: -15px
+        }
     </style>
-    <table class="table align-middle mb-4 bg-white">
+    <div style="position: absolute; top: 40px; left: 40%">
+        @if (session('success'))
+            <div class="alert alert-success" style="text-align: center">
+                {{ session('success') }}
+            </div>
+        @endif
+    </div>
+    <table class="table align-middle mb-5 bg-white ">
         <thead class="bg-light">
             <tr>
                 <th>Profile</th>
-                <th>Email</th>
-                <th>User ID</th>
-                <th>Student ID</th>
-                <th>Full Name</th>
-                <th>Fee</th>
+                <th style="padding-left: 5% ">Student Id</th>
+                <th style=" padding-left:5%">Full Name</th>
+                <th style=" padding-left:5%">gender</th>
+                <th>fee</th>
+                <th>email</th>
+                <th style="padding-left: 5%">class</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <img src="https://mdbootstrap.com/img/new/avatars/1.jpg" alt="Student Image"
-                            style="width: 45px; height: 45px" class="rounded-circle" />
 
-                    </div>
-                </td>
-                <td>
-                    example@example.com
+            @foreach ($students as $student)
+                <tr>
+                    <td style=" padding-top: 0px ; padding-right: 10%; padding-bottom: 20px ">
+                        <a href="{{ route('teacher.profile', $student->user_id) }}">
+                            @if ($student->user->path != null)
+                                <img src="{{ asset('storage/' . $student->user->path) }}" alt="" width="60">
+                            @else
+                                <img src="{{ asset('build/assets/images/profile.jpg') }}" alt="profile"
+                                    class="profile-card-header-profile-img">
+                            @endif
+                        </a>
+                    </td>
 
-                </td>
-                <td>
-                    2023001
-                </td>
-                <td>
-                    1001
-                </td>
-                <td>
-                    John Smith
-                </td>
-                <td>
-                    paid
-                </td>
-                <td>
-                    <button type="button" class="btn btn-primary btn-sm btn-rounded">
-                        show
-                    </button>
-                    <button type="button" class="btn btn-success btn-sm btn-rounded">
-                        Edit
-                    </button>
-                    <button type="button" class="btn btn-danger btn-sm btn-rounded">
-                        Delete
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <img src="https://mdbootstrap.com/img/new/avatars/1.jpg" alt="Student Image"
-                            style="width: 45px; height: 45px" class="rounded-circle" />
 
-                    </div>
-                </td>
-                <td>
-                    example@example.com
+                    <td>{{ $student->id }}</td>
+                    <td>{{ $student->user->first_name . ' ' . $student->user->last_name }}</td>
+                    <td>{{ $student->user->gender }}</td>
+                    <td style="padding-right:  3%">
+                        @if ($student->fee)
+                            {{ $student->fee->status }}
+                        @else
+                            null
+                        @endif
+                    </td>
+                    <td>{{ $student->user->email }}</td>
+                    <td style="padding-left:10%">
+                        @if ($student->class)
+                            {{ $student->class->name }}
+                        @else
+                            null
+                        @endif
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                            </a>
 
-                </td>
-                <td>
-                    2023001
-                </td>
-                <td>
-                    1001
-                </td>
-                <td>
-                    John Smith
-                </td>
-                <td>
-                    paid
-                </td>
-                <td>
-                    <button type="button" class="btn btn-primary btn-sm btn-rounded">
-                        show
-                    </button>
-                    <button type="button" class="btn btn-success btn-sm btn-rounded">
-                        Edit
-                    </button>
-                    <button type="button" class="btn btn-danger btn-sm btn-rounded">
-                        Delete
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <img src="https://mdbootstrap.com/img/new/avatars/1.jpg" alt="Student Image"
-                            style="width: 45px; height: 45px" class="rounded-circle" />
-
-                    </div>
-                </td>
-                <td>
-                    example@example.com
-
-                </td>
-                <td>
-                    2023001
-                </td>
-                <td>
-                    1001
-                </td>
-                <td>
-                    John Smith
-                </td>
-                <td>
-                    paid
-                </td>
-                <td>
-                    <button type="button" class="btn btn-primary btn-sm btn-rounded">
-                        show
-                    </button>
-                    <button type="button" class="btn btn-success btn-sm btn-rounded">
-                        Edit
-                    </button>
-                    <button type="button" class="btn btn-danger btn-sm btn-rounded">
-                        Delete
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <img src="https://mdbootstrap.com/img/new/avatars/1.jpg" alt="Student Image"
-                            style="width: 45px; height: 45px" class="rounded-circle" />
-
-                    </div>
-                </td>
-                <td>
-                    example@example.com
-
-                </td>
-                <td>
-                    2023001
-                </td>
-                <td>
-                    1001
-                </td>
-                <td>
-                    John Smith
-                </td>
-                <td>
-                    paid
-                </td>
-                <td>
-                    <button type="button" class="btn btn-primary btn-sm btn-rounded">
-                        show
-                    </button>
-                    <button type="button" class="btn btn-success btn-sm btn-rounded">
-                        Edit
-                    </button>
-                    <button type="button" class="btn btn-danger btn-sm btn-rounded">
-                        Delete
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <img src="https://mdbootstrap.com/img/new/avatars/2.jpg" alt="Student Image"
-                            style="width: 45px; height: 45px" class="rounded-circle" />
-
-                    </div>
-                </td>
-                <td>
-                    example@example.com
-
-                </td>
-                <td>
-                    2023002
-                </td>
-                <td>
-                    1002
-                </td>
-                <td>
-                    Sarah Johnson
-                </td>
-                <td>
-                    paid
-                </td>
-                <td>
-                    <button type="button" class="btn btn-primary btn-sm btn-rounded">
-                        show
-                    </button>
-                    <button type="button" class="btn btn-success btn-sm btn-rounded">
-                        Edit
-                    </button>
-                    <button type="button" class="btn btn-danger btn-sm btn-rounded">
-                        Delete
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <img src="https://mdbootstrap.com/img/new/avatars/3.jpg" alt="Student Image"
-                            style="width: 45px; height: 45px" class="rounded-circle" />
-
-                    </div>
-                </td>
-                <td>
-                    example@example.com
-
-                </td>
-                <td>
-                    2023003
-                </td>
-                <td>
-                    1003
-                </td>
-                <td>
-                    Michael Brown
-                </td>
-                <td>
-                    unpaid
-                </td>
-                <td>
-                    <button type="button" class="btn btn-primary btn-sm btn-rounded">
-                        show
-                    </button>
-                    <button type="button" class="btn btn-success btn-sm btn-rounded">
-                        Edit
-                    </button>
-                    <button type="button" class="btn btn-danger btn-sm btn-rounded">
-                        Delete
-                    </button>
-                </td>
-            </tr>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ route('student.edit', $student->id) }}">edit</a>
+                                </li>
+                                <li>
+                                    <form action="{{ route('student.destroy', $student->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="dropdown-item">delete</button>
+                                    </form>
+                                </li>
+                                </li>
+                                <li><a class="dropdown-item" href="{{ route('student.show', $student->id) }}">view</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
-    <div class="student-number">
-        <div class="teacher-subject-header">
-            <h4>Students </h4>
-
-        </div>
-        <div>
-            <p>300</p>
-            <h5 style="display: inline-block ;position:relative; left: 50px">40 <i class="fa-solid fa-mars"></i>
-            </h5>
-            <h5 style="display: inline-block ;position:relative; left: 120px">260 <i class="fa-solid fa-venus"> </i></h5>
-        </div>
-
-        <div class="teacher-subject-body">
-
-        </div>
-
-    </div>
-    <div class="new-student-number">
-        <div class="teacher-subject-header">
-            <h4>New students </h4>
-
-        </div>
-        <div>
-            <p>10</p>
-            <h5 style="display: inline-block ;position:relative; left: 50px"> 5 <i class="fa-solid fa-mars"></i>
-            </h5>
-            <h5 style="display: inline-block ;position:relative; left: 120px">5 <i class="fa-solid fa-venus"> </i></h5>
-        </div>
-
-        <div class="teacher-subject-body">
-
-        </div>
-
-    </div>
 @endsection
