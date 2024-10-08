@@ -43,4 +43,9 @@ class AdminController extends Controller
     {
         return view('admin.permissions');
     }
+
+    public function notifications()
+    {
+        return view('admin.notifications');
+    }
 }

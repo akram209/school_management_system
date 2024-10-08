@@ -5,6 +5,7 @@ use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\AttendenceController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ExamController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
@@ -19,8 +20,12 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard/{user}', [AdminController::class, 'profile'])->middleware(['auth', 'verified'])->name('admin.profile');
-
 Route::get('/permissions', [AdminController::class, 'permissions'])->middleware(['auth', 'verified'])->name('admin.permissions');
+Route::get('/notification/create', [NotificationController::class, 'create'])->middleware(['auth', 'verified'])->name('admin.notification.create');
+Route::post('/notification', [NotificationController::class, 'store'])->middleware(['auth', 'verified'])->name('admin.notification.store');
+Route::get('/notification', [NotificationController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.notification.index');
+
+
 
 
 Route::middleware('auth')->group(function () {

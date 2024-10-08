@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\NotificationJob;
 use App\Models\Notification;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class NotificationController extends Controller
@@ -12,8 +14,9 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        $index = Notification::all();
-        return $index;
+
+
+        return view('notification.index');
     }
 
     /**
@@ -21,7 +24,7 @@ class NotificationController extends Controller
      */
     public function create()
     {
-        //
+        return view('notification.create');
     }
 
     /**
@@ -29,21 +32,24 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'title' => ['required', 'string', 'max:30', 'min:3'],
             'body' => ['required', 'string', 'max:30', 'min:3'],
-            'message' => ['required', 'string', 'max:50', 'min:3'],
-            'user_id' => ['required', 'exists:users,id'],
-            'type' => ['required', 'in:admin,student'],
+            'email' => ['required', 'exists:users,email'],
+            'type' => ['required', 'in:information,danger,warning'],
         ]);
 
+        $user = User::where('email', $request->email)->first();
         Notification::create([
             'title' => $request->title,
             'body' => $request->body,
             'message' => $request->message,
-            'user_id' => $request->user_id,
+            'user_id' => $user->id,
             'type' => $request->type,
         ]);
+        dispatch(new NotificationJob($request->email, $request->type, $request->title, $request->body));
+        return redirect()->back()->with('success', 'Notification created successfully');
     }
 
     /**

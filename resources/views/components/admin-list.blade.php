@@ -216,12 +216,12 @@
             </a>
             <ul>
                 <li>
-                    <a href="">
+                    <a href="{{ route('admin.notification.create') }}">
                         <i class="fa-solid fa-plus"></i> <span>Add Notification</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{ route('admin.notification.index') }}">
                         <i class="fa-solid fa-border-all"></i> <span>All Notifications</span>
                     </a>
                 </li>
