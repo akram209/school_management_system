@@ -20,6 +20,9 @@ Route::get('/', function () {
 
 Route::get('/dashboard/{user}', [AdminController::class, 'profile'])->middleware(['auth', 'verified'])->name('admin.profile');
 
+Route::get('/permissions', [AdminController::class, 'permissions'])->middleware(['auth', 'verified'])->name('admin.permissions');
+
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/student/profile/{id}', [StudentController::class, 'profile'])->name('student.profile');

@@ -38,4 +38,9 @@ class AdminController extends Controller
             'teachers' => $teachers
         ]);
     }
+
+    public function permissions()
+    {
+        return view('admin.permissions');
+    }
 }

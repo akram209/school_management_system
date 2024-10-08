@@ -138,23 +138,14 @@
             </ul>
         </li>
         <li>
-            <a href="#">
+            <a href=" {{ route('admin.permissions') }}">
 
                 <i class="fa-solid fa-hand"></i><span class="nav-text">
                     Permissions
                 </span>
             </a>
             <ul>
-                <li>
-                    <a href="">
-                        <i class="fa-solid fa-plus"></i> <span>Add Permission</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <i class="fa-solid fa-border-all"></i> <span>All Permissions</span>
-                    </a>
-                </li>
+
 
             </ul>
         </li>
