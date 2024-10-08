@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ClassModel;
+use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\User;
 
@@ -17,8 +18,10 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        $teacher = Teacher::all();
-        return $teacher;
+        $teachers = Teacher::all();
+        $teachers->load('user');
+
+        return view('teacher.index', compact('teachers'));
     }
 
     /**
@@ -26,35 +29,29 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        //
+        return view('teacher.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Teacher $teacher)
+    public function store(Teacher $teacher, Request $request)
     {
         // Validate the request
         request()->validate([
             'first_name' => ['required', 'string', 'max:30', 'min:3'],
             'last_name' => ['required', 'string', 'max:30', 'min:3'],
             'gender' => ['required'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users'],
             'password' => ['required'],
-            // 'code' => ['required'],
-            'image' => ['required', 'image', 'mimes:jpeg,png,jpg'],
-            'phone' => ['required'],
+            'image' => ['required', 'image'],
+            'phone' => ['required', 'numeric'],
             'address' => ['required'],
             'qualification' => ['required'],
             'experience_years' => ['required'],
-            'status' => ['required'],
             'salary' => ['required'],
-            'subject_id' => ['required', 'exists:subjects,id'],
         ]);
-        // $permission = Permission::where('code', $request->code)->where('email', $request->email)->first();
-        // if (!$permission) {
-        //     return back()->withErrors(['code' => 'The code is not valid.']);
-        // }
+
 
         if (request()->hasFile('image')) {
             $file = request()->file('image');
@@ -62,25 +59,25 @@ class TeacherController extends Controller
         }
 
         $user = User::create([
-            'first_name' => request()->first_name,
-            'last_name' => request()->last_name,
-            'gender' => request()->gender,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'gender' => $request->gender,
             'role' => 'teacher',
-            'email' => request()->email,
+            'email' => $request->email,
             'image' => $path,
             'password' => Hash::make(request()->password),
         ]);
 
         $teacher = Teacher::create([
             'user_id' => $user->id,
-            'phone' => request()->phone,
-            'address' => request()->address,
-            'qualification' => request()->qualification,
-            'experience_years' => request()->experience_years,
-            'status' => request()->status,
-            'salary' => request()->salary,
-            'subject_id' => request()->subject_id,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'qualification' => $request->qualification,
+            'experience_years' => $request->experience_years,
+            'status' => 'unpaid',
+            'salary' => $request->salary,
         ]);
+        return redirect()->back()->with('success', 'Teacher created successfully');
     }
 
     /**
@@ -88,70 +85,70 @@ class TeacherController extends Controller
      */
     public function show(Teacher $teacher)
     {
-        return $teacher;
+        $teacher->load('user');
+        return view('teacher.show', compact('teacher'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Teacher $teacher)
     {
-        //
+
+        $teacher->load('user');
+        return view('teacher.edit', compact('teacher'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Teacher $teacher)
+    public function update(Teacher $teacher, Request $request)
     {
         // Validate the request
         request()->validate([
             'first_name' => ['required', 'string', 'max:30', 'min:3'],
             'last_name' => ['required', 'string', 'max:30', 'min:3'],
             'gender' => ['required'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255'],
+            'image' => ['image'],
+            'phone' => ['required', 'numeric', 'unique:teachers,phone,'],
+            'status' => ['required'],
             'password' => ['required'],
-            // 'code' => ['required'],
-            'image' => ['image', 'mimes:jpeg,png,jpg'],
-            'phone' => ['required'],
             'address' => ['required'],
             'qualification' => ['required'],
             'experience_years' => ['required'],
-            'status' => ['required'],
             'salary' => ['required'],
-            'subject_id' => ['required', 'exists:subjects,id'],
         ]);
+        $user = User::find($teacher->user_id);
 
         if (request()->hasFile('image')) {
+            Storage::disk('images')->delete($teacher->user->path);
             $file = request()->file('image');
-            Storage::disk('images')->delete($teacher->user->image);
             $path = Storage::disk('images')->put('teachers', $file);
-            $teacher->user->update([
-                'image' => $path,
-            ]);
         }
 
+        if (!request()->hasFile('image')) {
+            $path = $teacher->user->path;
+        }
+
+        $user->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'gender' => $request->gender,
+            'email' => $request->email,
+            'path' => $path,
+            'password' => Hash::make($request->password),
+        ]);
+
         $teacher->update([
-            'user_id' => $teacher->user_id,
-            'phone' => request()->phone,
-            'address' => request()->address,
-            'qualification' => request()->qualification,
-            'experience_years' => request()->experience_years,
-            'status' => request()->status,
-            'salary' => request()->salary,
-            'subject_id' => request()->subject_id,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'qualification' => $request->qualification,
+            'experience_years' => $request->experience_years,
+            'status' => $request->status,
+            'salary' => $request->salary,
         ]);
-
-
-        $teacher->user->update([
-            'first_name' => request()->first_name,
-            'last_name' => request()->last_name,
-            'gender' => request()->gender,
-            'email' => request()->email,
-            'password' => Hash::make(request()->password),
-        ]);
-
-        return $teacher;
+        return redirect()->back()->with('success', 'Teacher updated successfully');
     }
 
     /**
@@ -163,6 +160,7 @@ class TeacherController extends Controller
         Storage::disk('images')->delete($teacher->user->image);
         $teacher->delete();
         $teacher->user->delete();
+        return redirect()->back()->with('success', 'Teacher deleted successfully');
     }
     public function getTeachersByClassId($id)
     {
@@ -176,5 +174,12 @@ class TeacherController extends Controller
     {
         $teacher = Teacher::with(['user', 'subjects', 'timetables.class'])->where('user_id', $userId)->first();
         return view('teacher.profile', ['teacher' => $teacher]);
+    }
+    public function assignTeachers()
+    {
+        $teachers = Teacher::all();
+        $classes = ClassModel::all();
+        $subjects = Subject::all();
+        return view('teacher.assign', compact('teachers', 'classes', 'subjects'));
     }
 }

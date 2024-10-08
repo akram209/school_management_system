@@ -26,6 +26,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/storeStudentclass/{student}', [StudentController::class, 'setClass'])->name('student.storeclass');
 
     Route::get('/teacher/profile/{id}', [TeacherController::class, 'profile'])->name('teacher.profile');
+    Route::get('/teacher', [TeacherController::class, 'index'])->name('teacher.index');
+    Route::get('/teacher/create', [TeacherController::class, 'create'])->name('teacher.create');
+    Route::post('/teacher', [TeacherController::class, 'store'])->name('teacher.store');
+    Route::get('/teacher/{teacher}', [TeacherController::class, 'show'])->name('teacher.show');
+    Route::get('/teacher/{teacher}/edit', [TeacherController::class, 'edit'])->name('teacher.edit');
+    Route::put('/teacher/{teacher}', [TeacherController::class, 'update'])->name('teacher.update');
+    Route::delete('/teacher/{teacher}', [TeacherController::class, 'destroy'])->name('teacher.destroy');
+    Route::get('/assign-teachers', [TeacherController::class, 'assignTeachers'])->name('teacher.assign');
 
     Route::get('/parent/profile/{id}', [ParentController::class, 'profile'])->name('parent.profile');
     Route::get('/parents/{student}', [ParentController::class, 'getParentsByStudentId'])->name('student.parents');

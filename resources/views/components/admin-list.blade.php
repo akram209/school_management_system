@@ -33,13 +33,18 @@
             </a>
             <ul>
                 <li>
-                    <a href="">
+                    <a href="{{ route('teacher.create') }}">
                         <i class="fa-solid fa-plus"></i> <span>Add Teacher</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{ route('teacher.index') }}">
                         <i class="fa-solid fa-border-all"></i> <span>All Teachers</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('teacher.assign') }}">
+                        <i class="fa-solid fa-border-all"></i> <span>Classes and Subject</span>
                     </a>
                 </li>
 
