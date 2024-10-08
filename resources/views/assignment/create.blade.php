@@ -102,7 +102,39 @@
                     </select>
                 </div>
             </div>
+            
+            @if(Auth::user()->role == 'teacher')
             <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
+            @endif
+            @if(Auth::user()->role == 'admin')
+              @error('subject')
+                    <div class="alert alert-danger" style="width:100%;margin-left: 25px">{{ $message }}</div>
+                @enderror
+                <div class="col-4">
+                    <select class="form-select" name="subject" aria-label="Default select example" style="height: 50px;"
+                        title="subject">
+                        <option selected disabled hidden>subject</option>
+                        @foreach ($subjects as $subject)
+                            <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                        @endforeach
+            
+                    </select>
+                </div>
+                @error('class')
+                <div class="alert alert-danger" style="width:100%;margin-left: 25px">{{ $message }}</div>
+            @enderror
+            <div class="col-4">
+                <select class="form-select" name="class" aria-label="Default select example" style="height: 50px;"
+                    title="class">
+                    <option selected disabled hidden>class</option>
+                    @foreach ($classes as $class)
+                        <option value="{{ $class->id }}">{{ $class->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            @endif
+            
+            
             <div class="col-12">
                 <button type="submit" class="btn btn-primary" style="width: 100%">save</button>
             </div>
