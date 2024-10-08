@@ -195,12 +195,12 @@
             </a>
             <ul>
                 <li>
-                    <a href="">
+                    <a href="{{ route('timetable.create') }}">
                         <i class="fa-solid fa-plus"></i> <span>Add Timetable</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{ route('timetable.index') }}">
                         <i class="fa-solid fa-border-all"></i> <span>All Timetables</span>
                     </a>
                 </li>

@@ -74,17 +74,21 @@ Route::middleware('auth')->group(function () {
     Route::put('assignment/update/{assignment}', [AssignmentController::class, 'update'])->name('assignment.update');
     Route::delete('assignment/delete/{assignment}', [AssignmentController::class, 'destroy'])->name('assignment.destroy');
     Route::get('/assignment/create', [AssignmentController::class, 'create'])->name('assignment.create');
-
     Route::get('/assignment/{teacher}', [AssignmentController::class, 'createByTeacher'])->name('teacher.create-assignment');
     Route::get('/assignment', [AssignmentController::class, 'index'])->name('assignment.index');
-
-
-
     Route::post('/assignment', [AssignmentController::class, 'store'])->name('assignment.store');
     Route::post('student/{student}/assignment/{assignment}/', [AssignmentController::class, 'uploadAssignment'])->name('assignment.upload');
     Route::get('/student/{student}/assignment/{assignment}/', [AssignmentController::class, 'viewAssignment'])->name('assignment.view');
     Route::delete('/student/{student}/assignment/{assignment}/', [AssignmentController::class, 'deleteAssignment'])->name('assignment.delete');
+
+    Route::get('/timetable/create', [TimetableController::class, 'create'])->name('timetable.create');
     Route::get('/timetable/{student}', [TimetableController::class, 'getTimetableByStudentId'])->name('student.timetable');
+    Route::get('/timetable-class/{class}', [TimetableController::class, 'getTimetableByClassId'])->name('class.timetable');
+    Route::get('/timetable', [TimetableController::class, 'index'])->name('timetable.index');
+    Route::post('/timetable', [TimetableController::class, 'store'])->name('timetable.store');
+    Route::get('/timetable/{timetable}/edit', [TimetableController::class, 'edit'])->name('timetable.edit');
+    Route::put('/timetable/{timetable}', [TimetableController::class, 'update'])->name('timetable.update');
+    Route::delete('/timetable/{timetable}', [TimetableController::class, 'destroy'])->name('timetable.destroy');
 });
 
 
