@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Jobs\Assignmentjob;
 use App\Jobs\ExamJob;
 use App\Models\Assignment;
+use App\Models\ClassModel;
 use App\Models\Student;
+use App\Models\Subject;
 use App\Models\Teacher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -27,6 +29,12 @@ class AssignmentController extends Controller
         $classes = $teacher->classes;
         return view('assignment.create', ['teacher' => $teacher, 'classes' => $classes]);
     }
+    public function create(){
+        $subjects = Subject::all();
+        $classes = ClassModel::all();
+        return view('assignment.create', ['subjects' => $subjects, 'classes' => $classes]);
+    }
+
 
     /**
      * Show the form for creating a new resource.
