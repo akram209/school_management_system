@@ -125,12 +125,12 @@
             </a>
             <ul>
                 <li>
-                    <a href="">
+                    <a href="{{ route('assignment.create') }}">
                         <i class="fa-solid fa-plus"></i> <span>Add Assignment</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{ route('assignment.index') }}">
                         <i class="fa-solid fa-border-all"></i> <span>All Assignments</span>
                     </a>
                 </li>
