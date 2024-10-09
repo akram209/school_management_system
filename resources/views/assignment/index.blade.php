@@ -30,7 +30,7 @@
         <thead class="bg-light">
             <tr>
 
-                <th style="padding-left: 5% ">Assignment Id</th>
+                <th style="padding-left: 5% ">AssignmentId</th>
                 <th style=" padding-left:5%">Class</th>
                 <th style=" padding-left:5%">Subject</th>
                 <th>Title</th>
@@ -50,7 +50,7 @@
                     <td>{{ $assignment->title }}</td>
                     <td>{{ $assignment->mark }}</td>
                     <td style="padding-right:  3%">{{ $assignment->deadline }}</td>
-                    <td>{{ $assignment->type }}</td>
+                    <td style="padding-left:  8% ">{{ $assignment->type }}</td>
 
                     <td>
                         <div class="dropdown">

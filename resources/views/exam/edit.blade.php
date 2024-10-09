@@ -20,6 +20,9 @@
         <h3 style="text-align: center">Edit Exam</h3>
 
 
+        @if (session('success'))
+            <div class="alert alert-success" style="text-align: center"> {{ session('success') }}</div>
+        @endif
         <form class="row g-3" method="POST" action="{{ route('admin.exam.update', $exam->id) }}">
             @method('PUT')
             @csrf
@@ -107,7 +110,25 @@
                     </select>
                 </div>
             </div>
-            <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
+            @if (Auth::user()->role == 'teacher')
+                <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
+            @endif
+            @if (Auth::user()->role == 'admin')
+                @error('subject_id')
+                    <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
+                @enderror
+                <div class="col-4">
+                    <select class="form-select" name="subject_id" aria-label="Default select example"
+                        style="height: 50px; margin-left:-5px" title="subject">
+                        <option selected disabled hidden>subject</option>
+                        @foreach ($subjects as $subject)
+                            <option value="{{ $subject->id }}"
+                                {{ old('subject_id', $exam->subject_id) == $subject->id ? 'selected' : '' }}>
+                                {{ $subject->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            @endif
             <div class="col-12">
                 <button type="submit" class="btn btn-primary" style="width: 100%">update</button>
             </div>

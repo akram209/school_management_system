@@ -29,7 +29,7 @@
     <table class="table align-middle mb-5 bg-white ">
         <thead class="bg-light">
             <tr>
-                
+
                 <th style="padding-left: 5% ">Exam Id</th>
                 <th style=" padding-left:5%">Class</th>
                 <th style=" padding-left:5%">Subject</th>
@@ -48,8 +48,9 @@
                     <td>{{ $exam->class->name }}</td>
                     <td>{{ $exam->subject->name }}</td>
                     <td style="padding-right:  3%">{{ $exam->date }}</td>
-                    <td>{{ $exam->start_time}}</td>
-                    <td style="padding-left:10%">{{ $exam->end_time }}</td>
+                    <td>{{ $exam->start_time }}</td>
+                    <td>{{ $exam->end_time }}</td>
+                    <td style="padding-left:  7%">{{ $exam->type }}</td>
                     <td>
                         <div class="dropdown">
                             <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

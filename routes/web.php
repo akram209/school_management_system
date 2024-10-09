@@ -79,7 +79,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/teacher/exams/{teacher}/', [ExamController::class, 'getExamsByTeacherId'])->name('teacher.exams');
     Route::get('/student/exams/{student}', [ExamController::class, 'getExamsByStudentId'])->name('student.exams');
-    Route::get('/exam/{teacher}', [ExamController::class, 'createByTeacher'])->name('teacher.create-exam');
+    Route::get('/exam-create/{teacher}', [ExamController::class, 'createByTeacher'])->name('teacher.create-exam');
     Route::post('/exam', [ExamController::class, 'store'])->name('exam.store');
     Route::get('exam/set-score/{exam}', [ExamController::class, 'setScore'])->name('exam.set-score');
     Route::get('teacher/{teacher}/exam/edit/{exam}', [ExamController::class, 'editByTeacher'])->name('teacher.edit-exam');
@@ -87,6 +87,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('exam/delete/{exam}', [ExamController::class, 'destroy'])->name('exam.destroy');
     Route::get('/exam', [ExamController::class, 'index'])->name('exam.index');
     Route::get('/exam/create', [ExamController::class, 'create'])->name('exam.create');
+    Route::get('/exam/{exam}', [ExamController::class, 'show'])->name('exam.show');
     Route::get('/exam/{exam}/edit', [ExamController::class, 'edit'])->name('exam.edit');
     Route::put('/exam/{exam}', [ExamController::class, 'update'])->name('admin.exam.update');
     Route::delete('/exam/{exam}', [ExamController::class, 'destroy'])->name('admin.exam.destroy');

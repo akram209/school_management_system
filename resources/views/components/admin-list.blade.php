@@ -103,12 +103,12 @@
             </a>
             <ul>
                 <li>
-                    <a href="">
+                    <a href="{{ route('exam.create') }}">
                         <i class="fa-solid fa-plus"></i> <span>Add Exams</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{ route('exam.index') }}">
                         <i class="fa-solid fa-border-all"></i> <span>All Exams</span>
                     </a>
                 </li>

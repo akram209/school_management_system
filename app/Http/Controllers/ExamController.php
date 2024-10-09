@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\ExamJob;
+use App\Models\ClassModel;
 use App\Models\Exam;
 use App\Models\Student;
+use App\Models\Subject as SubjectModel;
 use App\Models\Teacher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -19,7 +21,7 @@ class ExamController extends Controller
     public function index()
     {
         $exams = Exam::all();
-        $exams= $exams->load('subject', 'class');
+        $exams = $exams->load('subject', 'class');
         return view('exam.index', ['exams' => $exams]);
     }
 
@@ -31,8 +33,9 @@ class ExamController extends Controller
         $classes = $teacher->classes;
         return view('exam.create', ['teacher' => $teacher, 'classes' => $classes]);
     }
-    public function create(){
-        $subjects = Subject::all();
+    public function create()
+    {
+        $subjects = SubjectModel::all();
         $classes = ClassModel::all();
         return view('exam.create', ['subjects' => $subjects, 'classes' => $classes]);
     }
@@ -42,17 +45,34 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => ['required', 'max:20'],
-            'description' => ['required', 'max:80'],
-            'mark' => 'required',
-            'class_id' => 'required',
-            'start_time' => 'required',
-            'end_time' => 'required',
-            'date' => 'required',
-            'type' => ['required', 'in:mid,final'],
+        if (Auth::user()->role == 'teacher') {
+            $request->validate([
+                'title' => ['required', 'max:20'],
+                'description' => ['required', 'max:80'],
+                'mark' => 'required',
+                'class_id' => 'required',
+                'start_time' => 'required',
+                'end_time' => 'required',
+                'date' => 'required',
+                'type' => ['required', 'in:mid,final'],
 
-        ]);
+            ]);
+        }
+        if (Auth::user()->role == 'admin') {
+            $request->validate([
+                'title' => ['required', 'max:20'],
+                'description' => ['required', 'max:80'],
+                'mark' => 'required',
+                'class_id' => 'required',
+                'start_time' => 'required',
+                'end_time' => 'required',
+                'date' => 'required',
+                'type' => ['required', 'in:mid,final'],
+                'subject_id' => ['required'],
+
+            ]);
+        }
+
         $class_id = $request->class_id;
         $subject_id = $request->subject_id;
 
@@ -95,23 +115,46 @@ class ExamController extends Controller
         return view('exam.edit', ['teacher' => $teacher, 'exam' => $exam, 'classes' => $classes]);
     }
 
+    public function edit(Exam $exam)
+    {
+        $subjects = SubjectModel::all();
+        $classes = ClassModel::all();
+        return view('exam.edit', ['exam' => $exam, 'subjects' => $subjects, 'classes' => $classes]);
+    }
+
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Exam $exam)
     {
-        $request->validate([
-            'title' => ['required', 'max:20'],
-            'description' => ['required', 'max:80'],
-            'mark' => 'required',
-            'class_id' => 'required',
-            'start_time' => 'required',
-            'end_time' => 'required',
-            'date' => 'required',
-            'type' => ['required', 'in:mid,final'],
+        if (Auth::user()->role == 'teacher') {
+            $request->validate([
+                'title' => ['required', 'max:20'],
+                'description' => ['required', 'max:150'],
+                'mark' => 'required',
+                'class_id' => 'required',
+                'start_time' => 'required',
+                'end_time' => 'required',
+                'date' => 'required',
+                'type' => ['required', 'in:mid,final'],
 
-        ]);
+            ]);
+        }
+        if (Auth::user()->role == 'admin') {
+            $request->validate([
+                'title' => ['required', 'max:20'],
+                'description' => ['required', 'max:150'],
+                'mark' => 'required',
+                'class_id' => 'required',
+                'start_time' => 'required',
+                'end_time' => 'required',
+                'date' => 'required',
+                'type' => ['required', 'in:mid,final'],
+                'subject_id' => ['required'],
+
+            ]);
+        }
         $class_id = $request->class_id;
         $subject_id = $request->subject_id;
 
@@ -131,9 +174,8 @@ class ExamController extends Controller
             'mark' => $request->mark,
             'type' => $request->type,
         ]);
-        if (Auth::user()->role == 'teacher') {
-            return redirect()->route('teacher.exams', $teacher_id);
-        }
+
+        return redirect()->back()->with('success', 'Exam updated successfully');
     }
 
     /**
