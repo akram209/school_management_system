@@ -82,12 +82,12 @@
             </a>
             <ul>
                 <li>
-                    <a href="">
+                    <a href="{{ route('parent.create') }}">
                         <i class="fa-solid fa-plus"></i> <span>Add Parent</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{ route('parent.index') }}">
                         <i class="fa-solid fa-border-all"></i> <span>All Parents</span>
                     </a>
                 </li>

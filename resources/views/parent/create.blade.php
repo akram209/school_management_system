@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Create Teacher')
+@section('title', 'Create Parent')
 @section('title of sidebar', 'Dashboard')
 <style>
     .container {
@@ -17,14 +17,14 @@
 
 @section('content')
     <div class="container" style="position: absolute; top: 20%; left: 10%">
-        <h3 style="text-align: center">Create Teacher</h3>
+        <h3 style="text-align: center">Create Parent</h3>
         @if (session('success'))
             <div class="alert alert-success" style="text-align: center">
                 {{ session('success') }}
             </div>
         @endif
 
-        <form class="row g-3" method="POST" action="{{ route('teacher.store') }}" enctype="multipart/form-data">
+        <form class="row g-3" method="POST" action="{{ route('parent.store') }}" enctype="multipart/form-data">
             @csrf
 
             <div class="row g-3">
@@ -62,16 +62,6 @@
                         style="width: 100%" title="password">
                 </div>
             </div>
-            <div class="row g-3">
-
-                @error('qualification')
-                    <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
-                @enderror
-                <div class="col">
-                    <input type="text" name="qualification" class="form-control" id="inputCity"
-                        placeholder="qualification" style="width: 100%" title="qualification">
-                </div>
-            </div>
 
             <div class="row g-3">
                 @error('gender')
@@ -85,13 +75,7 @@
                         <option value="female">female</option>
                     </select>
                 </div>
-                @error('experience_years')
-                    <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
-                @enderror
-                <div class="col">
-                    <input type="number" name="experience_years" class="form-control" id="inputCity"
-                        placeholder="experience_years" style="width: 100%" title="experience_years">
-                </div>
+
             </div>
 
             <div class="row g-3">
@@ -118,13 +102,7 @@
                     <input type="file" name="image" class="form-control" id="inputCity" placeholder="image"
                         style="width: 100%" title="image">
                 </div>
-                @error('salary')
-                    <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
-                @enderror
-                <div class="col">
-                    <input type="number" name="salary" class="form-control" id="inputCity" placeholder="salary"
-                        style="width: 100%" title="salary" min="0">
-                </div>
+
             </div>
 
 

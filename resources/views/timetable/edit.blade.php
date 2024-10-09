@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Edit Timetable')
-@section('title of sidebar', 'Settings')
+@section('title of sidebar', 'Dashboard')
 
 <style>
     .container {

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Send Notifications')
-@section('title of sidebar', 'Settings')
+@section('title of sidebar', 'Dashboard')
 <style>
     .container {
         position: absolute;

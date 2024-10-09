@@ -18,13 +18,16 @@ class ParentController extends Controller
     public function index()
     {
         $parents = ParentModel::all();
-        return $parents;
+        return view('parent.index', compact('parents'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create() {}
+    public function create()
+    {
+        return view('parent.create');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -37,15 +40,11 @@ class ParentController extends Controller
             'gender' => ['required'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required'],
-            // 'code' => ['required'],
             'image' => ['required', 'image', 'mimes:jpeg,png,jpg'],
-            'phone' => ['required'],
+            'phone' => ['required', 'numeric', 'unique:parents,phone'],
             'address' => ['required'],
         ]);
-        // $permission = Permission::where('code', $request->code)->where('email', $request->email)->first();
-        // if (!$permission) {
-        //     return back()->withErrors(['code' => 'The code is not valid.']);
-        // }
+
 
 
 
@@ -53,25 +52,23 @@ class ParentController extends Controller
         if (request()->hasFile('image')) {
             $file = request()->file('image');
             $path = Storage::disk('images')->put('parents', $file);
-            $user = User::create([
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'gender' => $request->gender,
-                'role' => 'parent',
-                'email' => $request->email,
-                'image' => $path,
-                'password' => Hash::make($request->password),
-            ]);
-            $parent = ParentModel::create([
-                'user_id' => $user->id,
-                'phone' => $request->phone,
-                'address' => $request->address,
-
-            ]);
         }
+        $user = User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'gender' => $request->gender,
+            'role' => 'parent',
+            'email' => $request->email,
+            'image' => $path,
+            'password' => Hash::make($request->password),
+        ]);
+        $parent = ParentModel::create([
+            'user_id' => $user->id,
+            'phone' => $request->phone,
+            'address' => $request->address,
 
-
-        return $parent;
+        ]);
+        return redirect()->back()->with('success', 'Parent created successfully');
     }
 
     /**
@@ -80,8 +77,9 @@ class ParentController extends Controller
     public function show(string $id)
     {
         $parent = ParentModel::find($id);
+        $parent->load('user', 'students.user');
 
-        return [$parent, $parent->user];
+        return view('parent.show', compact('parent'));
     }
 
     /**
@@ -90,13 +88,14 @@ class ParentController extends Controller
     public function edit(string $id)
     {
         $parent = ParentModel::find($id);
-        return $parent;
+        $parent->load('user');
+        return view('parent.edit', compact('parent'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ParentModel $parent, Request $request)
     {
         $request->validate([
             'first_name' => ['required', 'string', 'max:30', 'min:3'],
@@ -104,27 +103,26 @@ class ParentController extends Controller
             'gender' => ['required'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required'],
-            // 'code' => ['required'],
-            'image' => ['image', 'mimes:jpeg,png,jpg'],
-            'phone' => ['required'],
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg'],
+            'phone' => ['required', 'numeric', 'unique:parents,phone'],
             'address' => ['required'],
         ]);
 
-        $parent = ParentModel::find($id);
+
+
+
+        if (request()->hasFile('image')) {
+            $file = request()->file('image');
+            if ($parent->path) {
+                Storage::disk('images')->delete($parent->path);
+            }
+            $path = Storage::disk('images')->put('parents', $file);
+        }
         $parent->update([
             'user_id' => $parent->user_id,
             'phone' => $request->phone,
             'address' => $request->address,
         ]);
-
-        if (request()->hasFile('image')) {
-            $file = request()->file('image');
-            Storage::disk('images')->delete($parent->image);
-            $path = Storage::disk('images')->put('parents', $file);
-            $parent->user->update([
-                'image' => $path,
-            ]);
-        }
         $parent->user->update([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -132,9 +130,11 @@ class ParentController extends Controller
             'role' => 'parent',
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'path' => $path,
         ]);
 
-        return $parent;
+
+        return redirect()->back()->with('success', 'Parent updated successfully');
     }
 
     /**
@@ -146,6 +146,7 @@ class ParentController extends Controller
         Storage::disk('images')->delete($parent->user->image);
         $parent->user->delete();
         $parent->delete();
+        return redirect()->back()->with('success', 'parent deleted successfully');
     }
     public function getParentsByStudentId(Student $student)
     {

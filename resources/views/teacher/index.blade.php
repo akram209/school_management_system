@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', ' Teachers')
-@section('title of sidebar', 'Settings')
+@section('title of sidebar', 'Dashboard')
 @section('content')
     <style>
         .table {

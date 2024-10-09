@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', ' Timetable')
-@section('title of sidebar', 'Settings')
+@section('title of sidebar', 'Dashboard')
 <style>
     .table-bordered thead td,
     .table-bordered thead th {
