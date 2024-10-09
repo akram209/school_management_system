@@ -22,9 +22,13 @@ class AttendenceController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function adminStudentsAttendence()
     {
-        //
+        return view('attendence.admin-student');
+    }
+    public function adminTeachersAttendence()
+    {
+        return view('attendence.admin-teacher');
     }
 
     /**
