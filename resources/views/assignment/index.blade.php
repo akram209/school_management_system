@@ -29,12 +29,11 @@
     <table class="table mb-5 align-middle bg-white ">
         <thead class="bg-light">
             <tr>
-                
+
                 <th style="padding-left: 5% ">Assignment Id</th>
                 <th style=" padding-left:5%">Class</th>
                 <th style=" padding-left:5%">Subject</th>
                 <th>Title</th>
-                <th>Desctiption</th>
                 <th>mark</th>
                 <th>Deadline</th>
                 <th style="padding-left: 5%">Type</th>
@@ -49,11 +48,10 @@
                     <td>{{ $assignment->class->name }}</td>
                     <td>{{ $assignment->subject->name }}</td>
                     <td>{{ $assignment->title }}</td>
-                    <td>{{ $assignment->description }}</td>
                     <td>{{ $assignment->mark }}</td>
                     <td style="padding-right:  3%">{{ $assignment->deadline }}</td>
                     <td>{{ $assignment->type }}</td>
-                    
+
                     <td>
                         <div class="dropdown">
                             <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -61,17 +59,18 @@
                             </a>
 
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{route('assignment.edit',$assignment->id)}}">edit</a>
+                                <li><a class="dropdown-item" href="{{ route('assignment.edit', $assignment->id) }}">edit</a>
                                 </li>
                                 <li>
-                                    <form action="{{route('assignment.destroy',$assignment->id)}}" method="POST">
+                                    <form action="{{ route('assignment.destroy', $assignment->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="dropdown-item">delete</button>
                                     </form>
                                 </li>
                                 </li>
-                                <li><a class="dropdown-item" href="#">view</a>
+                                <li><a class="dropdown-item"
+                                        href="{{ route('assignment.show', $assignment->id) }}">view</a>
                                 </li>
                             </ul>
                         </div>

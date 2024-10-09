@@ -19,7 +19,11 @@
 @section('content')
     <div class="container" style="position: absolute; top: 20%; left: 10%">
         <h3 style="text-align: center">Edit Assignment</h3>
-
+        @if (session('success'))
+            <div class="alert alert-success" style="text-align: center">
+                {{ session('success') }}
+            </div>
+        @endif
 
         <form class="row g-3" method="POST" action="{{ route('assignment.update', $assignment->id) }}">
             @method('PUT')
@@ -47,20 +51,19 @@
             </div>
             <div class="row g-3">
                 {{-- message --}}
-                @error('date')
+                @error('deadline')
                     <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
                 @enderror
                 <div class="col">
                     <input type="date" class="form-control" name="deadline" style="width: 100%" title="deadline"
-                        value="{{ old('deadline', $assignment->deadline) }}" min="{{ now()->format('Y-m-d') }}"
-                        max="{{ now()->addMonth()->format('Y-m-d') }}">
+                        value="" min="{{ now()->format('Y-m-d') }}" max="{{ now()->addMonth()->format('Y-m-d') }}">
                 </div>
                 @error('time')
                     <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
                 @enderror
                 <div class="col">
                     <input type="time" class="form-control" name="time" style="width: 100%" title="deadline time"
-                        value="{{ old('time', $assignment->time) }}">
+                        value="">
                 </div>
 
             </div>
@@ -68,33 +71,35 @@
                 @error('class_id')
                     <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
                 @enderror
-               
+
                 <div class="col-4">
                     <select class="form-select" name="class_id" aria-label="Default select example" style="height: 50px;"
                         title="class">
                         <option selected disabled hidden>class</option>
                         @foreach ($classes as $class)
                             <option value="{{ $class->id }}"
-                                {{ old('class_id', $assignment->class_id) == $class->id?'selected' : '' }}
-                                >{{ $class->name }}</option>
+                                {{ old('class_id', $assignment->class_id) == $class->id ? 'selected' : '' }}>
+                                {{ $class->name }}</option>
                         @endforeach
                     </select>
                 </div>
                 @if (Auth::user()->role == 'admin')
-              
-                <div class="col-4">
-                    <select class="form-select" name="subject_id" aria-label="Default select example" style="height: 50px;"
-                        title="subject">
-                        <option selected disabled hidden>subject</option>
-                        @foreach ($subjects as $subject)
-                            <option value="{{ $subject->id }}"
-                                {{ old('subject_id', $assignment->subject_id) == $subject->id?'selected' : '' }}
-                                >{{ $subject->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
+                    @error('subject_id')
+                        <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
+                    @enderror
+                    <div class="col-4">
+                        <select class="form-select" name="subject_id" aria-label="Default select example"
+                            style="height: 50px;" title="subject">
+                            <option selected disabled hidden>subject</option>
+                            @foreach ($subjects as $subject)
+                                <option value="{{ $subject->id }}"
+                                    {{ old('subject_id', $assignment->subject_id) == $subject->id ? 'selected' : '' }}>
+                                    {{ $subject->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 @endif
-               
+
                 @error('type')
                     <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
                 @enderror
@@ -123,9 +128,9 @@
                     </select>
                 </div>
             </div>
-            
+
             @if (Auth::user()->role == 'teacher')
-            <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
+                <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
             @endif
             <div class="col-12">
                 <button type="submit" class="btn btn-primary" style="width: 100%">update</button>

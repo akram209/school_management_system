@@ -22,16 +22,18 @@ class AssignmentController extends Controller
      */
     public function index()
     {
-      $assignments=  Assignment::all();
+        $assignments =  Assignment::all();
 
         return view('assignment.index', ['assignments' => $assignments]);
     }
+
     public function createByTeacher(Teacher $teacher)
     {
         $classes = $teacher->classes;
         return view('assignment.create', ['teacher' => $teacher, 'classes' => $classes]);
     }
-    public function create(){
+    public function create()
+    {
         $subjects = Subject::all();
         $classes = ClassModel::all();
         return view('assignment.create', ['subjects' => $subjects, 'classes' => $classes]);
@@ -43,18 +45,32 @@ class AssignmentController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'deadline' => ['required', 'date', 'after:today'],
-            'time' => ['required'],
-            'title' => ['required', 'max:20'],
-            'description' => ['required', 'max:80'],
-            'mark' => 'required',
-            'class_id' => 'required',
-            'type' => ['required', 'in:online,offline'],
-        ]);
-
-        $class_id = $request->class_id;
+        if (Auth::user()->role == 'teacher') {
+            $request->validate([
+                'deadline' => ['required', 'date', 'after:today'],
+                'time' => ['required'],
+                'title' => ['required', 'max:20'],
+                'description' => ['required', 'max:80'],
+                'mark' => 'required',
+                'class_id' => 'required',
+                'type' => ['required', 'in:online,offline'],
+            ]);
+        }
+        if (Auth::user()->role == 'admin') {
+            $request->validate([
+                'deadline' => ['required', 'date', 'after:today'],
+                'time' => ['required'],
+                'title' => ['required', 'max:20'],
+                'description' => ['required', 'max:80'],
+                'mark' => 'required',
+                'class_id' => 'required',
+                'type' => ['required', 'in:online,offline'],
+                'subject_id' => ['required'],
+            ]);
+        }
         $subject_id = $request->subject_id;
+        $class_id = $request->class_id;
+
 
         if (!$subject_id) {
             $teacher_id = $request->teacher_id;
@@ -79,11 +95,11 @@ class AssignmentController extends Controller
 
         return redirect()->back()->with('success', 'Assignment created successfully');
     }
-    public function edit(Assignment $assignment){
+    public function edit(Assignment $assignment)
+    {
         $subjects = Subject::all();
         $classes = ClassModel::all();
-        return view('assignment.edit', ['assignment' => $assignment,'subjects' => $subjects, 'classes' => $classes]);
-
+        return view('assignment.edit', ['assignment' => $assignment, 'subjects' => $subjects, 'classes' => $classes]);
     }
 
     /**
@@ -94,9 +110,11 @@ class AssignmentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Assignment $assignment)
     {
-        //
+        $assignment->load('class', 'subject');
+
+        return view('assignment.show', ['assignment' => $assignment]);
     }
 
     /**
@@ -115,20 +133,31 @@ class AssignmentController extends Controller
      */
     public function update(Request $request, Assignment $assignment)
     {
-        
-        $request->validate([
-            'deadline' => ['required', 'date', 'after:today'],
-            'time' => ['required'],
-            'title' => ['required', 'max:20'],
-            'description' => ['required', 'max:80'],
-            'mark' => 'required',
-            'class_id' => 'required',
-            'type' => ['required', 'in:online,offline'],
-        ]);
-        // dd("lksdjgkdjfg");
-        $class_id = $request->class_id;
+        if (Auth::user()->role == 'teacher') {
+            $request->validate([
+                'deadline' => ['required', 'date', 'after:today'],
+                'time' => ['required'],
+                'title' => ['required', 'max:20'],
+                'description' => ['required', 'max:80'],
+                'mark' => 'required',
+                'class_id' => 'required',
+                'type' => ['required', 'in:online,offline'],
+            ]);
+        }
+        if (Auth::user()->role == 'admin') {
+            $request->validate([
+                'deadline' => ['required', 'date', 'after:today'],
+                'time' => ['required'],
+                'title' => ['required', 'max:20'],
+                'description' => ['required', 'max:80'],
+                'mark' => 'required',
+                'class_id' => 'required',
+                'type' => ['required', 'in:online,offline'],
+                'subject_id' => ['required'],
+            ]);
+        }
         $subject_id = $request->subject_id;
-      
+        $class_id = $request->class_id;
         if (!$subject_id) {
             $teacher_id = $request->teacher_id;
             $subject_id = DB::table('class_subject_teacher')->where('class_id', $class_id)->where('teacher_id', $teacher_id)->value('subject_id');
@@ -146,11 +175,9 @@ class AssignmentController extends Controller
             'mark' => $request->mark,
             'type' => $request->type,
         ]);
-        
-        if (Auth::user()->role == 'teacher') {
-            return redirect()->route('teacher.assignments', $teacher_id);
-        }
 
+
+        return redirect()->back()->with('success', 'Assignment updated successfully');
     }
 
     /**

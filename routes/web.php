@@ -99,9 +99,11 @@ Route::middleware('auth')->group(function () {
     Route::put('assignment/update/{assignment}', [AssignmentController::class, 'update'])->name('assignment.update');
     Route::delete('assignment/delete/{assignment}', [AssignmentController::class, 'destroy'])->name('assignment.destroy');
     Route::get('/assignment/create', [AssignmentController::class, 'create'])->name('assignment.create');
-    Route::get('/assignment/{teacher}', [AssignmentController::class, 'createByTeacher'])->name('teacher.create-assignment');
+    Route::get('/assignment/create/{teacher}', [AssignmentController::class, 'createByTeacher'])->name('teacher.create-assignment');
     Route::get('/assignment', [AssignmentController::class, 'index'])->name('assignment.index');
     Route::post('/assignment', [AssignmentController::class, 'store'])->name('assignment.store');
+    Route::get('/assignment/{assignment}/edit', [AssignmentController::class, 'edit'])->name('assignment.edit');
+    Route::get('/assignment/{assignment}', [AssignmentController::class, 'show'])->name('assignment.show');
     Route::post('student/{student}/assignment/{assignment}/', [AssignmentController::class, 'uploadAssignment'])->name('assignment.upload');
     Route::get('/student/{student}/assignment/{assignment}/', [AssignmentController::class, 'viewAssignment'])->name('assignment.view');
     Route::delete('/student/{student}/assignment/{assignment}/', [AssignmentController::class, 'deleteAssignment'])->name('assignment.delete');

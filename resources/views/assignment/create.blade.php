@@ -107,8 +107,8 @@
                 <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
             @endif
             @if (Auth::user()->role == 'admin')
-                @error('subject')
-                    <div class="alert alert-danger" style="width:100%;margin-left: 25px">{{ $message }}</div>
+                @error('subject_id')
+                    <div class="alert alert-danger" style="width:100%;">{{ $message }}</div>
                 @enderror
                 <div class="col-4">
                     <select class="form-select" name="subject_id" aria-label="Default select example"
