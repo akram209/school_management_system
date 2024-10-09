@@ -30,6 +30,11 @@ class ExamController extends Controller
         $classes = $teacher->classes;
         return view('exam.create', ['teacher' => $teacher, 'classes' => $classes]);
     }
+    public function create(){
+        $subjects = Subject::all();
+        $classes = ClassModel::all();
+        return view('exam.create', ['subjects' => $subjects, 'classes' => $classes]);
+    }
 
     /**
      * Store a newly created resource in storage.
