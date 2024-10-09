@@ -18,8 +18,9 @@ class ExamController extends Controller
      */
     public function index()
     {
-        $index = Exam::all();
-        return $index;
+        $exams = Exam::all();
+        $exams= $exams->load('subject', 'class');
+        return view('exam.index', ['exams' => $exams]);
     }
 
     /**

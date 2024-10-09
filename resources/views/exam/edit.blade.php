@@ -20,7 +20,7 @@
         <h3 style="text-align: center">Edit Exam</h3>
 
 
-        <form class="row g-3" method="POST" action="{{ route('exam.update', $exam->id) }}">
+        <form class="row g-3" method="POST" action="{{ route('admin.exam.update', $exam->id) }}">
             @method('PUT')
             @csrf
             <div class="row g-3">
@@ -49,7 +49,7 @@
                 <div class="col">
                     <input type="date" class="form-control" name="date" style="width: 100%" title="date"
                         value="{{ old('date', $exam->date) }}" min="{{ now()->format('Y-m-d') }}"
-                        max="{{ now()->addMonths(2)->format('Y-m-d') }}">
+                        max="{{ now()->addMonths(2)->format('Y-m-ds') }}">
                 </div>
                 @error('start_time')
                     <div class="alert alert-danger" style="width:100%">{{ $message }}</div>

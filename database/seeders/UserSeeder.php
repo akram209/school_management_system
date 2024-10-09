@@ -21,11 +21,11 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             [
-                'first_name' => 'John',
+                'first_name' => 'Akram',
                 'last_name' => 'Doe',
                 'gender' => 'male',
                 'role' => 'admin',
-                'email' => 'akram209@gmail.com',
+                'email' => 'ahmedabdelmageed@gmail.com',
                 'password' => Hash::make('12345'), // Hashed password
                 'image' => null,
             ]
