@@ -150,39 +150,20 @@
             </ul>
         </li>
         <li>
-            <a href="#">
+            <a href="{{ route('admin.students-attendence') }}">
                 <i class="fa-solid fa-clipboard-user"></i><span class="nav-text">Student Attendance</span>
             </a>
             <ul>
 
-                <li>
-                    <a href="">
-                        <i class="fa-solid fa-plus"></i> <span>Add Student Attendance</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <i class="fa-solid fa-border-all"></i> <span>All Student Attendance</span>
-                    </a>
-                </li>
+
             </ul>
         </li>
         <li>
-            <a href="#">
+            <a href="{{ route('admin.teachers-attendence') }}">
                 <i class="fa-solid fa-clipboard-user"></i><span class="nav-text"> Teacher Attendance</span>
             </a>
             <ul>
 
-                <li>
-                    <a href="">
-                        <i class="fa-solid fa-plus"></i> <span>Add Teacher Attendance</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <i class="fa-solid fa-border-all"></i> <span>All Teacher Attendance</span>
-                    </a>
-                </li>
             </ul>
 
         </li>
