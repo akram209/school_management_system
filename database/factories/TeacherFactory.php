@@ -20,7 +20,6 @@ class TeacherFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'subject_id' => Subject::factory(),
             'phone' => $this->faker->phoneNumber,
             'address' => $this->faker->address,
             'salary' => $this->faker->numberBetween(1000, 10000),

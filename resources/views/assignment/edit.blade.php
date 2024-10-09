@@ -68,15 +68,33 @@
                 @error('class_id')
                     <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
                 @enderror
+               
                 <div class="col-4">
                     <select class="form-select" name="class_id" aria-label="Default select example" style="height: 50px;"
                         title="class">
                         <option selected disabled hidden>class</option>
                         @foreach ($classes as $class)
-                            <option value="{{ $class->id }}">{{ $class->name }}</option>
+                            <option value="{{ $class->id }}"
+                                {{ old('class_id', $assignment->class_id) == $class->id?'selected' : '' }}
+                                >{{ $class->name }}</option>
                         @endforeach
                     </select>
                 </div>
+                @if (Auth::user()->role == 'admin')
+              
+                <div class="col-4">
+                    <select class="form-select" name="subject_id" aria-label="Default select example" style="height: 50px;"
+                        title="subject">
+                        <option selected disabled hidden>subject</option>
+                        @foreach ($subjects as $subject)
+                            <option value="{{ $subject->id }}"
+                                {{ old('subject_id', $assignment->subject_id) == $subject->id?'selected' : '' }}
+                                >{{ $subject->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                @endif
+               
                 @error('type')
                     <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
                 @enderror
@@ -105,7 +123,10 @@
                     </select>
                 </div>
             </div>
+            
+            @if (Auth::user()->role == 'teacher')
             <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
+            @endif
             <div class="col-12">
                 <button type="submit" class="btn btn-primary" style="width: 100%">update</button>
             </div>

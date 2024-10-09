@@ -88,6 +88,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/exam/{exam}', [ExamController::class, 'update'])->name('admin.exam.update');
     Route::delete('/exam/{exam}', [ExamController::class, 'destroy'])->name('admin.exam.destroy');
 
+    Route::get('/assignment/{assignment}/edit', [AssignmentController::class, 'edit'])->name('assignment.edit');
     Route::get('/teacher/assignments/{teacher}/', [AssignmentController::class, 'getAssignmentsByTeacherId'])->name('teacher.assignments');
     Route::get('/student/assignments/{student}', [AssignmentController::class, 'getAssignmentsByStudentId'])->name('student.assignments');
     Route::get('assignment/set-score/{assignment}', [AssignmentController::class, 'setScore'])->name('assignment.set-score');

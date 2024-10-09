@@ -22,7 +22,9 @@ class AssignmentController extends Controller
      */
     public function index()
     {
-        //
+      $assignments=  Assignment::all();
+
+        return view('assignment.index', ['assignments' => $assignments]);
     }
     public function createByTeacher(Teacher $teacher)
     {
@@ -77,6 +79,12 @@ class AssignmentController extends Controller
 
         return redirect()->back()->with('success', 'Assignment created successfully');
     }
+    public function edit(Assignment $assignment){
+        $subjects = Subject::all();
+        $classes = ClassModel::all();
+        return view('assignment.edit', ['assignment' => $assignment,'subjects' => $subjects, 'classes' => $classes]);
+
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -107,6 +115,7 @@ class AssignmentController extends Controller
      */
     public function update(Request $request, Assignment $assignment)
     {
+        
         $request->validate([
             'deadline' => ['required', 'date', 'after:today'],
             'time' => ['required'],
@@ -116,9 +125,10 @@ class AssignmentController extends Controller
             'class_id' => 'required',
             'type' => ['required', 'in:online,offline'],
         ]);
+        // dd("lksdjgkdjfg");
         $class_id = $request->class_id;
         $subject_id = $request->subject_id;
-
+      
         if (!$subject_id) {
             $teacher_id = $request->teacher_id;
             $subject_id = DB::table('class_subject_teacher')->where('class_id', $class_id)->where('teacher_id', $teacher_id)->value('subject_id');
@@ -136,9 +146,11 @@ class AssignmentController extends Controller
             'mark' => $request->mark,
             'type' => $request->type,
         ]);
+        
         if (Auth::user()->role == 'teacher') {
             return redirect()->route('teacher.assignments', $teacher_id);
         }
+
     }
 
     /**

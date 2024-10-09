@@ -82,7 +82,7 @@
     <div class="profile-card-body">
         <p> Full Name: {{ $user->first_name }} {{ $user->last_name }}</p>
         <p> Gender: {{ $user->gender }}</p>
-        <p> Join Date: {{ $user->created_at->format('d/m/Y') }}</p>
+        <p> Join Date: {{ $user->created_at }}</p>
     </div>
 </div>
 @section('content')
@@ -125,7 +125,7 @@
         <p id="classes">Classes</p>
         <h1 style="text-align: center; margin-top: 10%">{{ $totalClasses }}</h1>
     </div>
-    <table class="table align-middle mb-4 bg-white"
+    <table class="table mb-4 align-middle bg-white"
         style=" position: absolute !important; top : 75% !important ; left : 5% !important ; width : 65% !important ; height : 50vh !important ;
          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;">
         <thead class="bg-light">
@@ -195,7 +195,7 @@
             @endforeach
         </tbody>
     </table>
-    <table class="table align-middle mb-4 bg-white"
+    <table class="table mb-4 align-middle bg-white"
         style=" position: absolute !important; top : 130% !important ; left : 5% !important ; width : 65% !important ; height : 50vh !important ;
      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;">
         <thead class="bg-light">
