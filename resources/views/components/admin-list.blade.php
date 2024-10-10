@@ -91,7 +91,11 @@
                         <i class="fa-solid fa-border-all"></i> <span>All Parents</span>
                     </a>
                 </li>
-
+                <li>
+                    <a href="">
+                        <i class="fa-solid fa-border-all"></i> <span> assign children</span>
+                    </a>
+                </li>
             </ul>
         </li>
         <li>

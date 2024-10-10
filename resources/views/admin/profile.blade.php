@@ -8,7 +8,7 @@
         position: absolute;
         top: 50px;
         width: 300px;
-        height: 30vh;
+        height: 20vh;
         background-color: #fff;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -19,9 +19,9 @@
     .totel-classes,
     .percentage-fees {
         position: absolute;
-        top: 300px;
+        top: 210px;
         width: 300px;
-        height: 30vh;
+        height: 20vh;
         background-color: #fff;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -64,7 +64,39 @@
         border-bottom: 2px solid #3498db;
 
         font-weight: bolder;
-        font-size: 25px;
+        font-size: 20px;
+    }
+
+    /* Outer bar (empty bar) */
+    .progress-bar {
+        width: 100%;
+        height: 5px;
+        /* Adjust height to your preference */
+        background-color: #e0e0e0;
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+        margin-top: 75px;
+        margin-left: 5px;
+    }
+
+    /* Inner bar (filled progress) */
+    .progress-bar__fill {
+        height: 100%;
+        background-color: blue;
+        width: 0;
+        /* Initially 0, updated by JavaScript */
+        transition: width 1s ease;
+        border-radius: 10px 0 0 10px;
+        /* Make the left corner round */
+    }
+
+    /* CSS for the percentage text */
+    .progress-value {
+        margin-top: 5px;
+        font-size: 12px;
+        /* Adjust font size */
+        text-align: center;
     }
 </style>
 
@@ -88,45 +120,43 @@
 @section('content')
     <div class="totel-students">
         <p id="students">Students</p>
-        <h1 style="text-align: center; margin-top: 10% ; margin-bottom: 10%">{{ $totalStudents }}
-        </h1>
+        <h3 style="text-align: center; margin-top: 10% ; margin-bottom: 10%">{{ $totalStudents }}
+        </h3>
     </div>
 
     <div class="totel-teachers">
         <p id="teachers">Teachers</p>
-        <h1 style="text-align: center; margin-top: 10%">{{ $totalTeachers }}</h1>
+        <h3 style="text-align: center; margin-top: 10%">{{ $totalTeachers }}</h3>
     </div>
     </div>
     <div class="totel-parents">
         <p id="parents">Parents</p>
 
-        <h1 style="text-align: center; margin-top: 10%">{{ $totalParents }}</h1>
+        <h3 style="text-align: center; margin-top: 10%">{{ $totalParents }}</h3>
     </div>
     <div class="totel-fees">
         <p id="fees">Fees</p>
-        <h1 style="text-align: center; margin-top: 10%">$ {{ $totalFees * 1000 }}</h1>
+        <h3 style="text-align: center; margin-top: 10%">$ {{ $totalFees * 1000 }}</h3>
     </div>
 
     <div class="percentage-fees">
         <p id="percentage-fees">Paid fees</p>
-        <div class="progress-circle">
-            <svg class="progress-ring" width="120" height="120">
-                <circle class="progress-fees-ring__circle" stroke="blue" stroke-width="10" fill="transparent" r="50"
-                    cx="60" cy="60" />
-            </svg>
-            <div class="progress-value">
-                <span id="percentage-value"></span>
-            </div>
+        <div class="progress-bar">
+            <div class="progress-bar__fill" id="progress-bar__fill"></div>
+        </div>
+        <div class="progress-value">
+            <span id="percentage-value"></span>
         </div>
     </div>
 
 
+
     <div class="totel-classes">
         <p id="classes">Classes</p>
-        <h1 style="text-align: center; margin-top: 10%">{{ $totalClasses }}</h1>
+        <h3 style="text-align: center; margin-top: 10%">{{ $totalClasses }}</h3>
     </div>
     <table class="table mb-4 align-middle bg-white"
-        style=" position: absolute !important; top : 75% !important ; left : 5% !important ; width : 65% !important ; height : 50vh !important ;
+        style=" position: absolute !important; top : 55% !important ; left : 5% !important ; width : 65% !important ; height : 50vh !important ;
          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;">
         <thead class="bg-light">
             <tr>
@@ -196,7 +226,7 @@
         </tbody>
     </table>
     <table class="table mb-4 align-middle bg-white"
-        style=" position: absolute !important; top : 130% !important ; left : 5% !important ; width : 65% !important ; height : 50vh !important ;
+        style=" position: absolute !important; top : 110% !important ; left : 5% !important ; width : 65% !important ; height : 50vh !important ;
      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;">
         <thead class="bg-light">
             <tr>
