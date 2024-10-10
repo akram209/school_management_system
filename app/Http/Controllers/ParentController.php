@@ -51,7 +51,7 @@ class ParentController extends Controller
 
         if (request()->hasFile('image')) {
             $file = request()->file('image');
-            $path = Storage::disk('images')->put('parents', $file);
+            $image = Storage::disk('images')->put('parents', $file);
         }
         $user = User::create([
             'first_name' => $request->first_name,
@@ -59,7 +59,7 @@ class ParentController extends Controller
             'gender' => $request->gender,
             'role' => 'parent',
             'email' => $request->email,
-            'image' => $path,
+            'image' => $image,
             'password' => Hash::make($request->password),
         ]);
         $parent = ParentModel::create([
@@ -113,10 +113,10 @@ class ParentController extends Controller
 
         if (request()->hasFile('image')) {
             $file = request()->file('image');
-            if ($parent->path) {
-                Storage::disk('images')->delete($parent->path);
+            if ($parent->image) {
+                Storage::disk('images')->delete($parent->image);
             }
-            $path = Storage::disk('images')->put('parents', $file);
+            $image = Storage::disk('images')->put('parents', $file);
         }
         $parent->update([
             'user_id' => $parent->user_id,
@@ -130,7 +130,7 @@ class ParentController extends Controller
             'role' => 'parent',
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'path' => $path,
+            'image' => $image,
         ]);
 
 

@@ -50,7 +50,7 @@ class StudentController extends Controller
 
         if (request()->hasFile('image')) {
             $file = request()->file('image');
-            $path = Storage::disk('images')->put('students', $file);
+            $image = Storage::disk('images')->put('students', $file);
         }
 
         $user = User::create([
@@ -59,7 +59,7 @@ class StudentController extends Controller
             'gender' => $request->gender,
             'role' => 'student',
             'email' => $request->email,
-            'image' => $path,
+            'image' => $image,
             'password' => Hash::make($request->password),
         ]);
 
@@ -116,15 +116,15 @@ class StudentController extends Controller
         ]);
 
         if (request()->hasFile('image')) {
-            if ($student->user->path) {
-                Storage::disk('images')->delete($student->user->path);
+            if ($student->user->image) {
+                Storage::disk('images')->delete($student->user->image);
             }
             $file = request()->file('image');
-            $path = Storage::disk('images')->put('students', $file);
+            $image = Storage::disk('images')->put('students', $file);
         }
 
         if (!request()->hasFile('image')) {
-            $path = $student->user->path;
+            $image = $student->user->image;
         }
         $student->user->update([
             'first_name' => $request->first_name,
@@ -132,7 +132,7 @@ class StudentController extends Controller
             'gender' => $request->gender,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'path' => $path
+            'image' => $image
         ]);
 
         return redirect()->back()->with('success', 'Student updated successfully');

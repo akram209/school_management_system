@@ -55,7 +55,7 @@ class TeacherController extends Controller
 
         if (request()->hasFile('image')) {
             $file = request()->file('image');
-            $path = Storage::disk('images')->put('teachers', $file);
+            $image = Storage::disk('images')->put('teachers', $file);
         }
 
         $user = User::create([
@@ -64,7 +64,7 @@ class TeacherController extends Controller
             'gender' => $request->gender,
             'role' => 'teacher',
             'email' => $request->email,
-            'image' => $path,
+            'image' => $image,
             'password' => Hash::make(request()->password),
         ]);
 
@@ -122,15 +122,15 @@ class TeacherController extends Controller
         $user = User::find($teacher->user_id);
 
         if (request()->hasFile('image')) {
-            if ($teacher->user->path) {
-                Storage::disk('images')->delete($teacher->user->path);
+            if ($teacher->user->image) {
+                Storage::disk('images')->delete($teacher->user->image);
             }
             $file = request()->file('image');
-            $path = Storage::disk('images')->put('teachers', $file);
+            $image = Storage::disk('images')->put('teachers', $file);
         }
 
         if (!request()->hasFile('image')) {
-            $path = $teacher->user->path;
+            $image = $teacher->user->image;
         }
 
         $user->update([
@@ -138,7 +138,7 @@ class TeacherController extends Controller
             'last_name' => $request->last_name,
             'gender' => $request->gender,
             'email' => $request->email,
-            'path' => $path,
+            'image' => $image,
             'password' => Hash::make($request->password),
         ]);
 

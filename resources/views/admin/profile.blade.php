@@ -144,8 +144,8 @@
                     <td>
                         <div class="d-flex align-items-center">
                             <a href="{{ route('student.profile', $student->user_id) }}">
-                                @if ($student->user->path)
-                                    <img src="{{ asset('storage/images/' . $student->user->path) }}" alt="profile"
+                                @if ($student->user->image)
+                                    <img src="{{ asset('storage/images/' . $student->user->image) }}" alt="profile"
                                         style="width: 45px; height: 45px" class="rounded-circle">
                                 @else
                                     <img src="{{ asset('build/assets/images/profile.jpg') }}" alt="profile"
@@ -213,8 +213,8 @@
                     <td>
                         <div class="d-flex align-items-center">
                             <a href="{{ route('student.profile', $teacher->user_id) }}">
-                                @if ($teacher->user->path)
-                                    <img src="{{ asset('storage/images/' . $teacher->user->path) }}" alt="profile"
+                                @if ($teacher->user->image)
+                                    <img src="{{ asset('storage/images/' . $teacher->user->image) }}" alt="profile"
                                         style="width: 45px; height: 45px" class="rounded-circle">
                                 @else
                                     <img src="{{ asset('build/assets/images/profile.jpg') }}" alt="profile"
