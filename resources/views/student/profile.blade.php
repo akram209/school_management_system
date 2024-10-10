@@ -2,6 +2,7 @@
 @section('title', $student->user->first_name . ' ' . $student->user->last_name)
 @section('title of sidebar', 'Settings')
 
+
 <style>
     .table-bordered thead td,
     .table-bordered thead th {
@@ -49,6 +50,9 @@
         color: #000000;
 
         font-weight: 600;
+    }
+
+    input[type="search"] {}
     }
 </style>
 <div class="profile-card">

@@ -98,6 +98,24 @@
         /* Adjust font size */
         text-align: center;
     }
+
+    .chart1 {
+        width: 30%;
+        height: 30vh;
+        position: absolute;
+        top: 52%;
+        left: 40%;
+        color: #007bff;
+    }
+
+    .chart2 {
+        width: 25%;
+        height: 30vh;
+        position: absolute;
+        top: 52%;
+        left: 10%;
+        color: #007bff;
+    }
 </style>
 
 <div class="profile-card" style="height: 75vh">
@@ -156,7 +174,7 @@
         <h3 style="text-align: center; margin-top: 10%">{{ $totalClasses }}</h3>
     </div>
     <table class="table mb-4 align-middle bg-white"
-        style=" position: absolute !important; top : 55% !important ; left : 5% !important ; width : 65% !important ; height : 50vh !important ;
+        style=" position: absolute !important; top : 110% !important ; left : 5% !important ; width : 65% !important ; height : 50vh !important ;
          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;">
         <thead class="bg-light">
             <tr>
@@ -226,7 +244,7 @@
         </tbody>
     </table>
     <table class="table mb-4 align-middle bg-white"
-        style=" position: absolute !important; top : 110% !important ; left : 5% !important ; width : 65% !important ; height : 50vh !important ;
+        style=" position: absolute !important; top : 165% !important ; left : 5% !important ; width : 65% !important ; height : 50vh !important ;
      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;">
         <thead class="bg-light">
             <tr>
@@ -274,8 +292,19 @@
             @endforeach
         </tbody>
     </table>
+    <div class="chart1">{{ $chart1->options['chart_title'] }} {!! $chart1->renderHtml() !!}</div>
+    <div class="chart2">{{ $chart2->options['chart_title'] }} {!! $chart2->renderHtml() !!}</div>
+
     <script>
         window.apiToken = '{{ auth()->user()->createToken('API Token')->plainTextToken }}';
     </script>
     <script src="{{ asset('build/assets/js/fee.js') }}"></script>
+    {!! $chart1->renderChartJsLibrary() !!}
+    {!! $chart2->renderChartJsLibrary() !!}
+
+
+    {!! $chart1->renderJs() !!}
+    {!! $chart2->renderJs() !!}
+
+
 @endsection

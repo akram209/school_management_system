@@ -34,8 +34,13 @@
                     @else
                         <a href="{{ route('admin.profile', Auth::user()->id) }}">
         @endif
-        <img src="{{ asset('storage/images/' . Auth::user()->image) }}" class="rounded-circle" height="22"
-            loading="lazy" />
+        @if (Auth::user()->image)
+            <img src="{{ asset('storage/images/' . Auth::user()->image) }}" class="rounded-circle" height="22"
+                loading="lazy" />
+        @else
+            <img src="{{ asset('build/assets/images/profile.jpg') }}" class="rounded-circle" height="22"
+                loading="lazy" />
+        @endif
         <span class="nav-text" style="color: white; float: left">{{ Auth::user()->first_name }}
             {{ Auth::user()->last_name }} ({{ Auth::user()->role }})</span>
 

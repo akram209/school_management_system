@@ -9,6 +9,7 @@
         "laravel/framework": "^11.9",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
+        "laraveldaily/laravel-charts": "^0.2.3",
         "livewire/livewire": "^3.5"
     },
     "require-dev": {

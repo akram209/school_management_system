@@ -1,7 +1,11 @@
 @extends('layouts.app')
 @section('title', 'Exams')
 @section('title of sidebar', 'Settings')
-
+<style>
+    input[type="search"] {
+        margin-top: -5px;
+    }
+</style>
 
 @section('content')
     @if ($exams->count() > 0)

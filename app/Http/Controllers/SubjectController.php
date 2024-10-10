@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClassModel;
 use App\Models\Student;
 use App\Models\Subject;
 use Illuminate\Http\Request;
@@ -85,10 +86,10 @@ class SubjectController extends Controller
     }
     public function getSubjectsByStudentId(Student $student)
     {
-        $class = $student->class;
-        $subjects =  $class->load('subjects.teachers.user');
+        $classId = $student->class->id;
 
-        $subjects = $subjects->subjects;
+        $class = ClassModel::with('subjects')->find($classId);
+        $subjects = $class->subjects;
         return view('student.student-subjects', compact('subjects'));
     }
 }

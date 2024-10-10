@@ -7,6 +7,10 @@
         left: 10% !important;
 
     }
+
+    input[type="search"] {
+        margin-top: -5px;
+    }
 </style>
 
 @section('content')

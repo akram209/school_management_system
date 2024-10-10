@@ -1,7 +1,11 @@
 @extends('layouts.app')
 @section('title', 'Your Subjects')
 @section('title of sidebar', 'Settings')
-
+<style>
+    input[type="search"] {
+        margin-top: -5px;
+    }
+</style>
 
 
 @section('content')

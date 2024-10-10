@@ -61,6 +61,10 @@
         height: 100%;
         width: 100%;
     }
+
+    input[type="search"] {
+        margin-top: -5px;
+    }
 </style>
 
 @section('content')

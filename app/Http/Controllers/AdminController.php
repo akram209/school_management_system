@@ -11,6 +11,7 @@ use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 
 class AdminController extends Controller
 {
@@ -29,6 +30,27 @@ class AdminController extends Controller
         $teachers = Teacher::whereHas('user', function ($query) {
             $query->where('role', 'teacher');
         })->get();
+        $options1 = [
+            'chart_title' => 'Users by months',
+            'report_type' => 'group_by_date',
+            'model' => 'App\Models\User',
+            'group_by_field' => 'created_at',
+            'group_by_period' => 'month',
+            'chart_type' => 'line',
+
+        ];
+        $options2 = [
+            'chart_title' => 'Users by roles',
+            'report_type' => 'group_by_string',
+            'model' => 'App\Models\User',
+            'group_by_field' => 'role',
+            'chart_type' => 'pie',
+        ];
+
+
+
+        $chart1 = new LaravelChart($options1);
+        $chart2 = new LaravelChart($options2);
 
         return view('admin.profile', [
             'user' => $user,
@@ -38,7 +60,9 @@ class AdminController extends Controller
             'totalClasses' => $totalClasses,
             'totalFees' => $totalFees,
             'students' => $students,
-            'teachers' => $teachers
+            'teachers' => $teachers,
+            'chart1' => $chart1,
+            'chart2' => $chart2
         ]);
     }
 
