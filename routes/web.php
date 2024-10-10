@@ -26,9 +26,10 @@ Route::post('/notification', [NotificationController::class, 'store'])->middlewa
 Route::get('/notification', [NotificationController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.notification.index');
 Route::get('/teacher-class-subject', [AdminController::class, 'assignTeachers'])->middleware(['auth', 'verified'])->name('admin.teacher.assign');
 Route::post('/teacher-class-subject', [AdminController::class, 'storeTeachersClassSubject'])->middleware(['auth', 'verified'])->name('class-subject-teacher.store');
-
 Route::delete('/teacher-class-subject{teacher}/{class}/{subject}', [AdminController::class, 'deleteTeachersClassSubject'])->middleware(['auth', 'verified'])->name('class-subject-teacher.destroy');
-
+Route::get('/parent-student', [AdminController::class, 'assignParents'])->middleware(['auth', 'verified'])->name('admin.parent.assign');
+Route::post('/parent-student', [AdminController::class, 'storeParentsStudent'])->middleware(['auth', 'verified'])->name('parent-student.store');
+Route::delete('/parent-student{parent}/{student}', [AdminController::class, 'deleteParentsStudent'])->middleware(['auth', 'verified'])->name('parent-student.destroy');
 
 
 

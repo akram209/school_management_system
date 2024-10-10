@@ -92,7 +92,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{ route('admin.parent.assign') }}">
                         <i class="fa-solid fa-border-all"></i> <span> assign children</span>
                     </a>
                 </li>
