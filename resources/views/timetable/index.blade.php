@@ -32,8 +32,8 @@
                 <th style="padding-left: 5% ">Teacher Id</th>
                 <th style=" padding-left:5%">Subject Id</th>
                 <th style=" padding-left:5%">Class Id</th>
-                <th>Day</th>
-                <th>Start</th>
+                <th style=" padding-left:7%">Day</th>
+                <th style="padding-left: 5%">Start</th>
                 <th style="padding-left: 5%">End</th>
                 <th>Actions</th>
             </tr>

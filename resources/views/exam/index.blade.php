@@ -48,7 +48,7 @@
                     <td>{{ $exam->class->name }}</td>
                     <td>{{ $exam->subject->name }}</td>
                     <td style="padding-right:  3%">{{ $exam->date }}</td>
-                    <td>{{ $exam->start_time }}</td>
+                    <td style="padding-right:  3%">{{ $exam->start_time }}</td>
                     <td>{{ $exam->end_time }}</td>
                     <td style="padding-left:  7%">{{ $exam->type }}</td>
                     <td>

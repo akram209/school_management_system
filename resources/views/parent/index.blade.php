@@ -55,9 +55,9 @@
 
                     <td>{{ $parent->id }}</td>
                     <td>{{ $parent->user->first_name . ' ' . $parent->user->last_name }}</td>
-                    <td>{{ $parent->user->gender }}</td>
-                    <td>{{ $parent->user->email }}</td>
-                    <td>
+                    <td style="padding-right: 5%">{{ $parent->user->gender }}</td>
+                    <td style="padding-right: 5%">{{ $parent->user->email }}</td>
+                    <td style="padding-right: 5%">
                         <div class="dropdown">
                             <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-ellipsis-vertical"></i>

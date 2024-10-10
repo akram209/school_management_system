@@ -19,7 +19,7 @@
                     <td> {{ $permission->email }}</td>
                     <td> {{ $permission->code }}</td>
                     <td> {{ $permission->created_at }}</td>
-                    <td> <span wire:click="delete({{ $permission->id }})" style="cursor:pointer"><i
+                    <td> <span wire:click="delete({{ $permission->id }})" style="cursor:pointer ;color:red"><i
                                 class="fa-regular fa-trash-can"></i></span>
                     </td>
             @endforeach

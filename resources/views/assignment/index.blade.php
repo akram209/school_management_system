@@ -48,7 +48,7 @@
                     <td>{{ $assignment->class->name }}</td>
                     <td>{{ $assignment->subject->name }}</td>
                     <td>{{ $assignment->title }}</td>
-                    <td>{{ $assignment->mark }}</td>
+                    <td style="padding-right:  3%">{{ $assignment->mark }}</td>
                     <td style="padding-right:  3%">{{ $assignment->deadline }}</td>
                     <td style="padding-left:  8% ">{{ $assignment->type }}</td>
 
