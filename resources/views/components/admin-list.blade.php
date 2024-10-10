@@ -43,7 +43,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('teacher.assign') }}">
+                    <a href="{{ route('admin.teacher.assign') }}">
                         <i class="fa-solid fa-border-all"></i> <span>Classes and Subject</span>
                     </a>
                 </li>
