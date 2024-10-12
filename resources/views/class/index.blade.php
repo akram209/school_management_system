@@ -19,6 +19,17 @@
         input[type="search"] {
             margin-top: -15px
         }
+
+        .container {
+            position: absolute;
+            top: 10%;
+            left: 25%;
+            width: 50% !important;
+            border: 1px solid rgb(187, 183, 183);
+            border-radius: 10px;
+            padding: 10px;
+        }
     </style>
+    @livewire('class-form')
     @livewire('class-list')
 @endsection
