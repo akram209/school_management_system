@@ -111,7 +111,7 @@
             // Keep the loading screen visible for 5 seconds
             setTimeout(function() {
                 document.getElementById('loading').style.display = 'none';
-            }, 2000); // 5000 milliseconds = 5 seconds
+            }, 500);
         });
 
         // Optionally, show the loading screen again when navigating away

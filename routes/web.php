@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('/dashboard/{user}', [AdminController::class, 'profile'])->middleware(['auth', 'verified', 'isAdmin'])->name('admin.profile');
 Route::get('/permissions', [AdminController::class, 'permissions'])->middleware(['auth', 'verified', 'isAdmin'])->name('admin.permissions');

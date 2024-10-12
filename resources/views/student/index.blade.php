@@ -31,6 +31,7 @@
             border: 1px solid rgb(183, 204, 247) !important;
 
         }
+        
     </style>
     <div style="position: absolute; top: 40px; left: 40%">
         @if (session('success'))

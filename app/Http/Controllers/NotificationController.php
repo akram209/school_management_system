@@ -48,6 +48,7 @@ class NotificationController extends Controller
             'user_id' => $user->id,
             'type' => $request->type,
         ]);
+        
         dispatch(new NotificationJob($request->email, $request->type, $request->title, $request->body));
         return redirect()->back()->with('success', 'Notification created successfully');
     }
