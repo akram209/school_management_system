@@ -213,27 +213,7 @@
 
             </ul>
         </li>
-        <li>
-            <a href="#">
 
-                <i class="fa-solid fa-comment-dollar"></i><span class="nav-text">
-                    Fee
-                </span>
-            </a>
-            <ul>
-                <li>
-                    <a href="">
-                        <i class="fa-solid fa-plus"></i> <span>Add Fee</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <i class="fa-solid fa-border-all"></i> <span>All Fees</span>
-                    </a>
-                </li>
-
-            </ul>
-        </li>
         <li>
             <a href="#">
                 <i class="fa-solid fa-gears"></i>
