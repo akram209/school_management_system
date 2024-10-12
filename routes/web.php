@@ -7,12 +7,10 @@ use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ParentController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TimetableController;
-use App\Models\Attendence;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {

@@ -23,10 +23,10 @@
             @foreach ($students as $student)
                 <tr>
                     <td style=" padding-top: 0px ; padding-right: 10%; padding-bottom: 20px ">
-                        <a href="{{ route('teacher.profile', $student->user_id) }}">
+                        <a href="{{ route('student.profile', $student->user_id) }}">
                             @if ($student->user->image != null)
-                                <img src="{{ asset('storage/' . $student->user->image) }}" alt="" width="60"
-                                    loading="lazy">
+                                <img src="{{ asset('storage/images/' . $student->user->image) }}" alt=""
+                                    width="60" loading="lazy">
                             @else
                                 <img src="{{ asset('build/assets/images/profile.jpg') }}" alt="profile"
                                     class="profile-card-header-profile-img" loading="lazy">

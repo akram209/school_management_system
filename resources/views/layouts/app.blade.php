@@ -9,6 +9,7 @@
     @include('../includes.style')
 
 <body>
+
     <nav class="navbar navbar-dark bg-primary">
 
         <i class="bi bi-list" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"

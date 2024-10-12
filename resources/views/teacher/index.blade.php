@@ -46,7 +46,8 @@
                     <td style=" padding-top: 0px ; padding-right: 10%; padding-bottom: 20px ">
                         <a href="{{ route('teacher.profile', $teacher->user_id) }}">
                             @if ($teacher->user->image != null)
-                                <img src="{{ asset('storage/' . $teacher->user->image) }}" alt="" width="60">
+                                <img src="{{ asset('storage/images' . $teacher->user->image) }}" alt=""
+                                    width="60">
                             @else
                                 <img src="{{ asset('build/assets/images/profile.jpg') }}" alt="profile"
                                     class="profile-card-header-profile-img">
