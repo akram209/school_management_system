@@ -9,8 +9,6 @@ use Livewire\Component;
 class ClassForm extends Component
 {
     public $name;
-    #[On('class-event')]
-    public function listenClassEvent() {}
     public function CreateClass()
     {
 

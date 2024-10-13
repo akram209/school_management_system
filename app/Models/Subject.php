@@ -15,9 +15,14 @@ class Subject extends Model
 
 
 
-    public function grades()
+    public function assignments()
     {
-        return $this->hasMany(Grade::class);
+        return $this->hasMany(Assignment::class);
+    }
+
+    public function exams()
+    {
+        return $this->hasMany(Exam::class);
     }
 
     public function timeTables()

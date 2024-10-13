@@ -79,6 +79,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/class', [ClassController::class, 'store'])->name('class.store');
 
     Route::get('/subjects/{student}', [SubjectController::class, 'getSubjectsByStudentId'])->name('student.subjects');
+    Route::middleware('isAdmin')->group(function () {
+        Route::get('/subject', [SubjectController::class, 'index'])->name('subject.index');
+    });
+
 
     Route::get('student/attendence/{student}', [AttendenceController::class, 'getAttendencesByStudentId'])->name('student.attendences');
     Route::get('teacher/{teacher}/take-attendence/{class}', [AttendenceController::class, 'takeAttendenceByClassId'])->name('teacher.take-attendence');

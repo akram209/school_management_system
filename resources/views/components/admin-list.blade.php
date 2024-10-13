@@ -11,7 +11,16 @@
             </a>
 
         </li>
+        <li>
+            <a href="{{ route('subject.index') }}">
 
+                <i class="fa-solid fa-book"></i> <span class="nav-text">
+                    Subjects
+                </span>
+            </a>
+
+
+        </li>
         <li>
             <a href="#">
 
