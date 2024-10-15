@@ -193,6 +193,9 @@
                                             {{ $sunday->subject->name }}
                                         </span>
                                         <div class="font-size15 text-gray">{{ $sunday->teacher->user->first_name }}
+                                            {{ $sunday->teacher->user->last_name }}</div>
+                                    @else
+                                        <div class="font-size15 text-gray"></div>
                                     @endif
                                 </td>
 
@@ -203,8 +206,12 @@
                                             {{ $monday->subject->name }}
                                         </span>
                                         <div class="font-size15 text-gray">{{ $sunday->teacher->user->first_name }}
+                                        @else
+                                            <div> </div>
                                     @endif
                                 </td>
+
+
 
                                 <td>
                                     @if ($tuesday = $time->where('day_name', 'tuesday')->first())
@@ -212,7 +219,10 @@
                                             class="text-white bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13">
                                             {{ $tuesday->subject->name }}
                                         </span>
-                                        <div class="font-size15 text-gray">{{ $sunday->teacher->user->first_name }}
+                                        <div class="font-size15 text-gray">{{ $tuesday->teacher->user->first_name }}
+                                            {{ $tuesday->teacher->user->last_name }}</div>
+                                    @else
+                                        <div class="font-size15 text-gray"></div>
                                     @endif
                                 </td>
 
@@ -222,7 +232,10 @@
                                             class="text-white bg-pink padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13">
                                             {{ $wednesday->subject->name }}
                                         </span>
-                                        <div class="font-size15 text-gray">{{ $sunday->teacher->user->first_name }}
+                                        <div class="font-size15 text-gray">{{ $wednesday->teacher->user->first_name }}
+                                            {{ $wednesday->teacher->user->last_name }}</div>
+                                    @else
+                                        <div class="font-size15 text-gray"></div>
                                     @endif
                                 </td>
 
@@ -232,11 +245,14 @@
                                             class="text-white bg-blue padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13">
                                             {{ $thursday->subject->name }}
                                         </span>
-                                        <div class="font-size15 text-gray">{{ $sunday->teacher->user->first_name }}
+                                        <div class="font-size15 text-gray">{{ $thursday->teacher->user->first_name }}
+                                            {{ $thursday->teacher->user->last_name }}</div>
+                                    @else
+                                        <div class="font-size15 text-gray"></div>
                                     @endif
-                                </td>
                             </tr>
                         @endforeach
+
                     @endif
                 </tbody>
             </table>

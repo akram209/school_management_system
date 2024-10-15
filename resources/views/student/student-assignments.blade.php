@@ -7,14 +7,14 @@
 
     }
 
-    .fa-solid {
+    .fa-solid.fa-cloud-arrow-up {
         cursor: pointer;
         width: 25%;
         font-size: 30px;
         border-radius: 10px;
     }
 
-    .fa-solid:hover {
+    .fa-solid.fa-cloud-arrow-up:hover {
         color: rgb(100, 100, 100);
         background-color: rgb(255, 250, 250);
     }

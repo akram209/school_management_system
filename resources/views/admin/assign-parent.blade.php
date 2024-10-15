@@ -81,7 +81,7 @@
                 <select class="form-select" name="parent_id" style="margin-left:-5px">
                     <option selected disabled hidden>Parent</option>
                     @foreach ($parents as $parent)
-                        <option value="{{ $parent->id }}">{{ $parent->user->first_name }} {{ $parent->user->last_name }}
+                        <option value="{{ $parent->id }}">{{ $parent->id }}
                         </option>
                     @endforeach
                 </select>
@@ -95,8 +95,8 @@
                 <select class="form-select" name="student_id" style="margin-left:-5px">
                     <option selected disabled hidden>Student</option>
                     @foreach ($students as $student)
-                        <option value="{{ $student->id }}">{{ $student->user->first_name }}
-                            {{ $student->user->last_name }}</option>
+                        <option value="{{ $student->id }}">{{ $student->id }}
+                        </option>
                     @endforeach
                 </select>
             </div>
@@ -114,8 +114,8 @@
         <table class="table bg-white">
             <thead class="bg-light">
                 <tr>
-                    <th>Parent</th>
                     <th>Student</th>
+                    <th>Parent</th>
                     <th>Actions</th>
                 </tr>
             </thead>
