@@ -73,19 +73,19 @@
             @endforeach
         </ul>
     </li>
-    {{-- <li>
+    <li>
         <a href="#">
-            <i class="fa-solid fa-list-check"></i><span class="nav-text">Grades</span>
+            <i class="fa-solid fa-gears"></i>
+            <span class="nav-text">privacy settings</span>
         </a>
         <ul>
-            <li><a href=""><i class="fa-regular fa-file-lines"></i><span> Exam 1
-                    </span></a></li>
-            <li><a href="edit-professor.html"><i class="fa-regular fa-file-lines"></i> <span>
-                        Exam
-                        2
-                    </span></a></li>
+            {{-- user id --}}
+            <li><a href=""> <i class="fa-regular fa-file-lines"></i><span>change
+                        your info</span></a></li>
+            <li><a href="{{ route('password.confirm') }}"><i class="fa-solid fa-key"></i><span>change
+                        password</span> </a></li>
         </ul>
-    </li> --}}
+    </li>
     <li>
         <form action="{{ route('logout') }}" method="POST" id="logout-form">
             @csrf

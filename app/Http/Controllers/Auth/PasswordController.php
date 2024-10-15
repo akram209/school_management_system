@@ -10,18 +10,20 @@ use Illuminate\Validation\Rules\Password;
 
 class PasswordController extends Controller
 {
-    /**
-     * Update the user's password.
-     */
+
+    public function change()
+    {
+        return view('auth.change-password');
+    }
     public function update(Request $request): RedirectResponse
     {
-        $validated = $request->validateWithBag('updatePassword', [
-            'current_password' => ['required', 'current_password'],
-            'password' => ['required', Password::defaults(), 'confirmed'],
+        $request->validate([
+            'password' => 'required|min:4',
+            'confirm_password' => 'required|same:password',
         ]);
 
         $request->user()->update([
-            'password' => Hash::make($validated['password']),
+            'password' => Hash::make($request->password),
         ]);
 
         return back()->with('status', 'password-updated');

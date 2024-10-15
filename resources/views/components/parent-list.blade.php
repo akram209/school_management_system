@@ -104,6 +104,19 @@
             </ul>
         </li>
         <li>
+            <a href="#">
+                <i class="fa-solid fa-gears"></i>
+                <span class="nav-text">privacy settings</span>
+            </a>
+            <ul>
+                {{-- user id --}}
+                <li><a href=""> <i class="fa-regular fa-file-lines"></i><span>change
+                            your info</span></a></li>
+                <li><a href="{{ route('password.confirm') }}"><i class="fa-solid fa-key"></i><span>change
+                            password</span> </a></li>
+            </ul>
+        </li>
+        <li>
             <form action="{{ route('logout') }}" method="POST" id="logout-form">
                 @csrf
                 <a href="{{ route('logout') }}"
