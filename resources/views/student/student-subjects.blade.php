@@ -27,8 +27,13 @@
                         <div class="accordion-body">
                             <p> Teacher Name : {{ $subject->teachers[0]->user->first_name }}
                                 {{ $subject->teachers[0]->user->last_name }}</p>
-                            <img src="{{ asset('storage/images/' . $subject->teachers[0]->user->image) }}"
-                                style="width: 50px !important; height: 50px !important" alt="">
+                            @if ($subject->teachers[0]->user->image)
+                                <img src="{{ asset('storage/images/' . $subject->teachers[0]->user->image) }}"
+                                    style="width: 50px !important; height: 50px !important" alt="">
+                            @else
+                                <img src="{{ asset('build/assets/images/profile.jpg') }}"
+                                    style="width: 50px !important; height: 50px !important" alt="">
+                            @endif
                             <p>Description : {{ $subject->description }}</p>
 
 

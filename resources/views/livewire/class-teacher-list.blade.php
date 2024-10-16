@@ -30,8 +30,13 @@
                 <td>
                     <a href="{{ route('teacher.profile', $teacher->user->id) }}">
                         <div class="d-flex align-items-center">
-                            <img src="{{ asset('storage/' . $teacher->user->image) }}" alt="Student Image"
-                                style="width: 45px; height: 45px" class="rounded-circle" />
+                            @if ($teacher->user->image)
+                                <img src="{{ asset('storage/images/' . $teacher->user->image) }}" alt="Student Image"
+                                    style="width: 45px; height: 45px" class="rounded-circle" />
+                            @else
+                                <img src="{{ asset('build/assets/images/profile.jpg') }}" alt="profile"
+                                    style="width: 45px; height: 45px" class="rounded-circle">
+                            @endif
                         </div>
                     </a>
                 </td>
