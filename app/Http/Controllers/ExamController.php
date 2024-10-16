@@ -35,9 +35,13 @@ class ExamController extends Controller
     }
     public function create()
     {
-        $subjects = SubjectModel::all();
         $classes = ClassModel::all();
-        return view('exam.create', ['subjects' => $subjects, 'classes' => $classes]);
+        $examObject = DB::table('class_subject_teacher')
+            ->join('subjects', 'class_subject_teacher.subject_id', '=', 'subjects.id')
+            ->join('classes', 'class_subject_teacher.class_id', '=', 'classes.id')
+            ->select('subjects.id as subject_id', 'subjects.name as subject_name', 'classes.id as class_id', 'classes.name as class_name')
+            ->get();
+        return view('exam.create', ['examObject' => $examObject, 'classes' => $classes]);
     }
 
     /**

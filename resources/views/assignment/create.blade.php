@@ -114,8 +114,9 @@
                     <select class="form-select" name="subject_id" aria-label="Default select example"
                         style="height: 50px; margin-left: -5px" title="subject">
                         <option selected disabled hidden>subject</option>
-                        @foreach ($subjects as $subject)
-                            <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                        @foreach ($assignmentObject as $subject)
+                            <option value="{{ $subject->subject_id }}">{{ $subject->subject_name }}
+                                - {{ $subject->class_name }}</option>
                         @endforeach
 
                     </select>
