@@ -115,6 +115,7 @@
             <thead class="bg-light">
                 <tr>
                     <th>Student</th>
+                    <th>Student Id</th>
                     <th>Parent</th>
                     <th>Actions</th>
                 </tr>
@@ -123,7 +124,13 @@
                 @foreach ($parentStudents as $parentStudent)
                     <tr>
                         <td>{{ $parentStudent->student_first_name }} {{ $parentStudent->student_last_name }}</td>
-                        <td>{{ $parentStudent->parent_first_name }} {{ $parentStudent->parent_last_name }}</td>
+                        <td>{{ $parentStudent->student_id }}</td>
+                        <td>
+                            <a href="{{ route('parent.profile', $parentStudent->parent_user_id) }}" target="_blank"
+                                style="text-decoration: none; color: black">
+                                {{ $parentStudent->parent_first_name }} {{ $parentStudent->parent_last_name }}
+                            </a>
+                        </td>
                         <td>
                             <form
                                 action="{{ route('parent-student.destroy', [

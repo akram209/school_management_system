@@ -9,7 +9,8 @@
             <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
         @enderror
         <div class="col">
-            <select class="form-select" wire:model.live="day_name" name="day_name" aria-label="Default select example">
+            <select class="form-select" wire:model="day_name" name="day_name" aria-label="Default select example">
+
                 <option selected disabled hidden>days</option>
                 <option value="sunday">sunday</option>
                 <option value="monday">monday</option>
@@ -24,8 +25,10 @@
         @enderror
         <div class="col">
             <select class="form-select" wire:model.live="selectedClass" aria-label="Default select example">
-                <option selected disabled hidden>Classes</option>
-                @foreach ($classes as $class)
+                @foreach ($classes as $key => $class)
+                    @if ($key == 0)
+                        <option selected disabled hidden>Classes</option>
+                    @endif
                     <option value="{{ $class->id }}">{{ $class->name }}</option>
                 @endforeach
             </select>
@@ -36,8 +39,10 @@
         @enderror
         <div class="col">
             <select class="form-select" wire:model.live="selectedTeacher" aria-label="Default select example">
-                <option selected disabled hidden>Teachers</option>
-                @foreach ($teachers as $teacher)
+                @foreach ($teachers as $key => $teacher)
+                    @if ($key == 0)
+                        <option selected disabled hidden>Teachers</option>
+                    @endif
                     <option value="{{ $teacher->id }}">{{ $teacher->user->first_name }} {{ $teacher->user->last_name }}
                     </option>
                 @endforeach
@@ -75,7 +80,7 @@
             </select>
         </div> --}}
 
-        <div class="col-12">
+        <div class="col-12" style="margin-top: 20px">
             <button type="submit" class="btn btn-primary" style="width: 100%">save</button>
         </div>
     </form>

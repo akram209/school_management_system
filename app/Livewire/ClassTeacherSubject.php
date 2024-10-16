@@ -48,7 +48,8 @@ class ClassTeacherSubject extends Component
             'teacher_id' => $this->selectedTeacher,
             'subject_id' => $this->selectedSubject->first()->id,
             'start_time' => $this->start_time,
-            'end_time' => $this->end_time
+            'end_time' => $this->end_time,
+            'day_name' => $this->day_name
         ]);
 
         $this->reset('selectedClass', 'selectedTeacher', 'selectedSubject');

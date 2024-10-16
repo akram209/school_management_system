@@ -151,7 +151,8 @@ class AdminController extends Controller
                 'users.email as student_email',
                 'parent_user.first_name as parent_first_name',
                 'parent_user.last_name as parent_last_name',
-                'parent_user.email as parent_email'
+                'parent_user.email as parent_email',
+                'parent_user.id as parent_user_id'
             )->get();
 
 
