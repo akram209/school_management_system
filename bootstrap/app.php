@@ -3,6 +3,7 @@
 use App\Http\Middleware\Authenticated;
 use App\Http\Middleware\isAdmin;
 use App\Http\Middleware\isParent;
+use App\Http\Middleware\isStudent;
 use App\Http\Middleware\isTeacher;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -21,7 +22,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'authed' => Authenticated::class,
             'isAdmin' => isAdmin::class,
             'isTeacher' => isTeacher::class,
-            'isParent' => isParent::class
+            'isParent' => isParent::class,
+            'isStudent' => isStudent::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

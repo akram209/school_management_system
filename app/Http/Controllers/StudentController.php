@@ -180,4 +180,43 @@ class StudentController extends Controller
 
         return response()->json($student);
     }
+    public function changeInfo(Request $request)
+    {
+
+        $student = Student::where('user_id', $request->user()->id)->first();;
+        return view('student.change-info', compact('student'));
+    }
+    public function updateInfo(Request $request)
+    {
+        $request->validate([
+            'first_name' => ['required'],
+            'last_name' => ['required'],
+            'image' => ['image', 'mimes:jpeg,png,jpg'],
+            'gender' => ['in:male,female'],
+
+        ]);
+        if ($request->hasFile('image')) {
+            if ($request->user()->image) {
+                Storage::disk('images')->delete($request->user()->image);
+            }
+            $file = $request->file('image');
+            $image = Storage::disk('images')->put('students', $file);
+            $request->user()->update([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'gender' => $request->gender,
+                'image' => $image,
+            ]);
+        }
+        if (!$request->hasFile('image')) {
+            $request->user()->update([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'gender' => $request->gender,
+
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Info updated successfully');
+    }
 }

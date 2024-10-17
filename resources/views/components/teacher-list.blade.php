@@ -80,7 +80,7 @@
         </a>
         <ul>
             {{-- user id --}}
-            <li><a href=""> <i class="fa-regular fa-file-lines"></i><span>change
+            <li><a href="{{ route('teacher.change-info') }}"> <i class="fa-regular fa-file-lines"></i><span>change
                         your info</span></a></li>
             <li><a href="{{ route('password.confirm') }}"><i class="fa-solid fa-key"></i><span>change
                         password</span> </a></li>

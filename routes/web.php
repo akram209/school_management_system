@@ -28,6 +28,8 @@ Route::delete('/teacher-class-subject{teacher}/{class}/{subject}', [AdminControl
 Route::get('/parent-student', [AdminController::class, 'assignParents'])->middleware(['auth', 'verified', 'isAdmin'])->name('admin.parent.assign');
 Route::post('/parent-student', [AdminController::class, 'storeParentsStudent'])->middleware(['auth', 'verified', 'isAdmin'])->name('parent-student.store');
 Route::delete('/parent-student{parent}/{student}', [AdminController::class, 'deleteParentsStudent'])->middleware(['auth', 'verified', 'isAdmin'])->name('parent-student.destroy');
+Route::get('/admin/change-info', [AdminController::class, 'changeInfo'])->middleware(['auth', 'verified', 'isAdmin'])->name('admin.change-info');
+Route::put('/admin/change-info', [AdminController::class, 'updateInfo'])->middleware(['auth', 'verified', 'isAdmin'])->name('admin.update-info');
 
 
 
@@ -36,6 +38,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/student/profile/{id}', [StudentController::class, 'profile'])->name('student.profile');
     Route::post('/storeStudentclass/{student}', [StudentController::class, 'setClass'])->name('student.storeclass');
+    Route::get('/student/change-info', [StudentController::class, 'changeInfo'])->middleware(['isStudent'])->name('student.change-info');
+    Route::put('/student/change-info', [StudentController::class, 'updateInfo'])->middleware(['isStudent'])->name('student.update-info');
     Route::middleware('isAdmin')->group(function () {
         Route::get('/student', [StudentController::class, 'index'])->name('student.index');
         Route::get('/student/create', [StudentController::class, 'create'])->name('student.create');
@@ -49,6 +53,9 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/teacher/profile/{id}', [TeacherController::class, 'profile'])->name('teacher.profile');
+    Route::get('/teacher/change-info', [TeacherController::class, 'changeInfo'])->middleware(['isTeacher'])->name('teacher.change-info');
+    Route::put('/teacher/change-info', [TeacherController::class, 'updateInfo'])->middleware(['isTeacher'])->name('teacher.update-info');
+
     Route::middleware('isAdmin')->group(function () {
         Route::get('/teacher', [TeacherController::class, 'index'])->name('teacher.index');
         Route::get('/teacher/create', [TeacherController::class, 'create'])->name('teacher.create');
@@ -61,6 +68,9 @@ Route::middleware('auth')->group(function () {
     });
     Route::get('/parent/profile/{id}', [ParentController::class, 'profile'])->name('parent.profile');
     Route::get('/parents/{student}', [ParentController::class, 'getParentsByStudentId'])->name('student.parents');
+    Route::get('/parent/change-info', [ParentController::class, 'changeInfo'])->middleware(['isParent'])->name('parent.change-info');
+    Route::put('/parent/change-info', [ParentController::class, 'updateInfo'])->middleware(['isParent'])->name('parent.update-info');
+
     Route::middleware('isAdmin')->group(function () {
         Route::get('/parent', [ParentController::class, 'index'])->name('parent.index');
         Route::get('/parent/create', [ParentController::class, 'create'])->name('parent.create');

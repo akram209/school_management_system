@@ -165,4 +165,48 @@ class ParentController extends Controller
 
         return view('parent.profile', ['parent' => $parent]);
     }
+    public function changeInfo(Request $request)
+    {
+
+        $parent = ParentModel::where('user_id', $request->user()->id)->first();;
+        return view('parent.change-info', compact('parent'));
+    }
+    public function updateInfo(Request $request)
+    {
+        $request->validate([
+            'first_name' => ['required'],
+            'last_name' => ['required'],
+            'image' => ['image', 'mimes:jpeg,png,jpg'],
+            'gender' => ['in:male,female'],
+            'address' => ['required'],
+        ]);
+        if ($request->hasFile('image')) {
+            if ($request->user()->image) {
+                Storage::disk('images')->delete($request->user()->image);
+            }
+            $file = $request->file('image');
+            $image = Storage::disk('images')->put('parents', $file);
+            $request->user()->update([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'gender' => $request->gender,
+                'image' => $image,
+            ]);
+        }
+        if (!$request->hasFile('image')) {
+            $request->user()->update([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'gender' => $request->gender,
+
+            ]);
+        }
+        $parent = ParentModel::where('user_id', $request->user()->id)->first();
+
+        $parent->update([
+            'address' => $request->address,
+
+        ]);
+        return redirect()->back()->with('success', 'Info updated successfully');
+    }
 }

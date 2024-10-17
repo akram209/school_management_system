@@ -184,4 +184,53 @@ class TeacherController extends Controller
         $subjects = Subject::all();
         return view('teacher.assign', compact('teachers', 'classes', 'subjects'));
     }
+
+    public function changeInfo(Request $request)
+    {
+
+        $teacher = Teacher::where('user_id', $request->user()->id)->first();;
+        return view('teacher.change-info', compact('teacher'));
+    }
+    public function updateInfo(Request $request)
+    {
+        $request->validate([
+            'first_name' => ['required'],
+            'last_name' => ['required'],
+            'image' => ['image', 'mimes:jpeg,png,jpg'],
+            'gender' => ['in:male,female'],
+            'address' => ['required'],
+            'qualification' => ['required', 'max:255'],
+            'experience_years' => ['required', 'numeric'],
+
+        ]);
+        if ($request->hasFile('image')) {
+            if ($request->user()->image) {
+                Storage::disk('images')->delete($request->user()->image);
+            }
+            $file = $request->file('image');
+            $image = Storage::disk('images')->put('teachers', $file);
+            $request->user()->update([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'gender' => $request->gender,
+                'image' => $image,
+            ]);
+        }
+        if (!$request->hasFile('image')) {
+            $request->user()->update([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'gender' => $request->gender,
+
+            ]);
+        }
+        $teacher = Teacher::where('user_id', $request->user()->id)->first();
+
+        $teacher->update([
+            'address' => $request->address,
+            'qualification' => $request->qualification,
+            'experience_years' => $request->experience_years
+        ]);
+        return redirect()->back()->with('success', 'Info updated successfully');
+    }
 }

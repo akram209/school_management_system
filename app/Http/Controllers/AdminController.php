@@ -9,8 +9,10 @@ use App\Models\Student;
 use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\User;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 
 class AdminController extends Controller
@@ -183,5 +185,35 @@ class AdminController extends Controller
         DB::table('parent_student')->where('parent_id', $parent_id)->where('student_id', $student_id)->delete();
 
         return redirect()->back();
+    }
+    public function changeInfo()
+    {
+
+
+        return view('admin.change-info');
+    }
+    public function updateInfo(Request $request)
+    {
+        $request->validate([
+            'first_name' => ['required'],
+            'last_name' => ['required'],
+            'image' => ['image', 'mimes:jpeg,png,jpg'],
+            'gender' => ['in:male,female'],
+
+        ]);
+        if ($request->hasFile('image')) {
+            if ($request->user()->image) {
+                Storage::disk('images')->delete($request->user()->image);
+            }
+            $file = $request->file('image');
+            $image = Storage::disk('images')->put('admin', $file);
+        }
+        $request->user()->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'gender' => $request->gender,
+            'image' => $image ?? null
+        ]);
+        return redirect()->back()->with('success', 'Info updated successfully');
     }
 }

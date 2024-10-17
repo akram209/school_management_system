@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class isParent
+class isStudent
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class isParent
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::check() && (Auth::user()->role != 'admin' || Auth::user()->role != 'parent')) {
+        if (!Auth::check() && (Auth::user()->role != 'admin' || Auth::user()->role != 'student')) {
             return redirect()->back();
         }
         return $next($request);
