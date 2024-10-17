@@ -1,66 +1,50 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+School Management System (SMS)
+Overview
+The School Management System (SMS) is a web-based application built with Laravel that streamlines and manages school operations, including student registration, attendance tracking, assignment submission, exam management, fee tracking, and much more. The system offers a role-based interface tailored to the needs of students, teachers, parents, and administrators.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Features
+1. User Roles and Access Levels
+Students:
+View personal profile, academic performance, timetable, assignments, grades, results, and attendance records.
+Submit assignments online and update them until the deadline.
+View fee status, class information, subjects, and upcoming and past exam details.
+Register using a permission code sent via email.
+Teachers:
+View and manage class schedules, student profiles, assignments, and attendance.
+Mark attendance, grade assignments and exams, and communicate with students and parents.
+Create and manage assignments, exams, and provide feedback.
+Parents:
+View children's profiles, attendance, grades, assignments, and fee status.
+Communicate with teachers and track academic progress.
+Receive notifications and pay school fees offline.
+Administrators:
+Manage student, teacher, and parent profiles.
+Oversee academic records, class schedules, fee status, and school-wide announcements.
+Create, update, or delete user accounts, and manage permissions, assignments, and exams.
+2. Livewire Components
+Real-time interactions and updates without refreshing the page, including:
 
-## About Laravelll
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
--   [Simple, fast routing engine](https://laravel.com/docs/routing).
--   [Powerful dependency injection container](https://laravel.com/docs/container).
--   Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
--   Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
--   Database agnostic [schema migrations](https://laravel.com/docs/migrations).
--   [Robust background job processing](https://laravel.com/docs/queues).
--   [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
--   **[Vehikl](https://vehikl.com/)**
--   **[Tighten Co.](https://tighten.co)**
--   **[WebReinvent](https://webreinvent.com/)**
--   **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
--   **[64 Robots](https://64robots.com)**
--   **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
--   **[Cyber-Duck](https://cyber-duck.co.uk)**
--   **[DevSquad](https://devsquad.com/hire-laravel-developers)**
--   **[Jump24](https://jump24.co.uk)**
--   **[Redberry](https://redberry.international/laravel/)**
--   **[Active Logic](https://activelogic.com)**
--   **[byte5](https://byte5.de)**
--   **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Student and teacher attendance tracking.
+Live search and pagination for large student and parent records.
+Score management for assignments and exams.
+3. Queue and Jobs
+Notification and Permission Jobs: Notifications and permission codes are processed in the background to ensure system performance.
+Assignments and Exams Job: Handles large data insertions for marking assignments and exams when deadlines pass.
+Payment Update Job: Automatically updates teacher payment status on the 10th and 25th of each month.
+4. API Endpoints
+Retrieve assignment and attendance percentages for students.
+Get fee payment status for students.
+5. Authentication and Authorization
+Laravel Breeze for authentication, tailored to project needs.
+Middleware for server-side authorization.
+Policy Gates for client-side role-based access control, used to display appropriate sidebar components for each user role.
+6. Dashboard
+Admin dashboard includes charts (using Laravel Charts) to display user metrics by date and role.
+Fee payment statuses are color-coded for better visualization (red for unpaid over a month, yellow for unpaid for 2 weeks).
+7. Database Management
+Utilizes Laravel ORM and query builder for simple and complex queries.
+Eager Loading is used for large data sets, and Lazy Loading for smaller, less frequently accessed data.
+8. Future Enhancements
+Mobile app development with push notifications.
+Enhanced analytics and reporting for academic performance.
+Biometric attendance tracking and integration with external educational tools.
