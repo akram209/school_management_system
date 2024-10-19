@@ -22,6 +22,10 @@
         table {
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;
         }
+
+        input[type="search"] {
+            margin-top: -15px
+        }
     </style>
 
     @livewire('class-teacher-list', ['classId' => $class->id])
@@ -31,7 +35,7 @@
 
     <div class="student-number"
         style=" position: absolute !important;
-         left: 10% !important; top: 85% !important ; overflow:visible !important">
+         left: 12% !important; top: 92% !important ; overflow:visible !important;height: 25vh">
 
         <div class="teacher-subject-header">
             <h4>Students </h4>
@@ -53,7 +57,7 @@
     </div>
     <div class="student-number"
         style=" position: absolute !important;
-     left: 40% !important; top: 85% !important ; overflow:visible !important">
+     left: 42% !important; top: 92% !important ; overflow:visible !important;height: 25vh">
 
         <div class="teacher-subject-header">
             <h4>Teachers </h4>
@@ -75,7 +79,7 @@
     </div>
     <div class="student-number"
         style=" position: absolute !important;
- left: 70% !important; top: 85% !important ; overflow:visible !important">
+ left: 72% !important; top: 92% !important ; overflow:visible !important; height: 25vh">
 
         <div class="teacher-subject-header">
             <h4> Subjects </h4>

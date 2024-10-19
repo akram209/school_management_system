@@ -10,11 +10,15 @@
             left: 10% !important;
             top: 15% !important;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;
+
         }
 
         td:nth-child(6) {
             width: 120px !important;
         }
+
+
+
 
         input[type="search"] {
             margin-top: -15px

@@ -205,15 +205,22 @@ class AdminController extends Controller
             if ($request->user()->image) {
                 Storage::disk('images')->delete($request->user()->image);
             }
-            $file = $request->file('image');
-            $image = Storage::disk('images')->put('admin', $file);
+            $image = Storage::disk('images')->put('admins', $request->file('image'));
+            $request->user()->update([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'gender' => $request->gender,
+                'image' => $image,
+            ]);
         }
-        $request->user()->update([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'gender' => $request->gender,
-            'image' => $image ?? null
-        ]);
+        if (!$request->hasFile('image')) {
+            $request->user()->update([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'gender' => $request->gender,
+
+            ]);
+        }
         return redirect()->back()->with('success', 'Info updated successfully');
     }
 }

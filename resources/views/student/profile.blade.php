@@ -181,7 +181,7 @@
                         @endphp
 
                         @foreach ($timetables as $startTime => $time)
-                            <tr>
+                            <tr style="  height: 80px !important;">
                                 {{-- Show Time Period --}}
                                 <td>{{ $time->first()->start_time }} - {{ $time->first()->end_time }}</td>
 

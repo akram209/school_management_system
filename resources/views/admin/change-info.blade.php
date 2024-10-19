@@ -24,7 +24,7 @@
             </div>
         @endif
 
-        <form class="row g-3" method="POST" action="{{ route('admin.update-change-info') }}" enctype="multipart/form-data">
+        <form class="row g-3" method="POST" action="{{ route('admin.update-info') }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 

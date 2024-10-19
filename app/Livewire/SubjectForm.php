@@ -18,6 +18,7 @@ class SubjectForm extends Component
             'name' => ['required', 'string', 'max:30', 'min:3', 'in:English,Maths,Physics,Chemistry,Biology,Geography,Science'],
             'description' => ['required', 'string', 'max:50', 'min:3'],
         ]);
+
         $subject = Subject::create([
             'name' => $this->name,
             'description' => $this->description

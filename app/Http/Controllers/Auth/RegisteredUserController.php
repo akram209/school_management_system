@@ -75,6 +75,6 @@ class RegisteredUserController extends Controller
         ]);
         Auth::login($user);
 
-        return redirect(route('student.profile'), $user->id);
+        return redirect(route('student.profile', $user->id));
     }
 }

@@ -1,5 +1,5 @@
 <table class="table mb-4 align-middle bg-white"
-    style=" position: absolute !important; width: 80% !important; height: 30% !important; left: 10% !important; top: 50% !important ">
+    style=" position: absolute !important; width: 80% !important; height: 50% !important; left: 10% !important; top: 40% !important ">
     <thead>
         <tr>
             <th colspan="2" style="padding-left: 25% !important">
@@ -25,8 +25,9 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            @foreach ($students as $student)
+        @foreach ($students as $student)
+            <tr style="height: 0px !important; padding: 0px !important">
+
                 <td>
                     <a href="{{ route('student.profile', $student->user->id) }}">
                         <div class="d-flex align-items-center">
@@ -46,7 +47,7 @@
                 <td>{{ $student->user->gender }}</td>
                 <td>{{ $student->class->name }}</td>
 
-        </tr>
+            </tr>
         @endforeach
 
     </tbody>

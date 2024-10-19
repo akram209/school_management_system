@@ -26,7 +26,7 @@
         <tbody>
 
             @foreach ($subjects as $subject)
-                <tr>
+                <tr style="height: 100px !important;">
 
                     <td>{{ $subject->id }}</td>
 

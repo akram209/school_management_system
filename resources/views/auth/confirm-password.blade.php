@@ -16,7 +16,7 @@
 
 <body>
     <div class="container">
-        <h2 class="text-center mb-3">Login</h2>
+        <h2 class="text-center mb-3">Confirm Password</h2>
         <x-auth-session-status class="mb-4" :status="session('status')" />
         <form method="POST" action="{{ route('password.confirm') }}">
             @csrf
