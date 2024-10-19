@@ -95,9 +95,10 @@
                                         class="text-white bg-black padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13">
                                         {{ $monday->subject->name }}
                                     </span>
-                                    <div class="font-size15 text-gray">{{ $sunday->teacher->user->first_name }}
-                                    @else
-                                        <div> </div>
+                                    <div class="font-size15 text-gray">{{ $monday->teacher->user->first_name }}
+                                        {{ $monday->teacher->user->last_name }}</div>
+                                @else
+                                    <div> </div>
                                 @endif
                             </td>
 
