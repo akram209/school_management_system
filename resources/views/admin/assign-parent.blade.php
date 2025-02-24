@@ -4,6 +4,10 @@
 @section('title of sidebar', 'Dashboard')
 
 <style>
+    body {
+        overflow: hidden;
+    }
+
     .container {
         position: absolute;
         top: 8%;
@@ -29,7 +33,7 @@
 
     .table {
         position: absolute;
-        top: 49% !important;
+        top: 40% !important;
         height: 50vh !important;
         width: 50% !important;
         left: 25% !important;

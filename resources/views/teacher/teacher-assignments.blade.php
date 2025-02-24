@@ -19,6 +19,10 @@
         color: rgb(100, 100, 100);
         background-color: rgb(255, 255, 255);
     }
+
+    input[type="search"] {
+        margin-top: -15px
+    }
 </style>
 
 @section('content')

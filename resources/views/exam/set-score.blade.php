@@ -14,6 +14,10 @@
         td:nth-child(6) {
             width: 120px !important;
         }
+
+        input[type="search"] {
+            margin-top: -15px
+        }
     </style>
     @livewire('exam-score', ['exam_id' => $exam->id])
 

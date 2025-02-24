@@ -86,7 +86,6 @@
             </div>
 
             <div class="row g-3">
-
                 @error('address')
                     <div class="alert alert-danger" style="width:100%">{{ $message }}</div>
                 @enderror

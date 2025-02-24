@@ -4,6 +4,10 @@
 @section('title of sidebar', 'Dashboard')
 
 <style>
+    body {
+        overflow: hidden;
+    }
+
     .container {
         position: absolute;
         top: 8%;

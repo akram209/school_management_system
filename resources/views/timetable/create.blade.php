@@ -23,11 +23,7 @@
 @section('content')
     <div class="container" style="position: absolute; top: 20%; left: 10%">
         <h3 style="text-align: center">Create Timetable</h3>
-        @if (session('success'))
-            <div class="alert alert-success" style="text-align: center">
-                {{ session('success') }}
-            </div>
-        @endif
+  
 
 
 
