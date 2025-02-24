@@ -41,3 +41,6 @@ The School Management System (SMS) is a web-based application built with Laravel
 
 ## Er diagram link
 - https://lucid.app/users/registerOrLogin/free?showLogin=false&invitationId=inv_9d7635d1-b92a-4133-b7a6-9b21dad7cb09&productOpt=chart&invitationType=documentAcceptance&returnUrlOverride=%2Flucidchart%2F114bc862-26f0-4aa8-a2d5-06b0bcd415d6%2Fedit%3Fviewport_loc%3D-2138%252C-1100%252C3328%252C1939%252C0_0%26invitationId%3Dinv_9d7635d1-b92a-4133-b7a6-9b21dad7cb09
+
+  ## web site link
+  - http://tripl-a-school.42web.io
